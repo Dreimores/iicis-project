@@ -23,7 +23,3 @@
    <script src="js/demo/datatables-demo.js"></script>
 
    <!-- Custom form validation scripts -->
-    <script src="js/forms-validation.js"></script>
-    
-</body>
-</html>
