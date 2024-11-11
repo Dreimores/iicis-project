@@ -12,7 +12,7 @@
       public function sign_up($txtStudentNo, $txtPassword, $p_surname, $p_firstname, $p_middlename, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $files)
       {  
          # insert an account of students
-         $stmt_students = $this->getconnection()->prepare("INSERT INTO tbl_stud_accounts (studentno, pword, ylevel, email, course, college, major, file_name) VALUES (?,?,?,?,?,?,?,?)");
+         $stmt_students = $this->getconnection()->prepare("INSERT INTO tbl_stud_accounts (studentno, pword, ylevel, email, courseid, colid, majorid, file_name) VALUES (?,?,?,?,?,?,?,?)");
          $stmt_students->execute([$txtStudentNo, $txtPassword, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $files]);
          # end
 
@@ -45,7 +45,6 @@
          $stmt_initial_data = $this->getConnection()->prepare("INSERT INTO tbl_initial_interview (studentno) VALUES (?)");
          $stmt_initial_data->execute([$txtStudentNo]);
          # end
-
       }
       # end 
 

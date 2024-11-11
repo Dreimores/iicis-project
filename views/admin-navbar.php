@@ -36,16 +36,16 @@
             <div class="bg-white py-2 collapse-inner text-white rounded">
                 <h6 class= "collapse-header text-gray-900"> Custom Files: </h6>
                 <a class="collapse-item text-gray-900" href="?route=user-management"> <i class="fas fa-fw fa-user "></i> User Management </a>
-                <a class="collapse-item text-gray-900" href="?route=college"> <i class="fas fa-fw fa-building"></i> Colleges </a>
-                <a class="collapse-item text-gray-900" href=""> <i class="fas fa-fw fa-book"></i> Courses </a>
-                <a class="collapse-item text-gray-900" href=""> <i class="fas fa-fw fa-university"></i> Majors </a>
+                <a class="collapse-item text-gray-900" href="?route=college-list"> <i class="fas fa-fw fa-building"></i> Colleges </a>
+                <a class="collapse-item text-gray-900" href="?route=course-list"> <i class="fas fa-fw fa-book"></i> Courses </a>
+                <a class="collapse-item text-gray-900" href="?route=major-list"> <i class="fas fa-fw fa-university"></i> Majors </a>
             </div>
         </div>
     </li>
 
     <!-- for Student information -->
     <li class="nav-item text-capitalize">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="?route=student-info">
             <i class="fas fa-users"></i><span> Student Information </span> 
         </a>
     </li>

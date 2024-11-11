@@ -206,7 +206,7 @@
                                        </label>
                                        <div class="col-sm-12">
                                           <input type="password" id="txtConfirmPassword" class="form-control txtConfirmPassword" />
-                                          <i class="fas fa-eye position-absolute text-gray-500 sign-up-cpword d-none" id="" style="top:11px;right:2.5rem;" id="sign-up-cpword"></i>
+                                          <i class="fas fa-eye position-absolute text-gray-500 sign-up-cpword d-none" style="top:11px;right:2.5rem;" id="sign-up-cpword"></i>
                                           <span class="text-danger" id="errCPword"></span>
                                        </div>
                                     </div>
@@ -228,10 +228,14 @@
                                        <label for="cbCourse" class="form-label text-gray-900">
                                           Course <span class="text-danger" id="courseReq"></span>
                                        </label>
-                                       <select name="cbCourse" id="cbCourse" class="form-control">
+                                       <select name="cbCourse" id="cbCourse" class="form-control" onchange="getCourseId()">
                                           <option value="">Choose...</option>
-                                          <option value="1">1</option>
+                                          <?php $courseModel = new courseModel();
+                                          foreach ($courseModel->read_courses() as $row) {?>
+                                             <option value="<?=$row['course']?>"><?=$row['course']?></option>
+                                          <?php } ?>
                                        </select>
+                                       <input type="hidden" name="courseid" id="courseid" class="form-control">
                                        <span class="text-danger" id="errCourse"></span>
                                     </div>
                                     <div class="form-group row">
@@ -239,10 +243,14 @@
                                           College <span class="text-danger" id="collegeRq"></span>
                                        </label>
                                        <div class="col-sm-12">
-                                          <select name="cbCollege" id="cbCollege" class="form-control">
-                                             <option value="">choose...</option>
-                                             <option value="1">1</option>
+                                          <select name="cbCollege" id="cbCollege" class="form-control" onchange="getcollegeId()">
+                                             <option value="">Choose...</option>
+                                             <?php $collegeModel = new collegeModel();
+                                             foreach ($collegeModel->read_colleges() as $row) {?>
+                                                <option value="<?=$row['college']?>"><?=$row['college']?></option>
+                                             <?php } ?>
                                           </select>
+                                          <input type="hidden" name="collegeid" id="collegeid" class="form-control">
                                           <span id="errCollege" class="text-danger"></span>
                                        </div>
                                     </div>
@@ -251,11 +259,15 @@
                                           Major <span class="text-danger" id="majorReq"></span>
                                        </label>
                                        <div class="col-sm-12">
-                                          <select name="cbMajor" id="cbMajor" class="form-control">
+                                          <select name="cbMajor" id="cbMajor" class="form-control" onchange="getmajorId()">
                                              <option value="">Choose...</option>
-                                             <option value="1">1</option>
+                                             <?php $majorModel = new majorModel();
+                                             foreach ($majorModel->read_majors() as $row) {?>
+                                                <option value="<?=$row['major']?>"><?=$row['major']?></option>
+                                             <?php } ?>
                                           </select>
-                                          <span class="text-center" id="errMajor"></span>
+                                          <input type="hidden" name="majorid" id="majorid" class="form-control">
+                                          <span class="text-danger" id="errMajor"></span>
                                        </div>
                                     </div>
                                  </div>
@@ -433,6 +445,51 @@
       <script src="js/sweetalert.min.js"></script>
       <!-- Custom script -->
       <script type="text/javascript">
+         function getCourseId() {
+            const c = document.getElementById('cbCourse');
+            const selCourse = c.options[c.selectedIndex].text;
+            $.ajax({
+               type: 'post',
+               url: '?route=submit-courses',
+               data: {
+                  'course-btn': 1,
+                  'seleted-course': selCourse
+               },
+               success:(x)=>{
+                  document.getElementById('courseid').value = x;
+               }   
+            })
+         }
+         function getcollegeId() {
+            const c = document.getElementById('cbCollege');
+            const selCollege = c.options[c.selectedIndex].text;
+            $.ajax({
+               type: 'post',
+               url: '?route=submit-colleges',
+               data: {
+                  'college-btn': 1,
+                  'seleted-college': selCollege
+               },
+               success:(x)=>{
+                  document.getElementById('collegeid').value = x;
+               }   
+            })
+         }
+         function getmajorId() {
+            const m = document.getElementById('cbMajor');
+            const selMajor = m.options[m.selectedIndex].text;
+            $.ajax({
+               type: 'post',
+               url: '?route=submit-majors',
+               data: {
+                  'major-btn': 1,
+                  'selected-major': selMajor
+               },
+               success:(x)=>{
+                  document.getElementById('majorid').value = x;
+               }   
+            })
+         }
          $('#customCheck').click(function(){
             $('#txtPassworduser').attr('type', this.checked ? 'text' : 'password');
          });
@@ -691,9 +748,9 @@
             const txtMiddleName = $('input[name="txtMiddleName"]').val();
             const yearLevel     = $('select[name="cbYearLevel"]').val();
             const Email         = $('input[name="txtEmail"]').val();
-            const cbCourse      = $('select[name="cbCourse"]').val();
-            const cbCollege     = $('select[name="cbCollege"]').val();
-            const cbMajor       = $('select[name="cbMajor"]').val();
+            const cbCourse      = $('input[name="courseid"]').val();
+            const cbCollege     = $('input[name="collegeid"]').val();
+            const cbMajor       = $('input[name="majorid"]').val();
             const files         = $('.file-image').prop('files')[0];
             // If file empty
             if (!files) {
@@ -728,9 +785,9 @@
                               formData.append("txtMiddleName", txtMiddleName);
                               formData.append("cbYearLevel", yearLevel);
                               formData.append("txtEmail", Email);
-                              formData.append("cbCourse", cbCourse);
-                              formData.append("cbCollege", cbCollege);
-                              formData.append("cbMajor", cbMajor);
+                              formData.append("courseid", cbCourse);
+                              formData.append("collegeid", cbCollege);
+                              formData.append("majorid", cbMajor);
                               formData.append("files", files);
                               $.ajax({
                                  type: "post",

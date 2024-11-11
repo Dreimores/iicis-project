@@ -1,22 +1,45 @@
 <?php
 session_start();
+
+# configuration
 include_once('config/dbconfig.php');
+# end
+
+# includes controllers
 include_once('controllers/includeStudentController.php');
 include_once('controllers/loginStudentController.php');
 include_once('controllers/studentFormsController.php');
 include_once('controllers/loginAdminController.php');
 include_once('controllers/includeAdminController.php');
-include_once('models/userManagementModel.php');
 include_once('controllers/userManagementController.php');
+include_once('controllers/collegeController.php');
+include_once('controllers/courseController.php');
+include_once('controllers/majorController.php');
+# end
 
+# include models
+include_once('models/userManagementModel.php');
+include_once('models/collegeModel.php');
+include_once('models/courseModel.php');
+include_once('models/majorModel.php');
+include_once('models/studentFormsModel.php');
+# end 
+
+# get router
 $route = isset($_GET['route']) ? $_GET['route'] : '';
+# end
 
+# instance classes
 $includeStudentController = new includeStudentController();
 $loginController          = new loginStudentController();
 $studentFormsController   = new studentFormsController();
 $loginAdminController     = new loginAdminController();
 $includeAdminController   = new includeAdminController();
 $userManagementController = new userManagementController();
+$collegeController        = new collegeController();
+$courseController         = new courseController();
+$majorController          = new majorController();
+# end
 
 switch ($route) {
    case "":
@@ -58,11 +81,28 @@ switch ($route) {
    case "user-management":
       $includeAdminController->user_management();
       break;
-   case "college":
-      $includeAdminController->college();
-      break;
    case "admin-user-management":
       $userManagementController->admin_user_management();
+      break;
+   case "college-list":
+      $includeAdminController->college();
+      break;
+   case "submit-colleges":
+      $collegeController->submit_colleges();
+      break;
+   case "course-list":
+      $includeAdminController->course();
+      break;
+   case "submit-courses":
+      $courseController->submit_course();
+      break;
+   case "major-list":
+      $includeAdminController->majors();
+   case "submit-majors":
+      $majorController->submit_majors();
+      break;
+   case "student-info":
+      $includeAdminController->student_info();
       break;
    default:
       echo "404 Page Not Found!";

@@ -25,19 +25,16 @@
             $txtLastName  = $_POST['txtLastName'] ?? '';
             $cbYearLevel  = $_POST['cbYearLevel'] ?? '';
             $txtEmail     = $_POST['txtEmail'] ?? '';
-            $cbCourse     = $_POST['cbCourse'] ?? '';
-            $cbCollege    = $_POST['cbCollege'] ?? '';
-            $cbMajor      = $_POST['cbMajor'] ?? '';
+            $cbCourse     = $_POST['courseid'] ?? '';
+            $cbCollege    = $_POST['collegeid'] ?? '';
+            $cbMajor      = $_POST['majorid'] ?? '';
             $filesname    = $_FILES['files']['name'];
             $tmp_name     = $_FILES['files']['tmp_name'];
-
+            
             $this->loginModel->sign_up($txtStudentNo, $txtPassword, $txtFirstName, $txtMiddleName, $txtLastName, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $filesname);
             move_uploaded_file($tmp_name,'uploads/'.$filesname);
-
          }
-
       }
-
       public function sign_in()
       {
          if ($_SERVER['REQUEST_METHOD'] === 'POST') {

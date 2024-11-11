@@ -43,10 +43,31 @@
       }
       # end
 
-      # user management admin
+      # college
       public function college()
       {
          include_once('views/admin-colleges.php');
+      }
+      # end
+
+      # course
+      public function course()
+      {
+         include_once('views/admin-courses.php');
+      }
+      # end
+
+      # major
+      public function majors()
+      {
+         include_once('views/admin-majors.php');
+      }
+      # end
+      
+      # student information
+      public function student_info()
+      {
+         include_once('views/admin-student-info.php');
       }
       # end
    }

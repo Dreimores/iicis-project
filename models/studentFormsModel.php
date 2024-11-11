@@ -464,4 +464,24 @@ class studentFormsModel extends Connection
       return $query->fetchAll(PDO::FETCH_ASSOC);
    }
    # end
+
+   # migration viewing fir student account
+   public function view_account_student()
+   {
+      $stmt = $this->getConnection()->prepare(
+         "SELECT sa.*, cl.*, cr.*, mj.*, pd.*
+         FROM tbl_stud_accounts      AS sa 
+         LEFT JOIN tblcolleges       AS cl  ON sa.colid    = cl.colid 
+         LEFT JOIN tblcourses        AS cr  ON sa.courseid = cr.courseid
+         LEFT JOIN tblmajors         AS mj  ON sa.majorid  = mj.majorid
+         LEFT JOIN tbl_personal_data AS pd  ON sa.studentno = pd.studentno"
+      );
+
+      # Execute the prepared statement with the student number parameter
+      $stmt->execute();
+      
+      # Use FETCH_ASSOC to get all columns as an associative array
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+   }
+   # end 
 }
