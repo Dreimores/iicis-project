@@ -18,7 +18,7 @@
 
          # insert studentno into personal data
          $stmt_presonal = $this->getConnection()->prepare("INSERT INTO tbl_personal_data (studentno,p_surname,p_firstname,p_middlename) VALUES (?,?,?,?)");
-         $stmt_presonal->execute([$txtStudentNo,$p_surname, $p_firstname, $p_middlename]);
+         $stmt_presonal->execute([$txtStudentNo, $p_surname, $p_firstname, $p_middlename]);
          # end
          
          # insert studentno into family data
@@ -47,6 +47,83 @@
          # end
       }
       # end 
+
+      public function sign_update($txtStudentNo, $txtPassword, $p_surname, $p_firstname, $p_middlename, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $files, $txtOldStudentNo)
+      {
+         # update an account of students
+         $stmt_students = $this->getconnection()->prepare("UPDATE tbl_stud_accounts SET studentno=?, pword=?, ylevel=?, email=?, courseid=?, colid=?, majorid=?, file_name=? WHERE studentno=?");
+         $stmt_students->execute([$txtStudentNo, $txtPassword, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $files, $txtOldStudentNo]);
+         # end
+
+         # update studentno into personal data
+         $stmt_presonal = $this->getConnection()->prepare("UPDATE tbl_personal_data SET studentno=?, p_surname=?, p_firstname=?, p_middlename=? WHERE studentno=?");
+         $stmt_presonal->execute([$txtStudentNo, $p_surname, $p_firstname, $p_middlename, $txtOldStudentNo]);
+         # end
+         
+         # update studentno into family data
+         $stmt_fa_data_ = $this->getConnection()->prepare("UPDATE tbl_family_data SET studentno=? WHERE studentno=?");
+         $stmt_fa_data_->execute([$txtStudentNo, $txtOldStudentNo]);
+         # end
+
+         # update studentno into family data
+         $stmt_educ_data = $this->getConnection()->prepare("UPDATE tbl_educational_data SET studentno=? WHERE studentno=?");
+         $stmt_educ_data->execute([$txtStudentNo, $txtOldStudentNo]);
+         # end
+
+         # update studentno into health data
+         $stmt_health_data = $this->getConnection()->prepare("UPDATE tbl_health_data SET studentno=? WHERE studentno=?");
+         $stmt_health_data->execute([$txtStudentNo, $txtOldStudentNo]);
+         # end
+
+         # update studentno into ip pwd data
+         $stmt_ip_pwd_data = $this->getConnection()->prepare("UPDATE tbl_ippwd_check_list SET studentno=? WHERE studentno=?");
+         $stmt_ip_pwd_data->execute([$txtStudentNo, $txtOldStudentNo]);
+         # end
+
+         # update studentno into ip pwd data
+         $stmt_initial_data = $this->getConnection()->prepare("UPDATE tbl_initial_interview SET studentno=? WHERE studentno=?");
+         $stmt_initial_data->execute([$txtStudentNo, $txtOldStudentNo]);
+         # end
+      }
+
+      # delete student account
+      public function sign_delete($txtStudentNo)
+      {
+         # delete an account of students
+         $stmt = $this->getConnection()->prepare("DELETE FROM tbl_stud_accounts WHERE studentno=?");
+         $stmt->execute([$txtStudentNo]);
+         #end
+
+         # delete studentno into personal data
+         $stmt_presonal = $this->getConnection()->prepare("DELETE FROM tbl_personal_data WHERE studentno=?");
+         $stmt_presonal->execute([$txtStudentNo]);
+         # end
+         
+         # delete studentno into family data
+         $stmt_fa_data_ = $this->getConnection()->prepare("DELETE FROM tbl_family_data WHERE studentno=?");
+         $stmt_fa_data_->execute([$txtStudentNo]);
+         # end
+
+         # delete studentno into family data
+         $stmt_educ_data = $this->getConnection()->prepare("DELETE FROM tbl_educational_data WHERE studentno=?");
+         $stmt_educ_data->execute([$txtStudentNo]);
+         # end
+
+         # delete studentno into health data
+         $stmt_health_data = $this->getConnection()->prepare("DELETE FROM tbl_health_data WHERE studentno=?");
+         $stmt_health_data->execute([$txtStudentNo]);
+         # end
+
+         # delete studentno into ip pwd data
+         $stmt_ip_pwd_data = $this->getConnection()->prepare("DELETE FROM tbl_ippwd_check_list WHERE studentno=?");
+         $stmt_ip_pwd_data->execute([$txtStudentNo]);
+         # end
+
+         # delete studentno into ip pwd data
+         $stmt_initial_data = $this->getConnection()->prepare("DELETE FROM tbl_initial_interview WHERE studentno=?");
+         $stmt_initial_data->execute([$txtStudentNo]);
+      }
+      # end
 
       # sign in method
       public function sign_in($txtStudentNo, $txtPassword)

@@ -56,7 +56,7 @@ $includeAdminController->navbar();
                               </div>
                               &nbsp;
                               <div class="btn-group">
-                                 <button type="button" value="<?=$row['userid']?>" class="btn btn-sm btn-danger btn-delete-admin-user">
+                                 <button type="button" value="<?=$row['userid']?>" image="<?=$row['admin_picture']?>" class="btn btn-sm btn-danger btn-delete-admin-user">
                                     <i class="fas fa-trash-alt"></i>
                                  </button>
                               </div>
@@ -80,118 +80,292 @@ $includeAdminController->navbar();
                <span aria-hidden="true">×</span>
             </button>
          </div>
-         <form action="?route=admin-user-management" method="post" enctype="multipart/form-data">
-            <div class="modal-body">
-               <div class="d-flex justify-content-center mb-3">
-                  <img src="img/undraw_profile.svg" class="img-profile rounded-circle sign-up-profile" id="imgProfPicture" width="75" height="75"/>
-                  <i class="fas fa-camera position-absolute bg-secondary text-white border-sign-up-profile" id="profile-sing-up"></i>
-                  <input type="file" name="file-image" id="file-image" class="form-control p-1 d-none"/>
-                  <input type="text" name="old-image" id="old-image"class="form-control p-1 d-none"/>
+         <div class="modal-body">
+            <div class="d-flex justify-content-center mb-3">
+               <img src="img/undraw_profile.svg" class="img-profile rounded-circle sign-up-profile" id="imgProfPicture" width="75" height="75"/>
+               <i class="fas fa-camera position-absolute bg-secondary text-white border-sign-up-profile" id="profile-sing-up"></i>
+               <input type="file" name="fileImage" id="fileImage" class="form-control p-1 d-none"/>
+               <input type="hidden" name="old-image" id="old-image"class="form-control p-1"/>
+            </div>
+            <div class="form-group d-none">
+               <label for="getuserId" class="col-form-label col-12">User Id</label>
+               <div class="col-12">
+                  <input type="text" id="getuserId" name="getuserId" class="form-control"/>
                </div>
-               <div class="form-group d-none">
-                  <label for="getuserId" class="col-form-label col-12">User Id</label>
+            </div>
+            <div class="d-flex">
+               <div class="form-group">
+                  <label for="userLName" class="col-form-label col-12">
+                     Last Name <span class="text-danger" id="userLNameReq"></span>
+                  </label>
                   <div class="col-12">
-                     <input type="text" id="getuserId" name="getuserId" class="form-control"/>
-                  </div>
-               </div>
-               <div class="d-flex">
-                  <div class="form-group">
-                     <label for="userLName" class="col-form-label col-12">
-                        Last Name <span class="text-danger" id="userLNameReq"></span>
-                     </label>
-                     <div class="col-12">
-                        <input type="text" id="userLName" name="userLName" class="form-control"/>
-                        <span class="text-danger" id="errUserLName"></span>
-                     </div>
-                  </div>
-                  <div class="form-group">
-                     <label for="userFName" class="col-form-label col-12">
-                        First Name <span class="text-danger" id="userFNameReq"></span>
-                     </label>
-                     <div class="col-12">
-                        <input type="text" id="userFName" name="userFName" class="form-control"/>
-                        <span class="text-danger" id="errUserFName"></span>
-                     </div>
-                  </div>
-               </div>
-               <div class="d-flex">
-                  <div class="form-group">
-                     <label for="userMName" class="col-form-label col-12">
-                        Middle Name <span class="text-danger" id="userMNameReq"></span>
-                     </label>
-                     <div class="col-12">
-                        <input type="text" id="userMName" name="userMName" class="form-control"/>
-                        <span class="text-danger" id="errUserMName"></span>
-                     </div>
-                  </div>
-                  <div class="form-group">
-                     <label for="userEmAdd" class="col-form-label col-12">
-                        Email Address <span class="text-danger" id="userEmAddReq"></span>
-                     </label>
-                     <div class="col-12">
-                        <input type="text" id="userEmAdd" name="userEmAdd" class="form-control"/>
-                        <span class="text-danger" id="errUserEmAdd"></span>
-                     </div>
+                     <input type="text" id="userLName" name="userLName" class="form-control"/>
+                     <span class="text-danger" id="errUserLName"></span>
                   </div>
                </div>
                <div class="form-group">
-                  <label for="userUName" class="col-form-label col-12">
-                     User Name <span class="text-danger" id="userUNameReq"></span>
+                  <label for="userFName" class="col-form-label col-12">
+                     First Name <span class="text-danger" id="userFNameReq"></span>
                   </label>
                   <div class="col-12">
-                     <input type="text" id="userUName" name="userUName" class="form-control"/>
-                     <input type="hidden" id="origUName" class="form-control">
-                     <span class="text-danger" id="errUserUName"></span>
-                  </div>
-               </div>
-               <div class="d-flex">
-                  <div class="form-group">
-                     <label for="userPword" class="col-form-label col-12">
-                        Password <span class="text-danger" id="userPwordReq"></span>
-                     </label>
-                     <div class="col-12">
-                        <input type="password" id="userPword" name="userPword" class="form-control bg-password-img"/>
-                        <i class="fas fa-eye text-gray-500 pword-user-admin" id="pwordUserAdmin"></i>
-                        <span class="text-danger" id="errUserPword"></span>
-                     </div>
-                  </div>
-                  <div class="form-group">
-                     <label for="userConfirmPword" class="col-form-label col-12">
-                        Confirm Password <span class="text-danger" id="userConfirmPwordReq"></span>
-                     </label>
-                     <div class="col-12">
-                        <input type="password" id="userConfirmPword" name="userConfirmPword" class="form-control bg-password-img"/>
-                        <i class="fas fa-eye text-gray-500 pword-user-admin" id="cPwordUserAdmin"></i>
-                        <span class="text-danger" id="errUserConfirmPword"></span>
-                     </div>
+                     <input type="text" id="userFName" name="userFName" class="form-control"/>
+                     <span class="text-danger" id="errUserFName"></span>
                   </div>
                </div>
             </div>
-            <div class="modal-footer">
-               <div class="form-group mr-3">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">
-                     <i class="fas fa-ban"></i>
-                     Cancel
-                  </button>
-                  <button type="submit" class="btn btn-success add-user-form" disabled name="btnSave_Add" id="add-user-form">
-                     <i class="fas fa-save"></i>
-                     Save
-                  </button>
-                  <button type="submit" class="btn btn-success edit-user-form" name="btnSaveEdit" id="edit-user-form">
-                     <i class="fas fa-save"></i>
-                     Save
-                  </button>
+            <div class="d-flex">
+               <div class="form-group">
+                  <label for="userMName" class="col-form-label col-12">
+                     Middle Name <span class="text-danger" id="userMNameReq"></span>
+                  </label>
+                  <div class="col-12">
+                     <input type="text" id="userMName" name="userMName" class="form-control"/>
+                     <span class="text-danger" id="errUserMName"></span>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="userEmAdd" class="col-form-label col-12">
+                     Email Address <span class="text-danger" id="userEmAddReq"></span>
+                  </label>
+                  <div class="col-12">
+                     <input type="text" id="userEmAdd" name="userEmAdd" class="form-control"/>
+                     <span class="text-danger" id="errUserEmAdd"></span>
+                  </div>
                </div>
             </div>
-         </form>
+            <div class="form-group">
+               <label for="userUName" class="col-form-label col-12">
+                  User Name <span class="text-danger" id="userUNameReq"></span>
+               </label>
+               <div class="col-12">
+                  <input type="text" id="userUName" name="userUName" class="form-control"/>
+                  <input type="hidden" id="origUName" class="form-control">
+                  <span class="text-danger" id="errUserUName"></span>
+               </div>
+            </div>
+            <div class="d-flex">
+               <div class="form-group">
+                  <label for="userPword" class="col-form-label col-12">
+                     Password <span class="text-danger" id="userPwordReq"></span>
+                  </label>
+                  <div class="col-12">
+                     <input type="password" id="userPword" name="userPword" class="form-control bg-password-img"/>
+                     <i class="fas fa-eye text-gray-500 pword-user-admin" id="pwordUserAdmin"></i>
+                     <span class="text-danger" id="errUserPword"></span>
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label for="userConfirmPword" class="col-form-label col-12">
+                     Confirm Password <span class="text-danger" id="userConfirmPwordReq"></span>
+                  </label>
+                  <div class="col-12">
+                     <input type="password" id="userConfirmPword" name="userConfirmPword" class="form-control bg-password-img"/>
+                     <i class="fas fa-eye text-gray-500 pword-user-admin" id="cPwordUserAdmin"></i>
+                     <span class="text-danger" id="errUserConfirmPword"></span>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <div class="form-group mr-3">
+               <button type="button" class="btn btn-danger" data-dismiss="modal">
+                  <i class="fas fa-ban"></i>
+                  Cancel
+               </button>
+               <button type="button" class="btn btn-success add-user-form"  name="btnSave_Add" id="add-user-form" disabled>
+                  <i class="fas fa-save"></i>
+                  Save
+               </button>
+               <button type="button" class="btn btn-success edit-user-form" name="btnSaveEdit" id="edit-user-form">
+                  <i class="fas fa-save"></i>
+                  Save
+               </button>
+            </div>
+         </div>
       </div>
    </div>
 </div>
 <?php
-$includeAdminController->footer();
-$includeAdminController->script();
+   $includeAdminController->footer();
+   $includeAdminController->script();
 ?>
 <script>
+   // add student an account
+   $('#add-user-form').click(()=>{
+      const files    = $('#fileImage').prop('files')[0];
+      const formData = new FormData();
+      formData.append("btnSaveAdd", 1);
+      formData.append("txtGetuserId", $('input[name="getuserId"]').val());
+      formData.append("txtUserLName", $('input[name="userLName"]').val());
+      formData.append("txtUserFName", $('input[name="userFName"]').val());
+      formData.append("txtUserMName", $('input[name="userMName"]').val());
+      formData.append("txtUserEmAdd", $('input[name="userEmAdd"]').val());
+      formData.append("txtUserUName", $('input[name="userUName"]').val());
+      formData.append("txtUserPword", $('input[name="userPword"]').val());
+      formData.append("files__Image", files);
+      // If file empty
+      if (!files) {
+         swal({
+            title: "Info!",
+            text: "Please upload an image file. The valid formats are: jpg, jpeg, png, gif.",
+            icon: "info",
+            closeOnClickOutside: false,
+            button:{confirm: "Ok"}
+         })
+         $('.swal-text').addClass('text-center ml-3 mr-3');
+         return;
+      } else{ 
+         const validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+         const fileExtension = files.name.split('.').pop().toLowerCase();
+         const maxSize = 2 * 1024 * 1024;
+         if (!validExtensions.includes(fileExtension)) { // If the file extentions are invalid
+            swal({
+               title: "Info!",
+               text: "Invalid file type! Please upload an image file (jpg, jpeg, png, gif).",
+               icon: "info",
+               closeOnClickOutside: false,
+               button:{confirm: "Ok"}
+            })
+            $('.swal-text').addClass('text-center ml-3 mr-3');
+            return;
+         } else {
+            if (files.size > maxSize){ // If valid size file
+               swal({
+                  title: "Info!",
+                  text: "The file you are trying to upload exceeds the maximum allowed size of 2MB. Please ensure your file is smaller than 2MB.",
+                  icon: "info",
+                  closeOnClickOutside: false,
+                  button:{confirm: "Ok"}
+               })
+               $('.swal-text').addClass('text-center ml-3 mr-3');
+               return;
+            } else {
+               const filename = files.name;
+               $.ajax({ // check if the file already exist 
+                  type: "post",
+                  url: "?route=check-file-exist",
+                  data: {"filename": filename},
+                  success:(response)=>{
+                     if (response.exists) {
+                        swal({
+                           title: "Error!",
+                           text: "Invalid file! Please try again.",
+                           icon: "error",
+                           closeOnClickOutside: false,
+                           button:{confirm: "Ok"}
+                        })
+                        $('.swal-text').addClass('text-center ml-3 mr-3');
+                     } else { // Then Insert into table students account
+                        // Add using Ajax 
+                        $.ajax({
+                           type:"post",
+                           url :"?route=admin-user-management",
+                           contentType: false,
+                           processData: false,
+                           data:formData,
+                           success:()=>{
+                              location.reload();
+                           }
+                        })
+                     }
+                  }
+               })
+            }
+         } 
+      }
+   });
+   // end
+
+   // edit student account
+   $('#edit-user-form').click(()=>{
+      const files    = $('#fileImage').prop('files')[0];
+      const formData = new FormData();
+      formData.append("btnSaveEdit", 1);
+      formData.append("txtGetuserId", $('input[name="getuserId"]').val());
+      formData.append("txtUserLName", $('input[name="userLName"]').val());
+      formData.append("txtUserFName", $('input[name="userFName"]').val());
+      formData.append("txtUserMName", $('input[name="userMName"]').val());
+      formData.append("txtUserEmAdd", $('input[name="userEmAdd"]').val());
+      formData.append("txtUserUName", $('input[name="userUName"]').val());
+      formData.append("txtUserPword", $('input[name="userPword"]').val());
+      formData.append("txtOld_Image", $('input[name="old-image"]').val());
+      formData.append("files__Image", files);
+      // If file empty
+      if (!files) {
+         $.ajax({
+            type:"post",
+            url :"?route=admin-user-management",
+            contentType: false,
+            processData: false,
+            data:formData,
+            success:()=>{
+               location.reload();
+            }
+         })
+         $('.swal-text').addClass('text-center ml-3 mr-3');
+         return;
+      } else{ 
+         const validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+         const fileExtension = files.name.split('.').pop().toLowerCase();
+         const maxSize = 2 * 1024 * 1024;
+         if (!validExtensions.includes(fileExtension)) { // If the file extentions are invalid
+            swal({
+               title: "Info!",
+               text: "Invalid file type! Please upload an image file (jpg, jpeg, png, gif).",
+               icon: "info",
+               closeOnClickOutside: false,
+               button:{confirm: "Ok"}
+            })
+            $('.swal-text').addClass('text-center ml-3 mr-3');
+            return;
+         } else {
+            if (files.size > maxSize){ // If valid size file
+               swal({
+                  title: "Info!",
+                  text: "The file you are trying to upload exceeds the maximum allowed size of 2MB. Please ensure your file is smaller than 2MB.",
+                  icon: "info",
+                  closeOnClickOutside: false,
+                  button:{confirm: "Ok"}
+               })
+               $('.swal-text').addClass('text-center ml-3 mr-3');
+               return;
+            } else {
+               const filename = files.name;
+               $.ajax({ // check if the file already exist 
+                  type: "post",
+                  url: "?route=check-file-exist",
+                  data: {"filename": filename},
+                  success:(response)=>{
+                     if (response.exists) {
+                        swal({
+                           title: "Error!",
+                           text: "Invalid file! Please try again.",
+                           icon: "error",
+                           closeOnClickOutside: false,
+                           button:{confirm: "Ok"}
+                        })
+                        $('.swal-text').addClass('text-center ml-3 mr-3');
+                     } else { // Then Insert into table students account
+                        // Add using Ajax 
+                        $.ajax({
+                           type:"post",
+                           url :"?route=admin-user-management",
+                           contentType: false,
+                           processData: false,
+                           data:formData,
+                           success:()=>{
+                              location.reload();
+                           }
+                        })
+                     }
+                  }
+               })
+            }
+         } 
+      }
+   });   
+   // end
+
    $('#pwordUserAdmin').click(function(){
       this.classList.toggle('fa-eye-slash');
       const pwordUser = document.querySelector('#userPword');
@@ -205,13 +379,13 @@ $includeAdminController->script();
       cPwordUser.setAttribute('type', type);
    });
    $('#profile-sing-up').click(() => {
-      $('#file-image').click();
-      $('#file-image').on('change', function(e){
+      $('#fileImage').click();
+      $('#fileImage').on('change', function(e){
          e.preventDefault();
          this.files[0] ? $('#imgProfPicture').attr('src', URL.createObjectURL(this.files[0])) : $(".sign-up-profile").attr(`src`, `img/undraw_profile.svg`);
       });
    });
-   
+
    function verifyUserAdmin() 
    {
       const userLName    = $('#userLName').val().trim();
@@ -413,6 +587,7 @@ $includeAdminController->script();
    // delete admin user
    $('.btn-delete-admin-user').click(function(e) {
       const userid = $(this).val();
+      const images = $(this).attr('image');
       e.preventDefault();
       swal({
          title: "Are you sure?",
@@ -432,20 +607,11 @@ $includeAdminController->script();
                url: "?route=admin-user-management",
                data: {
                   "btnDeleteUser": 1,
-                  "userid": userid
+                  "userid": userid,
+                  "images": images
                },
                success: () => {
-                  swal({
-                     title: "Information!",
-                     text: "User admin has been successfully deleted!",
-                     icon: "info",
-                     closeOnClickOutside: false,
-                     button: {
-                        confirm: "Ok"
-                     }
-                  }).then(() => {
-                     location.reload();
-                  });
+                  location.reload();
                },
             });
          }

@@ -778,6 +778,7 @@
                               $('#already-exist-file').modal('show');
                            } else { // Then Insert into table students account
                               const formData = new FormData();
+                              formData.append("btnSubmitSaveAdd",1);
                               formData.append("txtStudentNo", studentNo);
                               formData.append("txtPassword", pWord);
                               formData.append("txtFirstName", txtFirstName);

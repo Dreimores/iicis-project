@@ -469,12 +469,13 @@ class studentFormsModel extends Connection
    public function view_account_student()
    {
       $stmt = $this->getConnection()->prepare(
-         "SELECT sa.*, cl.*, cr.*, mj.*, pd.*
+         "SELECT sa.*, cl.*, cr.*, mj.*, pd.*, nf.*
          FROM tbl_stud_accounts      AS sa 
-         LEFT JOIN tblcolleges       AS cl  ON sa.colid    = cl.colid 
-         LEFT JOIN tblcourses        AS cr  ON sa.courseid = cr.courseid
-         LEFT JOIN tblmajors         AS mj  ON sa.majorid  = mj.majorid
-         LEFT JOIN tbl_personal_data AS pd  ON sa.studentno = pd.studentno"
+         LEFT JOIN tblcolleges       AS cl  ON sa.colid     = cl.colid 
+         LEFT JOIN tblcourses        AS cr  ON sa.courseid  = cr.courseid
+         LEFT JOIN tblmajors         AS mj  ON sa.majorid   = mj.majorid
+         LEFT JOIN tbl_personal_data AS pd  ON sa.studentno = pd.studentno
+         LEFT JOIN tbl_intakeform    AS nf  ON sa.studentno = nf.studentno"
       );
 
       # Execute the prepared statement with the student number parameter

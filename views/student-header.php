@@ -22,6 +22,10 @@
 
    <!-- Custom css -->
    <link rel="stylesheet" href="css/css.css">
+   
+   <!-- Custom css -->
+   <link rel="icon" href="img/csu_lasam_logo.webp">
+   
 </head>
 
 <body id="page-top">

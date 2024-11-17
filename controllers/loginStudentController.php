@@ -15,25 +15,54 @@
 
       public function sign_up()
       {
-      
-         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            $txtStudentNo = $_POST['txtStudentNo'] ?? '';
-            $txtPassword  = $_POST['txtPassword'] ?? '';
-            $txtFirstName = $_POST['txtFirstName'] ?? '';
-            $txtMiddleName= $_POST['txtMiddleName'] ?? '';
-            $txtLastName  = $_POST['txtLastName'] ?? '';
-            $cbYearLevel  = $_POST['cbYearLevel'] ?? '';
-            $txtEmail     = $_POST['txtEmail'] ?? '';
-            $cbCourse     = $_POST['courseid'] ?? '';
-            $cbCollege    = $_POST['collegeid'] ?? '';
-            $cbMajor      = $_POST['majorid'] ?? '';
-            $filesname    = $_FILES['files']['name'];
-            $tmp_name     = $_FILES['files']['tmp_name'];
+         $txtOldStudentNo = $_POST['txtOldStudentNo'] ?? '';
+         $txtStudentNo = $_POST['txtStudentNo'] ?? '';
+         $txtPassword  = $_POST['txtPassword'] ?? '';
+         $txtFirstName = $_POST['txtFirstName'] ?? '';
+         $txtMiddleName= $_POST['txtMiddleName'] ?? '';
+         $txtLastName  = $_POST['txtLastName'] ?? '';
+         $cbYearLevel  = $_POST['cbYearLevel'] ?? '';
+         $txtEmail     = $_POST['txtEmail'] ?? '';
+         $cbCourse     = $_POST['courseid'] ?? '';
+         $cbCollege    = $_POST['collegeid'] ?? '';
+         $cbMajor      = $_POST['majorid'] ?? '';
+         $filesname    = $_FILES['files']['name'] ?? '';
+         $tmp_name     = $_FILES['files']['tmp_name'] ?? '';
+         
+         if (isset($_POST['btnSubmitSaveAdd'])) {
             
-            $this->loginModel->sign_up($txtStudentNo, $txtPassword, $txtFirstName, $txtMiddleName, $txtLastName, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $filesname);
+            $this->loginModel->sign_up($txtStudentNo, $txtPassword, $txtLastName, $txtFirstName, $txtMiddleName, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $filesname);
             move_uploaded_file($tmp_name,'uploads/'.$filesname);
+            $_SESSION['success'] = "Student account has been created successfully!";
+
+         } else if (isset($_POST['btnSubmitSaveEdit'])) {
+            
+            $old_image = $_POST['old__image'] ?? '';
+            
+            if (!empty($filesname)) {
+               # Remove the old uploaded file
+               unlink('uploads/' . $old_image);
+               # Move the new uploaded file and set it as the old_image
+               move_uploaded_file($tmp_name, 'uploads/'.$filesname);
+               $old_image = $filesname;
+            }
+
+            $this->loginModel->sign_update($txtStudentNo, $txtPassword, $txtLastName, $txtFirstName, $txtMiddleName, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $old_image, $txtOldStudentNo);
+            $_SESSION['success'] = "Student account has been edited successfully!";
+      
+         } else if (isset($_POST['btnDelete'])) {
+         
+            $studentId = $_POST['studentId'];
+            $this->loginModel->sign_delete($studentId);
+            unlink("uploads/".$_POST['unlinkimg']);
+            $_SESSION['success'] = "Student account has been deleted successfully!";
+         
+         } else {
+
+            $_SESSION['error'] = "Something went wrong! Please try again.";
+         
          }
+
       }
       public function sign_in()
       {

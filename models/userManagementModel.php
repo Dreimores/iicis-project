@@ -51,6 +51,14 @@
       }
       # end
 
+      # get full name
+      public function admin_username($studentno)
+      {
+         $stmt = $this->getConnection()->prepare("SELECT * FROM tbl_admin_users WHERE username = ?");
+         $stmt->execute([$studentno]);
+         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      }
+      # end
    }
 
 ?>

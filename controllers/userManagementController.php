@@ -1,6 +1,5 @@
 <?php
 include_once('models/usermanagementModel.php');
-
 class usermanagementController
 {
    private $usermanagementModel;
@@ -13,18 +12,18 @@ class usermanagementController
    # Add, edit, and delete for admin user list
    public function admin_user_management()
    {  
-      $getuserId = $_POST['getuserId'] ?? null;
-      $fileimage = $_FILES['file-image']['name'] ?? null;
-      $ftmp_name = $_FILES['file-image']['tmp_name'] ?? null;
-      $userLName = $_POST['userLName'] ?? '';
-      $userFName = $_POST['userFName'] ?? '';
-      $userMName = $_POST['userMName'] ?? '';
-      $userEmAdd = $_POST['userEmAdd'] ?? '';
-      $userUName = $_POST['userUName'] ?? '';
-      $userPword = $_POST['userPword'] ?? '';
+      $getuserId = $_POST['txtGetuserId'] ?? null;
+      $fileimage = $_FILES['files__Image']['name'] ?? null;
+      $ftmp_name = $_FILES['files__Image']['tmp_name'] ?? null;
+      $userLName = $_POST['txtUserLName'] ?? '';
+      $userFName = $_POST['txtUserFName'] ?? '';
+      $userMName = $_POST['txtUserMName'] ?? '';
+      $userEmAdd = $_POST['txtUserEmAdd'] ?? '';
+      $userUName = $_POST['txtUserUName'] ?? '';
+      $userPword = $_POST['txtUserPword'] ?? '';
 
       # Add
-      if (isset($_POST['btnSave_Add'])) 
+      if (isset($_POST['btnSaveAdd'])) 
       {
          # Move the uploaded file to the "uploads" directory
          $fileimage ? move_uploaded_file($ftmp_name, 'uploads/' . $fileimage) : '';
@@ -40,15 +39,14 @@ class usermanagementController
          
          # Set success message and redirect
          $_SESSION['success'] = "User admin has been successfully added!";
-         header('Location: ?route=user-management');
-         exit();
+         # end
       }
       # end
 
       # Edit
       if (isset($_POST['btnSaveEdit'])) 
       {
-         $old_image = $_POST['old-image'] ?? '';
+         $old_image = $_POST['txtOld_Image'] ?? '';
          if (!empty($fileimage)) {
             # Remove the old uploaded file
             unlink('uploads/' . $old_image);
@@ -70,8 +68,7 @@ class usermanagementController
 
          # Set success message and redirect
          $_SESSION['success'] = "User admin has been successfully updated!";
-         header('Location: ?route=user-management');
-         exit();
+         # end
       }
       # end
 
@@ -83,8 +80,7 @@ class usermanagementController
          {
             $this->usermanagementModel->admin_user_management_delete($userIdToDelete);
             $_SESSION['success'] = "User admin has been successfully deleted!";
-            header('Location: ?route=user-management');
-            exit();
+            unlink('uploads/' . $_POST['images']);
          }
       }
       # end

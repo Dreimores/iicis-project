@@ -1,8 +1,7 @@
 <?php
 session_start();
-
 # configuration
-include_once('config/dbconfig.php');
+require_once('config/dbconfig.php');
 # end
 
 # includes controllers
@@ -15,6 +14,7 @@ include_once('controllers/userManagementController.php');
 include_once('controllers/collegeController.php');
 include_once('controllers/courseController.php');
 include_once('controllers/majorController.php');
+include_once('controllers/intakeController.php');
 # end
 
 # include models
@@ -23,6 +23,7 @@ include_once('models/collegeModel.php');
 include_once('models/courseModel.php');
 include_once('models/majorModel.php');
 include_once('models/studentFormsModel.php');
+include_once('models/intakeModel.php');
 # end 
 
 # get router
@@ -39,6 +40,7 @@ $userManagementController = new userManagementController();
 $collegeController        = new collegeController();
 $courseController         = new courseController();
 $majorController          = new majorController();
+$intakeController         = new intakeController();
 # end
 
 switch ($route) {
@@ -103,6 +105,12 @@ switch ($route) {
       break;
    case "student-info":
       $includeAdminController->student_info();
+      break;
+   case "intake-form":
+      $includeAdminController->intake_form();
+      break;
+   case "submit-intake-form":
+      $intakeController->submit_intake_form();
       break;
    default:
       echo "404 Page Not Found!";

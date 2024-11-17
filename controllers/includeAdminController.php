@@ -70,5 +70,12 @@
          include_once('views/admin-student-info.php');
       }
       # end
+
+      // intake form
+      public function intake_form()
+      {
+         include_once('views/admin-intakeform.php');
+      }
+      // end
    }
 ?>

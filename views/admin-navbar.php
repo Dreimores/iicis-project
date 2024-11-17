@@ -51,7 +51,7 @@
     </li>
 
     <li class="nav-item text-capitalize">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="?route=intake-form">
             <i class="fas fa-fw fa-wrench"></i><span> Counseling Service </span> 
         </a>
     </li>
@@ -109,8 +109,7 @@
             </button>
 
             <!-- Topbar Search -->
-            <form
-                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                         aria-label="Search" aria-describedby="basic-addon2">
@@ -272,8 +271,11 @@
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <span class="mr-2 d-none d-lg-inline text-gray-600 small">Sample</span>
-                           <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                        <?php $userManagementModel = new userManagementModel();
+                            foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $row) { ?>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$row['lastname']." ".$row['firstname']." ".$row['middlename']?></span>
+                            <img class="img-profile rounded-circle" src="<?=!empty($row['admin_picture']) ? "uploads/".$row['admin_picture'] : "img/undraw_profile.svg"?>">
+                        <?php } ?>
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
