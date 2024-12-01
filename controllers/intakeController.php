@@ -19,11 +19,11 @@ class intakeController
          $TypeOfCounsel   = $_POST['TypeOfCounsel'];
          $txtDateRferred  = $_POST['txtDateRferred'];
          $txtReferredBy   = $_POST['txtReferredBy'];
-         $PersonalIssuess = $_POST['PersonalIssuess'];
+         $PersonalIssuess = implode(',',$_POST['PersonalIssuess'] ?? []);
          $txtOthersOne    = $_POST['txtOthersOne'];
-         $PlanActionAdd   = $_POST['PlanActionAdd'];
+         $PlanActionAdd   = implode(',',$_POST['PlanActionAdd'] ?? []);
          $txtOthersTwo    = $_POST['txtOthersTwo'];
-         $CounselStat     = $_POST['CounselStat'];
+         $CounselStat     = implode(',', $_POST['CounselStat'] ?? []);
          $txtStudnetno    = $_POST['txtStudnetno'];
          
          $this->intakeModel->submit_intakeform_add($txtDateEdit,$txtTimedEdit,$TypeOfCounsel,$txtDateRferred,$txtReferredBy,$PersonalIssuess,$txtOthersOne,$PlanActionAdd,$txtOthersTwo,$CounselStat,$txtStudnetno);

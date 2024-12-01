@@ -71,11 +71,18 @@
       }
       # end
 
-      // intake form
+      # intake form
       public function intake_form()
       {
          include_once('views/admin-intakeform.php');
       }
-      // end
+      # end
+
+      # terminal Interview
+      public function terminalInterviewForm() 
+      {
+         include_once('views/admin-terminalform.php');   
+      }
+      # end
    }
 ?>

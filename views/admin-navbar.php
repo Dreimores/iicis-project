@@ -65,7 +65,7 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header text-gray-900"> Custom Files: </h6>
-                <a class="collapse-item" href=""> Terminal Interview </a>
+                <a class="collapse-item" href="?route=terminal-Interview"> Terminal Interview </a>
                 <a class="collapse-item" href=""> Exit Interview Dropping </a>
                 <a class="collapse-item" href=""> Exit Interview Transferring </a>
             </div>

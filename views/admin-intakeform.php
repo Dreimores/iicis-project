@@ -167,46 +167,47 @@
                   <div class="custom-checkbox">
                      <div class="d-flex flex-column">
                         <div class="custom-control">
-                           <input type="radio" id="AcadConcern" name="PersonalIssuess" value="Academic concern" class="custom-control-input" checked/>
+                           <input type="checkbox" id="AcadConcern" name="PersonalIssuess[]" value="Academic concern" class="custom-control-input" checked/>
                            <label class="custom-control-label text-gray-900" for="AcadConcern"> 
                               Academic concern 
                            </label>
                         </div>
                         <div class="custom-control">
-                           <input type="radio" id="Behavioral" name="PersonalIssuess" value="Personality Behavioral Issues" class="custom-control-input"/>
+                           <input type="checkbox" id="Behavioral" name="PersonalIssuess[]" value="Personality Behavioral Issues" class="custom-control-input"/>
                            <label class="custom-control-label text-gray-900" for="Behavioral">
                               Personality/ Behavioral Issues 
                            </label>
                         </div>
                         <div class="custom-control">
-                           <input type="radio" id="FamilyConcern" name="PersonalIssuess" value="Family concern" class="custom-control-input"/>
+                           <input type="checkbox" id="FamilyConcern" name="PersonalIssuess[]" value="Family concern" class="custom-control-input"/>
                            <label class="custom-control-label text-gray-900" for="FamilyConcern"> 
                               Family concern 
                            </label>
                         </div>
                         <div class="custom-control">
-                           <input type="radio" id="PeerIssues" name="PersonalIssuess" value="Peer issues" class="custom-control-input"/>
+                           <input type="checkbox" id="PeerIssues" name="PersonalIssuess[]" value="Peer issues" class="custom-control-input"/>
                            <label class="custom-control-label text-gray-900" for="PeerIssues"> 
                               Peer issues 
                            </label>
                         </div>
                         <div class="custom-control">
-                           <input type="radio" id="Concern" name="PersonalIssuess" value="Relationship concern" class="custom-control-input"/>
+                           <input type="checkbox" id="Concern" name="PersonalIssuess[]" value="Relationship concern" class="custom-control-input"/>
                            <label class="custom-control-label text-gray-900" for="Concern"> 
                               Relationship concern 
                            </label>
                         </div>
                         <div class="custom-control">
-                           <input type="radio" id="CarrPlace" name="PersonalIssuess" value="Career placement concern" class="custom-control-input"/>
+                           <input type="checkbox" id="CarrPlace" name="PersonalIssuess[]" value="Career placement concern" class="custom-control-input"/>
                            <label class="custom-control-label text-gray-900" for="CarrPlace"> 
                               Career/ placement concern 
                            </label>
                         </div>
                         <div class="">
                            <label class="pr-1 text-gray-900" for="txtOthersOne"> 
-                              Others(pls.Specify) 
+                              Others(pls.Specify) <span class="text-danger" id="txtOthersOneReq"></span>
                            </label>
                            <input type="text" id="txtOthersOne" name="txtOthersOne" placeholder="Enter others" value="" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none">
+                           <span class="text-danger" id="errTxtOthersOne"></span>
                         </div>
                      </div>
                   </div>
@@ -217,53 +218,52 @@
                   </label>
                   <div class="d-flex flex-column">
                      <div class="custom-control">
-                        <input type="radio" id="FollUpCounsel" name="PlanActionAdd" value="For follow up counseling" class="custom-control-input" checked/>
+                        <input type="checkbox" id="FollUpCounsel" name="PlanActionAdd[]" value="For follow up counseling" class="custom-control-input PlanActionAdd" checked/>
                         <label class="custom-control-label text-gray-900" for="FollUpCounsel"> 
                            For follow - up counseling 
                         </label>
                      </div>
                      <div class="custom-control">
-                        <input type="radio" id="ForParentConsult" name="PlanActionAdd" value="For Parents Consultant" class="custom-control-input"/>
+                        <input type="checkbox" id="ForParentConsult" name="PlanActionAdd[]" value="For Parents Consultant" class="custom-control-input PlanActionAdd"/>
                         <label class="custom-control-label text-gray-900" for="ForParentConsult"> 
                            For Parents Consultant 
                         </label>
                      </div>
                      <div class="custom-control">
-                        <input type="radio" id="Spiritual" name="PlanActionAdd" value="For Spiritual counseling" class="custom-control-input"/>
+                        <input type="checkbox" id="Spiritual" name="PlanActionAdd[]" value="For Spiritual counseling" class="custom-control-input PlanActionAdd"/>
                         <label class="custom-control-label text-gray-900" for="Spiritual"> 
                            For Spiritual counseling 
                         </label>
                      </div>
                      <div class="custom-control">
-                        <input type="radio" id="Monitor" name="PlanActionAdd" value="For monitoring coordinate with teachers" class="custom-control-input"/>
+                        <input type="checkbox" id="Monitor" name="PlanActionAdd[]" value="For monitoring coordinate with teachers" class="custom-control-input PlanActionAdd"/>
                         <label class="custom-control-label text-gray-900" for="Monitor"> 
                            For monitoring (coordinate with teachers) 
                         </label>
                      </div>
                   </div>
                   <div class="custom-control">
-                     <input type="radio" id="ForHome" name="PlanActionAdd" value="For Home Visitation" class="custom-control-input"/>
+                     <input type="checkbox" id="ForHome" name="PlanActionAdd[]" value="For Home Visitation" class="custom-control-input PlanActionAdd"/>
                      <label class="custom-control-label text-gray-900" for="ForHome"> 
                         For Home Visitation 
                      </label>
                   </div>
                   <div class="custom-control">
-                     <input type="radio" id="ForPhychologic" name="PlanActionAdd" value="For Phychological testing" class="custom-control-input"/>
+                     <input type="checkbox" id="ForPhychologic" name="PlanActionAdd[]" value="For Phychological testing" class="custom-control-input PlanActionAdd"/>
                      <label class="custom-control-label text-gray-900" for="ForPhychologic"> 
                         For Phychological testing 
                      </label>
                   </div>
                   <div class="custom-control">
-                     <input type="radio" id="ReferPhychologist" name="PlanActionAdd" value="For Referral phychologist phychiatrist" class="custom-control-input"/>
+                     <input type="checkbox" id="ReferPhychologist" name="PlanActionAdd[]" value="For Referral phychologist phychiatrist" class="custom-control-input PlanActionAdd"/>
                      <label class="custom-control-label text-gray-900" for="ReferPhychologist"> 
                         For Referral (phychologist/ phychiatrist) 
                      </label>
                   </div>
                   <div>
-                     <label class="pr-1 text-gray-900" for="txtOthersTwo"> 
-                        Others(pls.Specify) 
-                     </label>
-                     <input type="text" name="txtOthersTwo" id="txtOthersTwo" placeholder="Enter others" value="" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none">
+                     <label class="pr-1 text-gray-900" for="txtOthersTwo"> Others(pls.Specify) <span class="text-danger" id="txtOthersTwoReq"></span> </label>
+                     <input type="text" name="txtOthersTwo" id="txtOthersTwo" placeholder="Enter others" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none">
+                     <span class="text-danger" id="errTxtOthersTwo"></span>
                   </div>
                </div>
                <div class="form-group">
@@ -272,13 +272,13 @@
                   </label>
                   <div class="custom-checkbox">
                      <div class="custom-control">
-                        <input type="radio" id="Terminated" name="CounselStat" value="Terminated" class="custom-control-input" checked/>
+                        <input type="checkbox" id="Terminated" name="CounselStat[]" value="Terminated" class="custom-control-input" checked/>
                         <label class="custom-control-label text-gray-900" for="Terminated">
                            Terminated 
                         </label>
                      </div>
                      <div class="custom-control">
-                        <input type="radio" id="Ongoing" name="CounselStat" value="Ongoing" class="custom-control-input"/>
+                        <input type="checkbox" id="Ongoing" name="CounselStat[]" value="Ongoing" class="custom-control-input"/>
                         <label class="custom-control-label text-gray-900" for="Ongoing"> 
                            Ongoing 
                         </label>
@@ -288,7 +288,7 @@
             </div>                                                                         
          </div>
          <div class="card-footer">
-            <button type="submit" name="btn-save-intake" title="Save record." class="btn btn-success">
+            <button type="submit" name="btn-save-intake" id="btn-save-intake" title="Save record." disabled class="btn btn-success">
                <i class="fas fa-save"></i> 
                Save 
             </button>
@@ -301,9 +301,41 @@
    $includeAdminController->script();
 ?>
 <script>
-   $("#studentno").on("input",function(){
-
-      $('#btn-search-studentno').click(()=>{
+   function verifyInpust() {
+      const txtClient = $("#txtClientName").val().trim();
+      const txtCourseYear = $("#txtCourseYear").val().trim();
+      const txtHmeAddress = $("#txtHmeAddress").val().trim();
+      const txtContactNo = $("#txtContactNo").val().trim();
+      const txtEmailAddress = $("#txtEmailAddress").val().trim();
+      const txtAge = $("#txtAge").val().trim();
+      const txtDateOfBirth = $("#txtDateOfBirth").val().trim();
+      const txtSex = $("#txtSex").val().trim();
+      const txtCivilStatus = $("#txtCivilStatus").val().trim();
+      const txtReligion = $("#txtReligion").val().trim();
+      const txtStudnetno = $('#txtStudnetno').val().trim();
+      const txtDateEdit = $('#txtDateEdit').val().trim();
+      const txtTimedEdit = $('#txtTimedEdit').val().trim();
+      const txtDateRferred = $('#txtDateRferred').val().trim();
+      const txtReferredBy = $('#txtReferredBy').val().trim();
+      const isValidInputs =txtClient.length > 2 && 
+                           txtCourseYear.length > 2 && 
+                           txtHmeAddress.length > 2 && 
+                           txtContactNo.length > 2 && 
+                           txtEmailAddress.length > 2 && 
+                           txtAge > 2 && 
+                           txtDateOfBirth.length > 2 && 
+                           txtSex.length > 2 && 
+                           txtCivilStatus.length > 2 && 
+                           txtReligion.length > 2 && 
+                           txtStudnetno.length > 2 && 
+                           txtDateEdit.length > 2 && 
+                           txtTimedEdit.length > 2 && 
+                           txtDateRferred.length > 2 && 
+                           txtReferredBy.length > 2;
+      $('#btn-save-intake').prop('disabled', !isValidInputs);
+   }
+   $("#studentno").on("input", function() {
+      $('#btn-search-studentno').click(() => {
          const y = $(`#list-of-student-no option[value=${$("#studentno").val()}]`);
          // get fullname form data list 
          $("#txtClientName").val(y.attr("fullName"));
@@ -324,163 +356,189 @@
          const x = y.attr("TypeOfCsel");
          x == "Counselor Initiated" ? $('#CselIntiate').attr("checked", true) : 
          x == "Walk-In" ? $('#WalkIn').attr("checked", true) : $('#Referred').attr("checked", true);
-         const r = y.attr("RForCounsl");
-         r == "Academic concern" ? $('#AcadConcern').attr("checked", true) : 
-         r == "Personality Behavioral Issues"? $('#Behavioral').attr("checked", true) : 
-         r == "Family concern" ? $("#FamilyConcern").attr("checked", true) : 
-         r == "Peer issues" ? $('#PeerIssues').attr("checked", true) : 
-         r == "Relationship concern" ? $('#Concern').attr("checked", true) : $('#CarrPlace').attr("checked", true);
          $('#txtOthersOne').val(y.attr('OthersOne'));
          const l = y.attr('PlanOfAction');
-         l == "For follow up counseling" ? $('#FollUpCounsel').attr('checked', true) :
-         l == "For Parents Consultant" ? $('#ForParentConsult').attr('checked', true) :
-         l == "For Spiritual counseling" ? $('#Spiritual').attr('checked', true) :
-         l == "For monitoring coordinate with teachers" ? $('#Monitor').attr('checked', true) :
-         l == "For Home Visitation" ? $('#ForHome').attr('checked', true) :
-         l == "For Phychological testing" ? $('#ForPhychologic').attr('checked', true) : $('#ReferPhychologist').attr('checked', true);
+         if (l) {
+            const actions = l.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="PlanActionAdd[]"][value="${action}"]`);
+
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         const r = y.attr("RForCounsl");
+         if (r) {
+            const actions = r.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="PersonalIssuess[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
          const c = y.attr('CounselStatus');
-         c == "Terminated" ? $('#Terminated').attr('checked', true) : $('#Ongoing').attr('checked', true);
+         if (c) {
+            const actions = c.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="CounselStat[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
          $('#txtOthersTwo').val(y.attr('OthersTwo'));
          const txtClientName = $("#txtClientName").val().trim();
          if (txtClientName.length <= 0) {
             $('#errTxtClientName').text("Client name is required.");
             $('#txtClientNameReq').text('*');
-            $("#txtClientName").addClass('is-invalid');
+            $("#txtClientName").removeClass('bg-white').addClass('is-invalid border-0');
          } else { 
             $('#errTxtClientName').text("");
-            $("#txtClientName").removeClass('is-invalid').addClass('is-valid');
+            $("#txtClientName").removeClass('is-invalid bg-white').addClass('is-valid border-0');
             $('#txtClientNameReq').text('');
          }
          const txtCourseYear = $("#txtCourseYear").val().trim();
          if (txtCourseYear.length <=0) {
             $('#errtTxtCourseYear').text("Course & Year are required.");
             $('txtCourseYearReq').text('*');
-            $("#txtCourseYear").addClass('is-invalid');
+            $("#txtCourseYear").removeClass('bg-white').addClass('is-invalid border-0');
          } else {
             $('#errtTxtCourseYear').text("");
             $('txtCourseYearReq').text('');
-            $("#txtCourseYear").removeClass('is-invalid').addClass('is-valid');
+            $("#txtCourseYear").removeClass('is-invalid bg-white').addClass('is-valid border-0');
          }
          const txtDateEdit = $('#txtDateEdit').val().trim();
          if (txtDateEdit.length <= 0) {
             $('#errTxtDateEdit').text("Date is required.");
             $('#txtDateEditReq').text("*");
-            $('#txtDateEdit').addClass("is-invalid");
+            $('#txtDateEdit').addClass('is-invalid');
          } else {
             $('#errTxtDateEdit').text("");
             $('#txtDateEditReq').text("");
-            $('#txtDateEdit').removeClass("is-invalid").addClass("is-valid");
+            $('#txtDateEdit').removeClass('is-invalid').addClass('is-valid');
          }
          const txtTimedEdit = $('#txtTimedEdit').val().trim();
          if (txtTimedEdit.length <= 0) {
             $('#errTxtTimedEdit').text("Time is required.");
             $('#txtTimedEditReq').text("*");
-            $('#txtTimedEdit').addClass("is-invalid");
+            $('#txtTimedEdit').addClass('is-invalid');
          } else {
             $('#errTxtTimedEdit').text("");
             $('#txtTimedEditReq').text("");
-            $('#txtTimedEdit').removeClass("is-invalid").addClass("is-valid");
+            $('#txtTimedEdit').removeClass('is-invalid').addClass('is-valid');
          }
          const txtHmeAddress = $("#txtHmeAddress").val().trim();
          if (txtHmeAddress.length <= 0) {
             $('#errTxtHmeAddress').text("Home address is required.");
             $('#txtHmeAddressReq').text("*");
-            $('#txtHmeAddress').addClass("is-invalid");
+            $('#txtHmeAddress').removeClass('bg-white').addClass('is-invalid border-0');
          }else {
             $('#errTxtHmeAddress').text("");
             $('#txtHmeAddressReq').text("");
-            $('#txtHmeAddress').removeClass("is-invalid").addClass("is-valid");
+            $('#txtHmeAddress').removeClass('is-invalid bg-white').addClass('is-valid border-0');
          }
          const txtContactNo = $("#txtContactNo").val().trim();
          if (txtContactNo.length <= 0) {
             $('#errTxtContactNo').text("Contact number is required.");
             $('#txtContactNoReq').text("*");
-            $('#txtContactNo').addClass("is-invalid");
+            $('#txtContactNo').removeClass('bg-white').addClass('is-invalid border-0');
          } else {
             $('#errTxtContactNo').text("");
             $('#txtContactNoReq').text("");
-            $('#txtContactNo').removeClass("is-invalid").addClass('is-valid');
+            $('#txtContactNo').removeClass('is-invalid bg-white').addClass('is-valid border-0');
          }
          const txtEmailAddress = $("#txtEmailAddress").val().trim();
          if (txtEmailAddress.length <= 0) {
             $('#errTxtEmailAddress').text("Email address is required.");
             $('#txtEmailAddressReq').text("*");
-            $('#txtEmailAddress').addClass("is-invalid");
+            $('#txtEmailAddress').removeClass('bg-white').addClass('is-invalid border-0');
          } else {
             $('#errTxtEmailAddress').text("");
             $('#txtEmailAddressReq').text("");
-            $('#txtEmailAddress').removeClass("is-invalid").addClass('is-valid');
+            $('#txtEmailAddress').removeClass('is-invalid bg-white').addClass('is-valid border-0');
          }
          const txtAge = $("#txtAge").val().trim();
          if (txtAge.length <= 0) {
             $('#errTxtAge').text("Age is required.");
             $('#txtAgeReq').text("*");
-            $('#txtAge').addClass("is-invalid");
+            $('#txtAge').removeClass('bg-white').addClass('is-invalid border-0');
          } else {
             $('#errTxtAge').text("");
             $('#txtAgeReq').text("");
-            $('#txtAge').removeClass("is-invalid").addClass('is-valid');
+            $('#txtAge').removeClass('is-invalid bg-white').addClass('is-valid border-0');
          }
          const txtDateOfBirth = $("#txtDateOfBirth").val().trim();
          if (txtDateOfBirth.length <= 0) {
             $('#errTxtDateOfBirth').text("Date of Birth is required.");
             $('#txtDateOfBirthReq').text("*");
-            $('#txtDateOfBirth').addClass("is-invalid");
+            $('#txtDateOfBirth').removeClass('bg-white').addClass('is-invalid border-0');
          } else {
             $('#errTxtDateOfBirth').text("");
             $('#txtDateOfBirthReq').text("");
-            $('#txtDateOfBirth').removeClass("is-invalid").addClass('is-valid');
+            $('#txtDateOfBirth').removeClass('is-invalid bg-white').addClass('is-valid border-0');
          }
          const txtSex = $("#txtSex").val().trim();
          if (txtSex.length <= 0) {
             $('#errTxtSex').text("Sex is required.");
             $('#txtSexReq').text("*");
-            $('#txtSex').addClass("is-invalid");
+            $('#txtSex').removeClass('bg-white').addClass('is-invalid border-0');
          } else {
             $('#errTxtSex').text("");
             $('#txtSexReq').text("");
-            $('#txtSex').removeClass("is-invalid").addClass('is-valid');
+            $('#txtSex').removeClass('is-invalid bg-white').addClass('is-valid border-0');
          }
          const txtCivilStatus = $("#txtCivilStatus").val().trim();
          if (txtCivilStatus.length <= 0) {
             $('#errTxtCivilStatus').text("Civil Status is required.");
             $('#txtCivilStatusReq').text("*");
-            $('#txtCivilStatus').addClass("is-invalid");
+            $('#txtCivilStatus').removeClass('bg-white').addClass('is-invalid border-0');
          } else {
             $('#errTxtCivilStatus').text("");
             $('#txtCivilStatusReq').text("");
-            $('#txtCivilStatus').removeClass("is-invalid").addClass('is-valid');
+            $('#txtCivilStatus').removeClass('is-invalid bg-white').addClass('is-valid border-0');
          }
          const txtReligion = $("#txtReligion").val().trim();
          if (txtReligion.length <= 0) {
             $('#errTxtReligion').text("Religion is required.");
             $('#txtReligionReq').text("*");
-            $('#txtReligion').addClass("is-invalid");
+            $('#txtReligion').removeClass('bg-white').addClass('is-invalid border-0');
          } else {
             $('#errTxtReligion').text("");
             $('#txtReligionReq').text("");
-            $('#txtReligion').removeClass("is-invalid").addClass('is-valid');
+            $('#txtReligion').removeClass('is-invalid bg-white').addClass('is-valid border-0');
          }
          const txtDateRferred = $("#txtDateRferred").val().trim();
          if (txtDateRferred.length <= 0) {
             $('#errTxtDateRferred').text("Date Referred is required.");
             $('#txtDateRferredReq').text("*");
-            $('#txtDateRferred').addClass("is-invalid");
+            $('#txtDateRferred').addClass('is-invalid');
          } else {
             $('#errTxtDateRferred').text("");
             $('#txtDateRferredReq').text("");
-            $('#txtDateRferred').removeClass("is-invalid").addClass('is-valid');
+            $('#txtDateRferred').removeClass('is-invalid').addClass('is-valid');
          }
          const txtReferredBy = $("#txtReferredBy").val().trim();
          if (txtReferredBy.length <= 0) {
             $('#errTxtReferredBy').text("Referredm By is required.");
             $('#txtReferredByReq').text("*");
-            $('#txtReferredBy').addClass("is-invalid");
+            $('#txtReferredBy').addClass('is-invalid');
          } else {
             $('#errTxtReferredBy').text("");
             $('#txtReferredByReq').text("");
-            $('#txtReferredBy').removeClass("is-invalid").addClass('is-valid');
+            $('#txtReferredBy').removeClass('is-invalid').addClass('is-valid');
          }
+         verifyInpust();
       });
       $("#txtClientName").val('');
       $("#txtCourseYear").val('');
@@ -499,46 +557,58 @@
       $('#txtReferredBy').val('');
       $('#errTxtClientName').text("");
       $('#txtClientNameReq').text('');
-      $("#txtClientName").removeClass('is-invalid').removeClass('is-valid');
+      $("#txtClientName").removeClass('is-invalid is-valid border-0').addClass('bg-white');
       $('#errtTxtCourseYear').text("");
       $('txtCourseYearReq').text('');
-      $("#txtCourseYear").removeClass('is-invalid').removeClass('is-valid');
+      $("#txtCourseYear").removeClass('is-invalid is-valid border-0').addClass('bg-white');
       $('#errTxtDateEdit').text("");
       $('#txtDateEditReq').text("");
-      $('#txtDateEdit').removeClass("is-invalid").removeClass("is-valid");
+      $('#txtDateEdit').removeClass("is-invalid is-valid").addClass('bg-white');
       $('#errTxtTimedEdit').text("");
       $('#txtTimedEditReq').text("");
-      $('#txtTimedEdit').removeClass("is-invalid").removeClass("is-valid");
+      $('#txtTimedEdit').removeClass("is-invalid is-valid").addClass('bg-white');
       $('#errTxtHmeAddress').text("");
       $('#txtHmeAddressReq').text("");
-      $('#txtHmeAddress').removeClass("is-invalid").removeClass("is-valid");
+      $('#txtHmeAddress').removeClass("is-invalid is-valid border-0").addClass('bg-white');
       $('#errTxtContactNo').text("");
       $('#txtContactNoReq').text("");
-      $('#txtContactNo').removeClass("is-invalid").removeClass('is-valid');
+      $('#txtContactNo').removeClass("is-invalid is-valid border-0").addClass('bg-white');
       $('#errTxtEmailAddress').text("");
       $('#txtEmailAddressReq').text("");
-      $('#txtEmailAddress').removeClass("is-invalid").removeClass('is-valid');
+      $('#txtEmailAddress').removeClass("is-invalid is-valid border-0").addClass('bg-white');
       $('#errTxtAge').text("");
       $('#txtAgeReq').text("");
-      $('#txtAge').removeClass("is-invalid").removeClass('is-valid');
+      $('#txtAge').removeClass("is-invalid is-valid border-0").addClass('bg-white');
       $('#errTxtDateOfBirth').text("");
       $('#txtDateOfBirthReq').text("");
-      $('#txtDateOfBirth').removeClass("is-invalid").removeClass('is-valid');
+      $('#txtDateOfBirth').removeClass("is-invalid is-valid border-0").addClass('bg-white');
       $('#errTxtSex').text("");
       $('#txtSexReq').text("");
-      $('#txtSex').removeClass("is-invalid").removeClass('is-valid');
+      $('#txtSex').removeClass("is-invalid is-valid border-0").addClass('bg-white');
       $('#errTxtCivilStatus').text("");
       $('#txtCivilStatusReq').text("");
-      $('#txtCivilStatus').removeClass("is-invalid").removeClass('is-valid');
+      $('#txtCivilStatus').removeClass("is-invalid is-valid border-0").addClass('bg-white');
       $('#errTxtReligion').text("");
       $('#txtReligionReq').text("");
-      $('#txtReligion').removeClass("is-invalid").removeClass('is-valid');
+      $('#txtReligion').removeClass("is-invalid is-valid border-0").addClass('bg-white');
       $('#errTxtDateRferred').text("");
       $('#txtDateRferredReq').text("");
-      $('#txtDateRferred').removeClass("is-invalid").removeClass('is-valid');
+      $('#txtDateRferred').removeClass("is-invalid is-valid").addClass('bg-white');
       $('#errTxtReferredBy').text("");
       $('#txtReferredByReq').text("");
-      $('#txtReferredBy').removeClass("is-invalid").removeClass('is-valid');
+      $('#txtReferredBy').removeClass("is-invalid is-valid").addClass('bg-white');
+      $('#btn-save-intake').attr('disabled',true);
+      $(`input[name="PlanActionAdd[]"]:checked`).each((_, checkbox) => {
+         $(checkbox).prop('checked', false); // Uncheck the checkbox
+      });
+      $(`input[name="PersonalIssuess[]"]:checked`).each((_, checkbox) => {
+         $(checkbox).prop('checked', false); // Uncheck the checkbox
+      });
+      $(`input[name="CounselStat[]"]:checked`).each((_, checkbox) => {
+         $(checkbox).prop('checked', false); // Uncheck the checkbox
+      });
+      $('#txtOthersTwo').val('');
+      $('#txtOthersOne').val('');
    });
    $('#txtDateEdit').on('input',()=>{
       const txtDateEdit = $('#txtDateEdit').val().trim();
@@ -551,8 +621,9 @@
          $('#txtDateEditReq').text("");
          $('#txtDateEdit').removeClass("is-invalid").addClass("is-valid");
       }
+      verifyInpust();
    });
-   $('#txtTimedEdit').on('input',()=>{
+   $('#txtTimedEdit').on('input',() => {
       const txtTimedEdit = $('#txtTimedEdit').val().trim();
       if (txtTimedEdit.length <= 0) {
          $('#errTxtTimedEdit').text("Time is required.");
@@ -563,6 +634,7 @@
          $('#txtTimedEditReq').text("");
          $('#txtTimedEdit').removeClass("is-invalid").addClass("is-valid");
       }
+      verifyInpust();
    });
    $("#txtDateRferred").on('input',()=>{
       const txtDateRferred = $("#txtDateRferred").val().trim();
@@ -575,11 +647,12 @@
          $('#txtDateRferredReq').text("");
          $('#txtDateRferred').removeClass("is-invalid").addClass('is-valid');
       }
+      verifyInpust()
    });
    $("#txtReferredBy").on('input',()=>{
       const txtReferredBy = $("#txtReferredBy").val().trim();
       if (txtReferredBy.length <= 0) {
-         $('#errTxtReferredBy').text("Referredm By is required.");
+         $('#errTxtReferredBy').text("Referred By is required.");
          $('#txtReferredByReq').text("*");
          $('#txtReferredBy').addClass("is-invalid");
       } else {
@@ -587,5 +660,6 @@
          $('#txtReferredByReq').text("");
          $('#txtReferredBy').removeClass("is-invalid").addClass('is-valid');
       }
+      verifyInpust();
    });
 </script>
