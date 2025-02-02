@@ -16,6 +16,7 @@
    include_once('controllers/courseController.php');
    include_once('controllers/majorController.php');
    include_once('controllers/intakeController.php');
+   include_once('controllers/terminalController.php');
    # end
 
    # include models
@@ -42,6 +43,7 @@
    $courseController         = new courseController();
    $majorController          = new majorController();
    $intakeController         = new intakeController();
+   $terminalController       = new terminalController();
    # end
 
    # route start
@@ -117,8 +119,11 @@
       case "terminal-Interview":
          $includeAdminController->terminalInterviewForm();
       break;
+      case "submit-terminal-Interview":
+         $terminalController->submit_terminal_Interview();
+      break;
       default:
-         echo "404 Page Not Found!";
+         $includeAdminController->page_not_found();
       break;
    }
 # end

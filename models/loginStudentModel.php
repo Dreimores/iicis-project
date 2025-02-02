@@ -45,6 +45,16 @@
          $stmt_initial_data = $this->getConnection()->prepare("INSERT INTO tbl_initial_interview (studentno) VALUES (?)");
          $stmt_initial_data->execute([$txtStudentNo]);
          # end
+
+         # insert studentno into initake data
+         $stmt_intake_data = $this->getConnection()->prepare("INSERT INTO tbl_intakeform (studentno) VALUES (?)");
+         $stmt_intake_data->execute([$txtStudentNo]);
+         # end
+
+         # insert studentno into terminal data
+         $stmt_terminal_data = $this->getConnection()->prepare("INSERT INTO tbl_terminal_form (studentno) VALUES (?)");
+         $stmt_terminal_data->execute([$txtStudentNo]);
+         # end
       }
       # end 
 
@@ -84,6 +94,16 @@
          $stmt_initial_data = $this->getConnection()->prepare("UPDATE tbl_initial_interview SET studentno=? WHERE studentno=?");
          $stmt_initial_data->execute([$txtStudentNo, $txtOldStudentNo]);
          # end
+
+         # insert studentno into initake data
+         $stmt_intake_data = $this->getConnection()->prepare("UPDATE tbl_intakeform SET studentno=?  WHERE studentno=?");
+         $stmt_intake_data->execute([$txtStudentNo, $txtOldStudentNo]);
+         # end
+
+         # insert studentno into terminal data
+         $stmt_terminal_data = $this->getConnection()->prepare("UPDATE tbl_terminal_form SET studentno=?  WHERE studentno=?");
+         $stmt_terminal_data->execute([$txtStudentNo, $txtOldStudentNo]);
+         # end
       }
 
       # delete student account
@@ -122,6 +142,17 @@
          # delete studentno into ip pwd data
          $stmt_initial_data = $this->getConnection()->prepare("DELETE FROM tbl_initial_interview WHERE studentno=?");
          $stmt_initial_data->execute([$txtStudentNo]);
+         # end
+
+         # delete studentno into initake data
+         $stmt_intake_data = $this->getConnection()->prepare("DELETE FROM tbl_intakeform WHERE studentno=?");
+         $stmt_intake_data->execute([$txtStudentNo]);
+         # end
+
+         # delete studentno into terminal data
+         $stmt_terminal_data = $this->getConnection()->prepare("DELETE FROM tbl_terminal_form WHERE studentno=?");
+         $stmt_terminal_data->execute([$txtStudentNo]);
+         # end
       }
       # end
 

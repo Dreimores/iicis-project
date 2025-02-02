@@ -303,10 +303,10 @@ class studentFormsModel extends Connection
 
    # submit students health data forms
    public function submit_stud_health_data(
-      $studentno,
       $h_sick,
       $health_data_health_problems,
-      $health_data_others_please_specify
+      $health_data_others_please_specify,
+      $studentno
    )
    {
       $stmp = $this->getConnection()->prepare(
@@ -469,13 +469,15 @@ class studentFormsModel extends Connection
    public function view_account_student()
    {
       $stmt = $this->getConnection()->prepare(
-         "SELECT sa.*, cl.*, cr.*, mj.*, pd.*, nf.*
+         "SELECT sa.*, cl.*, cr.*, mj.*, pd.*, nf.*, fd.*, tf.*
          FROM tbl_stud_accounts      AS sa 
          LEFT JOIN tblcolleges       AS cl  ON sa.colid     = cl.colid 
          LEFT JOIN tblcourses        AS cr  ON sa.courseid  = cr.courseid
          LEFT JOIN tblmajors         AS mj  ON sa.majorid   = mj.majorid
          LEFT JOIN tbl_personal_data AS pd  ON sa.studentno = pd.studentno
-         LEFT JOIN tbl_intakeform    AS nf  ON sa.studentno = nf.studentno"
+         LEFT JOIN tbl_family_data   AS fd  ON sa.studentno = fd.studentno
+         LEFT JOIN tbl_intakeform    AS nf  ON sa.studentno = nf.studentno
+         LEFT JOIN tbl_terminal_form AS tf  ON sa.studentno = tf.studentno"
       );
 
       # Execute the prepared statement with the student number parameter

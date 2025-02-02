@@ -84,5 +84,12 @@
          include_once('views/admin-terminalform.php');   
       }
       # end
+
+      # 404 page not found
+      public function page_not_found() 
+      {
+         include_once('views/404.html');
+      }
+      # end
    }
 ?>

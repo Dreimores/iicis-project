@@ -1,95 +1,164 @@
 <?php
-$includeAdminController = new includeAdminController();
-$includeAdminController->header();
-$includeAdminController->navbar();
+   $includeAdminController = new includeAdminController();
+   $includeAdminController->header();
+   $includeAdminController->navbar();
 ?>
 <div class="container-fluid">
    <div class="card">
       <div class="card-header d-sm-flex justify-content-center">
-         <img class="d-lg-inline-block d-none" src="img/csu_lasam_logo.webp" width="130" height="130" />
+         <img class="d-lg-inline-block d-none" src="img/csu_lasam_logo.webp" width="130" height="130"/>
          <div class="text-gray-900">
-            <div class="h5 text-center">Republic of the Philippines</div>
-            <div class="h4 text-uppercase text-center font-weight-bold">cagayan state university</div>
-            <div class="h5 text-capitalize text-center">lasam campus</div>
-            <div class="h4 text-uppercase text-center mb-4">guidance and counseling center</div>
+            <div class="h5 text-center"> Republic of the Philippines </div>
+            <div class="h4 text-uppercase text-center font-weight-bold"> cagayan state university </div>
+            <div class="h5 text-capitalize text-center"> lasam campus </div>
+            <div class="h4 text-uppercase text-center mb-4"> guidance and counseling center </div>
             <div class="h4 text-uppercase text-center font-weight-bold"> terminal interview form </div>
          </div>
+         <div class="mx-5"></div>
       </div>
-      <div class="card-body">
-         <label for="" class="mr-2"> Student no. </label>
-         <div class="form-inline mr-auto my-2 mb-3 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-               <input type="text" name="studentno" class="form-control small" placeholder="Search...">
-               <div class="input-group-append">
-                  <a href="#" title="Search student no." data-target="#StudentNumberTerminal" data-toggle="modal" class="btn btn-primary">
-                     <i class="fas fa-ellipsis-h text-xs"></i>
-                  </a>
+      <form action="?route=submit-terminal-Interview" method="post">
+         <div class="card-body">
+            <!-- <span class="card bg-danger text-white p-2 mb-3">sample</span> -->
+            <div class="form-group d-sm-flex mb-4">
+               <label class="my-1 mr-3"> Student number : </label>
+               <div class="form-inline">
+                  <div class="input-group">
+                     <input type="search" name="student-no" id="student-no" list="list-of-studentNo" class="form-control" placeholder="Search for...">
+                     <div class="input-group-append">
+                        <button type="button" class="btn btn-primary" title="Search student no." id="btn-search-student-no">
+                           <i class="fas fa-search fa-sm"></i>
+                        </button>
+                     </div>
+                  </div>
+                  <datalist id="list-of-studentNo">
+                     <?php $studentFormsModel = new studentFormsModel();
+                        foreach ($studentFormsModel->view_account_student() as $row) { ?>
+                           <option value="<?=$row['studentno']?>"
+                           studentNo ="<?=$row['studentno']?>" 
+                           firstName ="<?=$row['p_firstname']?>"
+                           nickName  ="<?=$row['p_nickname']?>"
+                           middleName="<?= substr($row['p_middlename'],0,1). "."?>"
+                           SurName   ="<?= $row['p_surname']?>"
+                           courseYear="<?=$row['coursecode']?>"
+                           civilstats="<?=$row['p_cilvilstatus']?>"
+                           homeAddres="<?=$row['p_homeaddress']?>"
+                           email     ="<?=$row['email']?>"
+                           haddTelno ="<?=$row['p_homeadd_telno']?>"
+                           boardtelno="<?=$row['p_boardhousetelno']?>"
+                           fathername="<?=$row['f_fathername']?>"
+                           mothername="<?=$row['m_mothername']?>"
+                           whyenrollcsu="<?=$row['WhyEnrollCsu']?>"
+                           IfNoWhy="<?=$row['IfNoWhy']?>"
+                           HowFeelGraduate="<?=$row['HowFeelGraduate']?>"
+                           WhatDoAfterGrad="<?=$row['WhatDoAfterGrad']?>"
+                           WhatDiffUniversity="<?=$row['WhatDiffUniversity']?>"
+                           WhatGreatLearn="<?=$row['WhatGreatLearn']?>"
+                           WouldYouEncourRel="<?=$row['WouldYouEncourRel']?>"
+                           FinishCrsEnrolled="<?=$row['FinishCrsEnrolled']?>"
+                           >
+                     <?php }?>
+                  </datalist>
                </div>
             </div>
-         </div>
-         <form action="" method="post">
             <div class="mt-4">
                <div class="row">
                   <div class="form-group col-sm-3">
-                     <label for="Surname" class="text-gray-900"> Surname </label>
-                     <input type="text" class="form-control">
-                  </div>
-                  <div class="form-group col-sm-3">
-                     <label for="Firstname" class="text-gray-900"> Firstname </label>
-                     <input type="text" class="form-control">
-                  </div>
-                  <div class="form-group col-sm-3">
-                     <label for="Middlename" class="text-gray-900"> Middlename
+                     <label for="txtSureName" class="text-gray-900"> 
+                        Surname <span class="text-danger" id="txtSureNameReq"></span>
                      </label>
-                     <input type="text" class="form-control">
+                     <input type="text" id="txtSureName" name="txtSureName" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                     <span class="text-danger" id="errTxtSureName"></span>
                   </div>
                   <div class="form-group col-sm-3">
-                     <label for="Nickname" class="text-gray-900"> Nickname </label>
-                     <input type="text" class="form-control">
+                     <label for="txtFirstName" class="text-gray-900"> 
+                        Firstname <span class="text-danger" id="txtFirstNameReq"></span> 
+                     </label>
+                     <input type="text" id="txtFirstName" name="txtFirstName" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                     <span class="text-danger" id="errTxtFirstName"></span>
+                  </div>
+                  <div class="form-group col-sm-3">
+                     <label for="txtMiddleName" class="text-gray-900"> 
+                        Middlename <span class="text-danger" id="txtMiddleNameReq"></span>
+                     </label>
+                     <input type="text" id="txtMiddleName" name="txtMiddleName" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                     <span class="text-danger" id="errTxtMiddleName"></span>
+                  </div>
+                  <div class="form-group col-sm-3">
+                     <label for="txtNickName" class="text-gray-900"> 
+                        Nickname <span class="text-danger" id="txtNickNameReq"></span> 
+                     </label>
+                     <input type="text" id="txtNickName" name="txtNickName" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                     <span class="text-danger" id="errTxtNickName"></span>
                   </div>
                </div>
             </div>
             <div class="row">
                <div class="form-group col-sm-3">
-                  <label for="Course" class="text-gray-900"> Course: </label>
-                  <input type="text" class="form-control">
-               </div>
-               <div class="form-group col-sm-3">
-                  <label for="CivilStatus" class="text-gray-900"> Civil Status: </label>
-                  <input type="text" class="form-control">
-               </div>
-               <div class="form-group col-sm-3">
-                  <label for="HomeAddress" class="text-gray-900"> Complete Home Address: </label>
-                  <input type="text" class="form-control">
-               </div>
-               <div class="form-group col-sm-3">
-                  <label for="EmailAddress" class="text-gray-900"> E-mail Address </label>
-                  <input type="text" class="form-control">
-               </div>
-            </div>
-            <div class="row">
-               <div class="form-group col-sm-3">
-                  <label for="Telephone" class="text-gray-900"> Telephone </label>
-                  <input type="text" class="form-control">
-               </div>
-               <div class="form-group col-sm-3">
-                  <label for="Cellphone" class="text-gray-900"> Cellphone </label>
-                  <input type="text" class="form-control">
-               </div>
-               <div class="form-group col-sm-3">
-                  <label for="Father" class="text-gray-900"> Father: </label>
-                  <input type="text" class="form-control">
-               </div>
-               <div class="form-group col-sm-3">
-                  <label for="Mother" class="text-gray-900"> Mother: </label>
-                  <input type="text" class="form-control">
-               </div>
-            </div>
-            <div class="row">
-               <div class="form-group col-sm-3">
-                  <label for="FacebookAccount" class="text-gray-900"> Facebook Account
+                  <label for="txtCourse" class="text-gray-900"> 
+                     Course: <span class="text-danger" id="txtCourseReq"></span>
                   </label>
-                  <input type="text" id="FacebookAccount" name="FacebookAccount" class="form-control" title="Special character is not allowed." />
+                  <input type="text" id="txtCourse" name="txtCourse" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                  <span class="text-danger" id="errTxtCourse"></span>
+               </div>
+               <div class="form-group col-sm-3">
+                  <label for="textCivilStatus" class="text-gray-900"> 
+                     Civil Status: <span class="text-danger" id="textCivilStatusReq"></span>
+                  </label>
+                  <input type="text" id="textCivilStatus" name="textCivilStatus" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                  <span class="text-danger" id="errTextCivilStatus"></span>
+               </div>
+               <div class="form-group col-sm-3">
+                  <label for="txtHomeAddress" class="text-gray-900"> 
+                     Complete Home Address: <span class="text-danger" id="txtHomeAddressReq"></span> 
+                  </label>
+                  <input type="text" id="txtHomeAddress" name="txtHomeAddress" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                  <span class="text-danger" id="errTxtHomeAddress"></span>
+               </div>
+               <div class="form-group col-sm-3">
+                  <label for="txtEmailAddress" class="text-gray-900"> 
+                     E-mail Address <span class="text-danger" id="txtEmailAddressReq"></span>
+                  </label>
+                  <input type="text" id="txtEmailAddress" name="txtEmailAddress" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                  <span class="text-danger" id="errTxtEmailAddress"></span>
+               </div>
+            </div>
+            <div class="row">
+               <div class="form-group col-sm-3">
+                  <label for="txtTelphone" class="text-gray-900"> 
+                     Telephone <span class="text-danger" id="txtTelphoneReq"></span> 
+                  </label>
+                  <input type="text" id="txtTelphone" name="txtTelphone" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                  <span class="text-danger" id="errTxtTelphone"></span>
+               </div>
+               <div class="form-group col-sm-3">
+                  <label for="txtCellphone" class="text-gray-900"> 
+                     Cellphone <span class="text-danger" id="txtCellphoneReq"></span>
+                  </label>
+                  <input type="text" id="txtCellphone" name="txtCellphone" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                  <span class="text-danger" id="errTxtCellphone"></span>
+               </div>
+               <div class="form-group col-sm-3">
+                  <label for="txtFather" class="text-gray-900"> 
+                     Father: <span class="text-danger" id="txtFatherReq"></span> 
+                  </label>
+                  <input type="text" id="txtFather" name="txtFather" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                  <span class="text-danger" id="errTxtFather"></span>
+               </div>
+               <div class="form-group col-sm-3">
+                  <label for="txtMother" class="text-gray-900"> 
+                     Mother: <span class="text-danger" id="txtMotherReq"></span>
+                  </label>
+                  <input type="text" id="txtMother" name="txtMother" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+                  <span class="text-danger" id="errTxtMother"></span>
+               </div>
+            </div>
+            <div class="row">
+               <div class="form-group col-sm-3">
+                  <label for="txtFacebookAccount" class="text-gray-900"> 
+                     Facebook Account <span class="text-danger" id="txtFacebookAccountReq"></span>
+                  </label>
+                  <input type="text" id="txtFacebookAccount" name="txtFacebookAccount" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" title="Special character is not allowed." />
+                  <span class="text-danger" id="errTxtFacebookAccount"></span>
                </div>
             </div>
             <label for="QualityEducation" class="text-gray-900"> Direction: Please check your choices below. </label>
@@ -141,7 +210,7 @@ $includeAdminController->navbar();
                            </div>
                            <div class="form-group">
                               <label for="OthersOne"> Others (specify) </label>
-                              <input type="text" id="OthersOne" name="OthersOne" placeholder="Enter others" class="form-control form-control-sm">
+                              <input type="text" id="OthersOne" name="OthersOne" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white">
                            </div>
                         </div>
                      </div>
@@ -150,9 +219,12 @@ $includeAdminController->navbar();
                <div>
                   <li>
                      <div class="form-group row mb-4">
-                        <label class="col-sm-4 col-form-label text-gray-900" for="FirstEnroll"> What school year did you first enroll? </label>
+                        <label class="col-sm-4 col-form-label text-gray-900" for="txtFirstEnroll"> 
+                           What school year did you first enroll? <span class="text-danger" id="txtFirstEnrollReq"></span>
+                        </label>
                         <div class="col-sm-8">
-                           <input type="text" id="FirstEnroll" name="WhatSchlFirstEnroll" class="form-control" title="Special character is not allowed." />
+                           <input type="text" id="txtFirstEnroll" name="txtFirstEnroll" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" title="Special character is not allowed." />
+                           <span class="text-danger" id="errTxtFirstEnroll"></span>
                         </div>
                      </div>
                   </li>
@@ -161,11 +233,11 @@ $includeAdminController->navbar();
                   <li>
                      <div class="custom-checkbox">
                         <div class="d-flex justify-content-start">
-                           <label for="Finishing" class="mb-2 pr-2">
+                           <label for="Yes" class="mb-2 pr-2">
                               Are you finishing the same course you first enrolled?
                            </label>
                            <div class="custom-control">
-                              <input type="radio" id="Finishing" name="FinishCrsEnrolled" value="Yes" class="custom-control-input" checked />
+                              <input type="radio" id="Yes" name="FinishCrsEnrolled" value="Yes" class="custom-control-input" checked />
                               <label class="custom-control-label pr-2" for="Yes"> Yes </label>
                            </div>
                            <div class="custom-control">
@@ -178,15 +250,15 @@ $includeAdminController->navbar();
                      <div class="d-sm-flex justify-content-between mb-3">
                         <div class="d-flex flex-column">
                            <div class="custom-control custom-checkbox">
-                              <input type="checkbox" id="FamilyProblem" name="IfNoWhy[]" value="Family problem" class="custom-control-input" />
+                              <input type="checkbox" id="FamilyProblem" name="IfNoWhy[]" value="Family problem" class="custom-control-input"/>
                               <label class="custom-control-label text-gray-900" for="FamilyProblem"> Family problem </label>
                            </div>
                            <div class="custom-control custom-checkbox">
-                              <input type="checkbox" id="ParentsChoice" name="IfNoWhy[]" value="Parents choice" class="custom-control-input" />
+                              <input type="checkbox" id="ParentsChoice" name="IfNoWhy[]" value="Parents choice" class="custom-control-input"/>
                               <label class="custom-control-label text-gray-900" for="ParentsChoice"> Parents's choice </label>
                            </div>
                            <div class="custom-control custom-checkbox">
-                              <input type="checkbox" id="HealthCondition" name="IfNoWhy[]" value="Health condition" class="custom-control-input" />
+                              <input type="checkbox" id="HealthCondition" name="IfNoWhy[]" value="Health condition" class="custom-control-input"/>
                               <label class="custom-control-label text-gray-900" for="HealthCondition"> Health condition </label>
                            </div>
                         </div>
@@ -210,8 +282,8 @@ $includeAdminController->navbar();
                         </div>
                         <div class="d-flex flex-column">
                            <div class="form-group">
-                              <label for="OtherIfNo"> Others (specify) </label>
-                              <input type="text" id="OthersTwo" name="OthersTwo" class="form-control form-control-sm">
+                              <label for="txtOtherIfNo"> Others (specify) </label>
+                              <input type="text" id="txtOtherIfNo" name="txtOtherIfNo" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white">
                            </div>
                         </div>
                      </div>
@@ -270,13 +342,8 @@ $includeAdminController->navbar();
                            </div>
                         </div>
                         <div class="form-group">
-                           <label for="OtherFive">
-                              Others (specify)
-                           </label>
-                           <input type="text" id="OtherFive" name="OthersThree"
-
-                              placeholder="Enter others"
-                              class="form-control form-control-sm">
+                           <label for="txtOthersThree"> Others (specify) </label>
+                           <input type="text" id="txtOthersThree" name="txtOthersThree" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white">
                         </div>
                      </div>
                   </li>
@@ -289,7 +356,7 @@ $includeAdminController->navbar();
                            <div class="custom-control">
                               <input type="checkbox" id="WithinPhilippines" name="WhatDoAfterGrad[]" value="Find work immediately" class="custom-control-input" />
                               <label class="custom-control-label text-gray-900" for="WithinPhilippines"> Find work immediately </label>
-                              <select id="PhilippinesAbroad" name="WhatDoAfterGrad[]" class="form-control form-control-sm">
+                              <select id="PhilippinesAbroad" name="WhatDoAfterGrad[]" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white">
                                  <option value=""> Choose... </option>
                                  <option value="Within Philippines"> Within Philippines </option>
                                  <option value="Abroad"> Abroad </option>
@@ -313,7 +380,7 @@ $includeAdminController->navbar();
                            </div>
                            <div class="d-sm-flex">
                               <label class="text-gray-900 pr-2" for="OthersFour"> Others(pls.Specify) </label>
-                              <input type="text" id="OthersFour" name="OthersFour" placeholder="Enter others" class="form-control form-control-sm">
+                              <input type="text" id="OthersFour" name="OthersFour" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white">
                            </div>
                         </div>
                      </div>
@@ -376,7 +443,7 @@ $includeAdminController->navbar();
                            </div>
                            <div class="d-sm-flex">
                               <label class="text-gray-900 pr-2" for="OthersFive"> Others(pls.Specify) </label>
-                              <input type="text" id="OthersFive" name="OthersFive" class="form-control form-control-sm" />
+                              <input type="text" id="OthersFive" name="OthersFive" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
                            </div>
                         </div>
                      </div>
@@ -424,8 +491,8 @@ $includeAdminController->navbar();
                               <label class="custom-control-label text-gray-900" for="LearnValueEduc"> Learned to value education & became positive always </label>
                            </div>
                            <div class="d-sm-flex">
-                              <label class="text-gray-900 pr-2" for="OthersSix"> Others(pls.Specify) </label>
-                              <input type="text" id="OthersSix" name="OthersSix" class="form-control form-control-sm">
+                              <label class="text-gray-900 pr-2" for="txtOthersSix"> Others(pls.Specify) </label>
+                              <input type="text" id="txtOthersSix" name="txtOthersSix" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
                            </div>
                         </div>
                      </div>
@@ -457,8 +524,8 @@ $includeAdminController->navbar();
                            <label class="custom-control-label text-gray-900" for="NoTuitionFeeOne"> No tuition fee </label>
                         </div>
                         <div class="d-sm-flex">
-                           <label class="text-gray-900 pr-2" for="OthersSeven"> Others(pls.Specify) </label>
-                           <input type="text" id="OthersSeven" name="OthersSeven" class="form-control form-control-sm">
+                           <label class="text-gray-900 pr-2" for="txtOthersSeven"> Others(pls.Specify) </label>
+                           <input type="text" id="txtOthersSeven" name="txtOthersSeven" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
                         </div>
                      </div>
                   </li>
@@ -466,21 +533,382 @@ $includeAdminController->navbar();
                <div>
                   <li>
                      <h1 class="h6 text-gray-900"> What can you suggest/recommend to inprove the student services of CSU? </h1>
-                     <textarea cols="30" rows="5" name="WhatCanSugServ" class="form-control"></textarea>
+                     <input type="text" id="txtWhatCanSugServ" name="txtWhatCanSugServ" class="form-control border-top-0 border-left-0 border-right-0 col-sm-6 rounded-0 shadow-none bg-white"/>
                   </li>
                </div>
             </ol>
-            <div class="d-sm-flex justify-content-center">
-               <button type="submit" name="Btn-Terminalform-Save" title="Save record." class="btn btn-success">
-                  <i class="fas fa-save"></i>
-                  Save
-               </button>
-            </div>
-         </form>
-      </div>
+         </div>
+         <div class="card-footer">
+            <button type="submit" name="Btn-Terminalform-Save" title="Save record." class="btn btn-success">
+               <i class="fas fa-save"></i>
+               Save
+            </button>
+         </div>
+      </form>
    </div>
 </div>
 <?php
-$includeAdminController->footer();
-$includeAdminController->script();
+   $includeAdminController->footer();
+   $includeAdminController->script();
 ?>
+
+<script>
+   $('#student-no').on('input',function(){
+      $('#btn-search-student-no').click(()=>{
+         const y = $(`#list-of-studentNo option[value=${$("#student-no").val()}]`);
+         $("#txtFirstName").val(y.attr("firstName"));
+         $("#txtMiddleName").val(y.attr("middleName"));
+         $("#txtSureName").val(y.attr("SurName"));
+         $("#txtNickName").val(y.attr("nickName"));
+         $("#txtCourse").val(y.attr("courseYear"));
+         $("#textCivilStatus").val(y.attr("civilstats"));
+         $("#txtHomeAddress").val(y.attr("homeAddres"));
+         $("#txtEmailAddress").val(y.attr("email"));
+         $("#txtTelphone").val(y.attr("haddTelno"));
+         $("#txtCellphone").val(y.attr("boardtelno"));
+         $("#txtFather").val(y.attr("fathername"));
+         $("#txtMother").val(y.attr("mothername"));
+         const txtSureName = $("#txtSureName").val().trim();
+         if (txtSureName.length <= 0) {
+            $('#txtSureNameReq').text('*');
+            $("#txtSureName").addClass('is-invalid');
+            $('#errTxtSureName').text('First Name is Required.');
+         } else {
+            $('#txtSureNameReq').text('');
+            $("#txtSureName").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errTxtSureName').text('');
+         }
+         const txtFirstName = $("#txtFirstName").val().trim();
+         if (txtFirstName.length <= 0) {
+            $('#txtFirstNameReq').text('*');
+            $("#txtFirstName").addClass('is-invalid');
+            $('#errtxtFirstName').text('First Name is Required.');
+         } else {
+            $('#txtFirstNameReq').text('');
+            $("#txtFirstName").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errtxtFirstName').text('');
+         }
+         const txtMiddleName = $("#txtMiddleName").val().trim();
+         if (txtMiddleName.length <= 0) {
+            $('#txtMiddleNameReq').text('*');
+            $("#txtMiddleName").addClass('is-invalid');
+            $('#errTxtMiddleName').text('First Name is Required.');
+         } else {
+            $('#txtMiddleNameReq').text('');
+            $("#txtMiddleName").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errTxtMiddleName').text('');
+         }
+         const txtNickName = $("#txtNickName").val().trim();
+         if (txtNickName.length <= 0) {
+            $('#txtNickNameReq').text('*');
+            $("#txtNickName").addClass('is-invalid');
+            $('#errTxtNickName').text('First Name is Required.');
+         } else {
+            $('#txtNickNameReq').text('');
+            $("#txtNickName").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errTxtNickName').text('');
+         }
+         const txtCourse = $("#txtCourse").val().trim();
+         if (txtCourse.length <= 0) {
+            $('#txtCourseReq').text('*');
+            $("#txtCourse").addClass('is-invalid');
+            $('#errTxtCourse').text('First Name is Required.');
+         } else {
+            $('#txtCourseReq').text('');
+            $("#txtCourse").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errTxtCourse').text('');
+         }
+         const textCivilStatus = $("#textCivilStatus").val().trim();
+         if (textCivilStatus.length <= 0) {
+            $('#textCivilStatusReq').text('*');
+            $("#textCivilStatus").addClass('is-invalid');
+            $('#errTextCivilStatus').text('First Name is Required.');
+         } else {
+            $('#textCivilStatusReq').text('');
+            $("#textCivilStatus").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errTextCivilStatus').text('');
+         }
+         const txtHomeAddress = $("#txtHomeAddress").val().trim();
+         if (txtHomeAddress.length <= 0) {
+            $('#txtHomeAddressReq').text('*');
+            $("#txtHomeAddress").addClass('is-invalid');
+            $('#errTxtHomeAddress').text('First Name is Required.');
+         } else {
+            $('#txtHomeAddressReq').text('');
+            $("#txtHomeAddress").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errTxtHomeAddress').text('');
+         }
+         const txtEmailAddress = $("#txtEmailAddress").val().trim();
+         if (txtEmailAddress.length <= 0) {
+            $('#txtEmailAddressReq').text('*');
+            $("#txtEmailAddress").addClass('is-invalid');
+            $('#errTxtEmailAddress').text('First Name is Required.');
+         } else {
+            $('#txtEmailAddressReq').text('');
+            $("#txtEmailAddress").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errTxtEmailAddress').text('');
+         }
+         const txtTelphone = $("#txtTelphone").val().trim();
+         if (txtTelphone.length <= 0) {
+            $('#txtTelphoneReq').text('*');
+            $("#txtTelphone").addClass('is-invalid');
+            $('#errTxtTelphone').text('First Name is Required.');
+         } else {
+            $('#txtTelphoneReq').text('');
+            $("#txtTelphone").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errTxtTelphone').text('');
+         }
+         const txtCellphone = $("#txtCellphone").val().trim();
+         if (txtCellphone.length <= 0) {
+            $('#txtCellphoneReq').text('*');
+            $("#txtCellphone").addClass('is-invalid');
+            $('#errTxtCellphone').text('First Name is Required.');
+         } else {
+            $('#txtCellphoneReq').text('');
+            $("#txtCellphone").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errTxtCellphone').text('');
+         }
+         const txtFather = $("#txtFather").val().trim();
+         if (txtFather.length <= 0) {
+            $('#txtFatherReq').text('*');
+            $("#txtFather").addClass('is-invalid');
+            $('#errTxtFather').text('First Name is Required.');
+         } else {
+            $('#txtFatherReq').text('');
+            $("#txtFather").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errTxtFather').text('');
+         }
+         const txtMother = $("#txtMother").val().trim();
+         if (txtMother.length <= 0) {
+            $('#txtMotherReq').text('*');
+            $("#txtMother").addClass('is-invalid');
+            $('#errTxtMother').text('First Name is Required.');
+         } else {
+            $('#txtMotherReq').text('');
+            $("#txtMother").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
+            $('#errTxtMother').text('');
+         }
+
+         const txtFacebookAccount = $("#txtFacebookAccount").val().trim();
+         if (txtFacebookAccount.length <= 0) {
+            $('#txtFacebookAccountReq').text('*');
+            $("#txtFacebookAccount").addClass('is-invalid');
+            $('#errTxtFacebookAccount').text('Facebook acount is Required.');
+         } else {
+            $('#txtFacebookAccountReq').text('');
+            $("#txtFacebookAccount").removeClass('is-invalid').addClass('is-valid');
+            $('#errTxtFacebookAccount').text('');
+         }
+
+         const txtFirstEnroll = $("#txtFirstEnroll").val().trim();
+         if (txtFirstEnroll.length <= 0) {
+            $('#txtFirstEnrollReq').text('*');
+            $("#txtFirstEnroll").addClass('is-invalid');
+            $('#errTxtFirstEnroll').text('What school year did you first enroll is Required.');
+         } else {
+            $('#txtFirstEnrollReq').text('');
+            $("#txtFirstEnroll").removeClass('is-invalid').addClass('is-valid');
+            $('#errTxtFirstEnroll').text('');
+         }
+         const l = y.attr('whyenrollcsu');
+         if (l) {
+            const actions = l.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="WhyEnrollCsu[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         const r = y.attr('IfNoWhy');
+         if (r) {
+            const actions = r.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="IfNoWhy[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         const h = y.attr('HowFeelGraduate');
+         if (h) {
+            const actions = h.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="HowFeelGraduate[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         const w = y.attr('WhatDiffUniversity');
+         if (w) {
+            const actions = r.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="WhatDiffUniversity[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         const d = y.attr('WhatDiffUniversity');
+         if (d) {
+            const actions = d.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="WhatDiffUniversity[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         const g = y.attr('WhatGreatLearn');
+         if (g) {
+            const actions = g.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="WhatGreatLearn[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         const e = y.attr('WouldYouEncourRel');
+         if (e) {
+            const actions = e.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="WouldYouEncourRel[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         const i = y.attr('Why');
+         if (i) {
+            const actions = i.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="Why[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         const f = y.attr('FinishCrsEnrolled');
+         if (f) {
+            const actions = f.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="FinishCrsEnrolled[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         $("#OthersOne").addClass('is-valid');
+         $("#txtOtherIfNo").addClass('is-valid');
+         $("#txtOthersThree").addClass('is-valid');
+         $("#OthersFour").addClass('is-valid');
+         $("#OthersFive").addClass('is-valid');
+         $("#txtOthersSix").addClass('is-valid');
+         $("#txtOthersSeven").addClass('is-valid');
+         $("#txtWhatCanSugServ").addClass('is-valid');
+         $("#txtFirstEnroll").addClass('is-valid');
+      });
+      $("#txtFirstName").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtMiddleName").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtSureName").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtNickName").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtCourse").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#textCivilStatus").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtHomeAddress").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtEmailAddress").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtTelphone").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtCellphone").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtFather").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtMother").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $('#txtSureNameReq').text('');
+      $('#errTxtSureName').text('');
+      $('#txtFirstNameReq').text('');
+      $('#errtxtFirstName').text('');
+      $('#txtMiddleNameReq').text('');
+      $('#errTxtMiddleName').text('');
+      $('#txtNickNameReq').text('');
+      $('#errTxtNickName').text('');
+      $('#txtCourseReq').text('');
+      $('#errTxtCourse').text('');
+      $('#textCivilStatusReq').text('');
+      $('#errTextCivilStatus').text('');
+      $('#txtHomeAddressReq').text('');
+      $('#errTxtHomeAddress').text('');
+      $('#txtEmailAddressReq').text('');
+      $('#errTxtEmailAddress').text('');
+      $('#txtTelphoneReq').text('');
+      $('#errTxtTelphone').text('');
+      $('#txtCellphoneReq').text('');
+      $('#errTxtCellphone').text('');
+      $('#txtFatherReq').text('');
+      $('#errTxtFather').text('');
+      $('#txtMotherReq').text('');
+      $('#errTxtMother').text('');
+      $('#errTxtFacebookAccount').text('');
+      $('#txtFacebookAccountReq').text('');
+      $("#txtFacebookAccount").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#OthersOne").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtOtherIfNo").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtOthersThree").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#OthersFour").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#OthersFive").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtOthersSix").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtOthersSeven").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtWhatCanSugServ").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtFirstEnroll").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $('#errTxtFirstEnroll').text('');
+   });
+   $('#txtFacebookAccount').on('input',()=>{
+      const txtFacebookAccount = $("#txtFacebookAccount").val().trim();
+      if (txtFacebookAccount.length <= 0) {
+         $('#txtFacebookAccountReq').text('*');
+         $("#txtFacebookAccount").addClass('is-invalid');
+         $('#errTxtFacebookAccount').text('Facebook acount is Required.');
+      } else {
+         $('#txtFacebookAccountReq').text('');
+         $("#txtFacebookAccount").removeClass('is-invalid').addClass('is-valid');
+         $('#errTxtFacebookAccount').text('');
+      }
+   })
+   $('#txtFirstEnroll').on('input',()=>{
+      const txtFirstEnroll = $("#txtFirstEnroll").val().trim();
+      if (txtFirstEnroll.length <= 0) {
+         $('#txtFirstEnrollReq').text('*');
+         $("#txtFirstEnroll").addClass('is-invalid');
+         $('#errTxtFirstEnroll').text('What school year did you first enroll is Required.');
+      } else {
+         $('#txtFirstEnrollReq').text('');
+         $("#txtFirstEnroll").removeClass('is-invalid').addClass('is-valid');
+         $('#errTxtFirstEnroll').text('');
+      }
+   })
+</script>

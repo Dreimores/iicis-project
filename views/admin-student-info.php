@@ -93,7 +93,7 @@
          <div class="modal-header pt-2 pb-2 pl-3 pr-3">
             <div class="h6" id="Add_student"> Add </div>
             <div class="h6" id="Edit_student"> Edit </div>
-            <button onclick="location.reload()" class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <button type="button" onclick="location.reload()" class="close" data-dismiss="modal" aria-label="Close">
                <span aria-hidden="true">×</span>
             </button>
          </div>

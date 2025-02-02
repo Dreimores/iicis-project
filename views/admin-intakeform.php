@@ -6,7 +6,7 @@
 <div class="container-fluid">
    <div class="card">
       <div class="card-header d-sm-flex justify-content-center">
-         <div class="d-sm-inline-block d-none mx-2"></div>
+         <div class="d-sm-inline-block d-none mx-1"></div>
          <img class="d-lg-inline-block d-none" src="img/csu_lasam_logo.webp" width="130" height="130"/>
          <div class="text-gray-900">
             <div class="h5 text-center"> Republic of the Philippines </div>
@@ -19,6 +19,7 @@
       </div>
       <form action="?route=submit-intake-form" method="post">
          <div class="card-body">
+            <span id="message-notification"></span> 
             <div class="form-group d-sm-flex mb-4">
                <label class="my-1 mr-3"> Student number : </label>
                <div class="form-inline">
@@ -53,9 +54,8 @@
                            RForCounsl="<?=$row['ReasonsForCounsel']?>"
                            PlanOfAction="<?=$row['PlanOfAction']?>"
                            CounselStatus="<?=$row['CounselStatus']?>"
-                           OthersOne ="<?=$row['OthersOne']?>"
-                           OthersTwo ="<?=$row['OtherTwo']?>"
-                           >
+                           OthersOne="<?=$row['OtherOne']?>"
+                           OthersTwo="<?=$row['OtherTwo']?>">
                      <?php }?>
                   </datalist>
                </div>
@@ -202,11 +202,11 @@
                               Career/ placement concern 
                            </label>
                         </div>
-                        <div class="">
+                        <div>
                            <label class="pr-1 text-gray-900" for="txtOthersOne"> 
                               Others(pls.Specify) <span class="text-danger" id="txtOthersOneReq"></span>
                            </label>
-                           <input type="text" id="txtOthersOne" name="txtOthersOne" placeholder="Enter others" value="" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none">
+                           <input type="text" id="txtOthersOne" name="txtOthersOne" placeholder="Enter others" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none">
                            <span class="text-danger" id="errTxtOthersOne"></span>
                         </div>
                      </div>
@@ -257,7 +257,7 @@
                   <div class="custom-control">
                      <input type="checkbox" id="ReferPhychologist" name="PlanActionAdd[]" value="For Referral phychologist phychiatrist" class="custom-control-input PlanActionAdd"/>
                      <label class="custom-control-label text-gray-900" for="ReferPhychologist"> 
-                        For Referral (phychologist/ phychiatrist) 
+                        For Referral (phychologist/ phychiatrist)
                      </label>
                   </div>
                   <div>
@@ -302,36 +302,22 @@
 ?>
 <script>
    function verifyInpust() {
-      const txtClient = $("#txtClientName").val().trim();
+      const txtClient     = $("#txtClientName").val().trim();
       const txtCourseYear = $("#txtCourseYear").val().trim();
       const txtHmeAddress = $("#txtHmeAddress").val().trim();
-      const txtContactNo = $("#txtContactNo").val().trim();
+      const txtContactNo  = $("#txtContactNo").val().trim();
       const txtEmailAddress = $("#txtEmailAddress").val().trim();
-      const txtAge = $("#txtAge").val().trim();
-      const txtDateOfBirth = $("#txtDateOfBirth").val().trim();
-      const txtSex = $("#txtSex").val().trim();
-      const txtCivilStatus = $("#txtCivilStatus").val().trim();
-      const txtReligion = $("#txtReligion").val().trim();
-      const txtStudnetno = $('#txtStudnetno').val().trim();
-      const txtDateEdit = $('#txtDateEdit').val().trim();
-      const txtTimedEdit = $('#txtTimedEdit').val().trim();
-      const txtDateRferred = $('#txtDateRferred').val().trim();
+      const txtAge        = $("#txtAge").val().trim();
+      const txtDateOfBirth= $("#txtDateOfBirth").val().trim();
+      const txtSex        = $("#txtSex").val().trim();
+      const txtCivilStatus= $("#txtCivilStatus").val().trim();
+      const txtReligion   = $("#txtReligion").val().trim();
+      const txtStudnetno  = $('#txtStudnetno').val().trim();
+      const txtDateEdit   = $('#txtDateEdit').val().trim();
+      const txtTimedEdit  = $('#txtTimedEdit').val().trim();
+      const txtDateRferred= $('#txtDateRferred').val().trim();
       const txtReferredBy = $('#txtReferredBy').val().trim();
-      const isValidInputs =txtClient.length > 2 && 
-                           txtCourseYear.length > 2 && 
-                           txtHmeAddress.length > 2 && 
-                           txtContactNo.length > 2 && 
-                           txtEmailAddress.length > 2 && 
-                           txtAge > 2 && 
-                           txtDateOfBirth.length > 2 && 
-                           txtSex.length > 2 && 
-                           txtCivilStatus.length > 2 && 
-                           txtReligion.length > 2 && 
-                           txtStudnetno.length > 2 && 
-                           txtDateEdit.length > 2 && 
-                           txtTimedEdit.length > 2 && 
-                           txtDateRferred.length > 2 && 
-                           txtReferredBy.length > 2;
+      const isValidInputs = txtClient.length > 2 && txtCourseYear.length > 2 && txtHmeAddress.length > 2 && txtContactNo.length > 2 && txtEmailAddress.length > 2 && txtAge > 2 && txtDateOfBirth.length > 2 && txtSex.length > 2 && txtCivilStatus.length > 2 && txtReligion.length > 2 && txtStudnetno.length > 2 && txtDateEdit.length > 2 && txtTimedEdit.length > 2 && txtDateRferred.length > 2 && txtReferredBy.length > 2;
       $('#btn-save-intake').prop('disabled', !isValidInputs);
    }
    $("#studentno").on("input", function() {
@@ -356,7 +342,6 @@
          const x = y.attr("TypeOfCsel");
          x == "Counselor Initiated" ? $('#CselIntiate').attr("checked", true) : 
          x == "Walk-In" ? $('#WalkIn').attr("checked", true) : $('#Referred').attr("checked", true);
-         $('#txtOthersOne').val(y.attr('OthersOne'));
          const l = y.attr('PlanOfAction');
          if (l) {
             const actions = l.split(',').map(action => action.trim()); // Ensure all actions are trimmed
@@ -397,7 +382,10 @@
                }
             });
          }
+         $('#txtOthersOne').val(y.attr('OthersOne'));
+         $('#txtOthersOne').addClass('is-valid');
          $('#txtOthersTwo').val(y.attr('OthersTwo'));
+         $('#txtOthersTwo').addClass('is-valid');
          const txtClientName = $("#txtClientName").val().trim();
          if (txtClientName.length <= 0) {
             $('#errTxtClientName').text("Client name is required.");
@@ -538,6 +526,10 @@
             $('#txtReferredByReq').text("");
             $('#txtReferredBy').removeClass('is-invalid').addClass('is-valid');
          }
+         let allinputs = [txtClientName, txtCourseYear, txtDateEdit, txtTimedEdit, txtHmeAddress, txtContactNo, txtEmailAddress, txtAge, txtDateOfBirth,txtSex,txtCivilStatus,txtReligion,txtDateRferred,txtReferredBy];
+         // Check if any input is empty
+         let hasEmptyInputs = allinputs.some(input => input.trim() === "");
+         hasEmptyInputs ? $('#message-notification').text("The student's does not fill out all forms!").addClass('card p-2 mb-4 bg-danger text-white') : $('#message-notification').text('').removeClass('card p-2 mb-4 bg-danger text-white') 
          verifyInpust();
       });
       $("#txtClientName").val('');
@@ -608,7 +600,10 @@
          $(checkbox).prop('checked', false); // Uncheck the checkbox
       });
       $('#txtOthersTwo').val('');
+      $('#txtOthersTwo').removeClass('is-valid');
       $('#txtOthersOne').val('');
+      $('#txtOthersOne').removeClass('is-valid'); 
+      $('#message-notification').text('').removeClass('card p-2 mb-4 bg-danger text-white');
    });
    $('#txtDateEdit').on('input',()=>{
       const txtDateEdit = $('#txtDateEdit').val().trim();
