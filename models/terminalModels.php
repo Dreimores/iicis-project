@@ -1,6 +1,4 @@
 <?php
-
-
    class terminalModels extends Connection
    {
       public function __construct()

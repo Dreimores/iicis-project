@@ -122,6 +122,9 @@
       case "submit-terminal-Interview":
          $terminalController->submit_terminal_Interview();
       break;
+      case "exit-drop":
+         $includeAdminController->submit_exit_drop();
+      break;
       default:
          $includeAdminController->page_not_found();
       break;

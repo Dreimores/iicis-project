@@ -85,6 +85,13 @@
       }
       # end
 
+      # exit drop
+      public function submit_exit_drop()
+      {
+         include_once('views/admin-exit-drop.php');
+      }
+      # end
+
       # 404 page not found
       public function page_not_found() 
       {

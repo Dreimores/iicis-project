@@ -33,27 +33,38 @@
                   <datalist id="list-of-studentNo">
                      <?php $studentFormsModel = new studentFormsModel();
                         foreach ($studentFormsModel->view_account_student() as $row) { ?>
-                           <option value="<?=$row['studentno']?>"
-                           studentNo ="<?=$row['studentno']?>" 
-                           firstName ="<?=$row['p_firstname']?>"
-                           nickName  ="<?=$row['p_nickname']?>"
-                           middleName="<?= substr($row['p_middlename'],0,1). "."?>"
-                           SurName   ="<?= $row['p_surname']?>"
-                           courseYear="<?=$row['coursecode']?>"
-                           civilstats="<?=$row['p_cilvilstatus']?>"
-                           homeAddres="<?=$row['p_homeaddress']?>"
-                           email     ="<?=$row['email']?>"
-                           haddTelno ="<?=$row['p_homeadd_telno']?>"
-                           boardtelno="<?=$row['p_boardhousetelno']?>"
-                           fathername="<?=$row['f_fathername']?>"
-                           mothername="<?=$row['m_mothername']?>"
-                           whyenrollcsu="<?=$row['WhyEnrollCsu']?>"
-                           IfNoWhy="<?=$row['IfNoWhy']?>"
+                           <option value  ="<?=$row['studentno']?>"
+                           studentNo      ="<?=$row['studentno']?>" 
+                           firstName      ="<?=$row['p_firstname']?>"
+                           nickName       ="<?=$row['p_nickname']?>"
+                           middleName     ="<?= substr($row['p_middlename'],0,1). "."?>"
+                           SurName        ="<?= $row['p_surname']?>"
+                           courseYear     ="<?=$row['coursecode']?>"
+                           civilstats     ="<?=$row['p_cilvilstatus']?>"
+                           homeAddres     ="<?=$row['p_homeaddress']?>"
+                           email          ="<?=$row['email']?>"
+                           haddTelno      ="<?=$row['p_homeadd_telno']?>"
+                           boardtelno     ="<?=$row['p_boardhousetelno']?>"
+                           fathername     ="<?=$row['f_fathername']?>"
+                           mothername     ="<?=$row['m_mothername']?>"
+                           FacebookAccount="<?=$row['FacebookAccount']?>"
+                           OthersOne      ="<?=$row['OthersOne']?>"
+                           WhatSchlFirstEnroll="<?=$row['WhatSchlFirstEnroll']?>"
+                           Whyenrollcsu   ="<?=$row['WhyEnrollCsu']?>"
+                           IfNoWhy        ="<?=$row['IfNoWhy']?>"
+                           OthersTwo      ="<?=$row['OthersTwo']?>"
                            HowFeelGraduate="<?=$row['HowFeelGraduate']?>"
+                           OthersThree    ="<?=$row['OthersThree']?>"
                            WhatDoAfterGrad="<?=$row['WhatDoAfterGrad']?>"
+                           OthersFour     ="<?=$row['OthersFour']?>"
                            WhatDiffUniversity="<?=$row['WhatDiffUniversity']?>"
-                           WhatGreatLearn="<?=$row['WhatGreatLearn']?>"
-                           WouldYouEncourRel="<?=$row['WouldYouEncourRel']?>"
+                           OthersFive     ="<?=$row['OthersFive']?>"
+                           WhatGreatLearn ="<?=$row['WhatGreatLearn']?>"
+                           OthersSix      ="<?=$row['OthersSix']?>"
+                           WouldYouEncourrel="<?=$row['WouldYouEncourRel']?>"
+                           Why	          ="<?=$row['Why']?>"
+                           OthersSeven	    ="<?=$row['OthersSeven']?>"
+                           WhatCanSugServ	 ="<?=$row['WhatCanSugServ']?>"
                            FinishCrsEnrolled="<?=$row['FinishCrsEnrolled']?>"
                            >
                      <?php }?>
@@ -219,10 +230,10 @@
                <div>
                   <li>
                      <div class="form-group row mb-4">
-                        <label class="col-sm-4 col-form-label text-gray-900" for="txtFirstEnroll"> 
+                        <label class="col-sm-3 col-form-label text-gray-900" for="txtFirstEnroll"> 
                            What school year did you first enroll? <span class="text-danger" id="txtFirstEnrollReq"></span>
                         </label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-9">
                            <input type="text" id="txtFirstEnroll" name="txtFirstEnroll" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" title="Special character is not allowed." />
                            <span class="text-danger" id="errTxtFirstEnroll"></span>
                         </div>
@@ -356,7 +367,7 @@
                            <div class="custom-control">
                               <input type="checkbox" id="WithinPhilippines" name="WhatDoAfterGrad[]" value="Find work immediately" class="custom-control-input" />
                               <label class="custom-control-label text-gray-900" for="WithinPhilippines"> Find work immediately </label>
-                              <select id="PhilippinesAbroad" name="WhatDoAfterGrad[]" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white">
+                              <select id="PhilippinesAbroad" name="WhatDoAfterGrad[]" class="d-none form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white">
                                  <option value=""> Choose... </option>
                                  <option value="Within Philippines"> Within Philippines </option>
                                  <option value="Abroad"> Abroad </option>
@@ -539,7 +550,7 @@
             </ol>
          </div>
          <div class="card-footer">
-            <button type="submit" name="Btn-Terminalform-Save" title="Save record." class="btn btn-success">
+            <button type="submit" id="Btn-Terminalform-Save" value="1" name="Btn-Terminalform-Save" title="Save record." disabled class="btn btn-success">
                <i class="fas fa-save"></i>
                Save
             </button>
@@ -553,6 +564,26 @@
 ?>
 
 <script>
+   function validInputs() {
+
+      const txtSureName       = $('#txtSureName').val().trim();
+      const txtFirstName      = $('#txtFirstName').val().trim();
+      const txtMiddleName     = $('#txtMiddleName').val().trim();
+      const txtNickName       = $('#txtNickName').val().trim();
+      const txtCourse         = $('#txtCourse').val().trim();
+      const textCivilStatus   = $('#textCivilStatus').val().trim();
+      const txtHomeAddress    = $('#txtHomeAddress').val().trim();
+      const txtEmailAddress   = $('#txtEmailAddress').val().trim();
+      const txtTelphone       = $('#txtTelphone').val().trim();
+      const txtCellphone      = $('#txtCellphone').val().trim();
+      const txtFather         = $('#txtFather').val().trim();
+      const txtMother         = $('#txtMother').val().trim();
+      const txtFacebookAccount= $('#txtFacebookAccount').val().trim();
+      const txtFirstEnroll    = $('#txtFirstEnroll').val().trim();
+
+      const isValidInputs = txtSureName.length > 2 && txtFirstName.length > 2 && txtMiddleName.length > 1 && txtNickName.length > 2 && txtCourse.length > 2 && textCivilStatus.length > 2 && txtHomeAddress.length > 2 && txtEmailAddress.length > 2 && txtTelphone.length > 2 && txtCellphone.length > 2 && txtFather.length > 2 && txtMother.length > 2 && txtFacebookAccount.length > 2 && txtFirstEnroll.length > 2;
+      $('#Btn-Terminalform-Save').prop('disabled', !isValidInputs);
+   }
    $('#student-no').on('input',function(){
       $('#btn-search-student-no').click(()=>{
          const y = $(`#list-of-studentNo option[value=${$("#student-no").val()}]`);
@@ -568,6 +599,124 @@
          $("#txtCellphone").val(y.attr("boardtelno"));
          $("#txtFather").val(y.attr("fathername"));
          $("#txtMother").val(y.attr("mothername"));
+         $('#txtFacebookAccount').val(y.attr("FacebookAccount"));
+         const wy = y.attr('Whyenrollcsu');
+         if (wy) {
+            const actions = wy.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="WhyEnrollCsu[]"][value="${action}"]`);
+
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         $('#OthersOne').val(y.attr("OthersOne"));
+         $('#txtFirstEnroll').val(y.attr("WhatSchlFirstEnroll"));
+
+         const ag = y.attr('FinishCrsEnrolled');
+         ag==="Yes" ? $(`#Yes`).prop('checked', true) : ag==="No" ? $(`#No`).prop('checked', true) : '';
+
+         const r = y.attr('IfNoWhy');
+         if (r) {
+            const actions = r.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="IfNoWhy[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         $('#txtOtherIfNo').val(y.attr('OthersTwo'));
+         const h = y.attr('HowFeelGraduate');
+         if (h) {
+            const actions = h.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="HowFeelGraduate[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         $('#txtOthersThree').val(y.attr('OthersThree'));
+         
+         const w = y.attr('WhatDoAfterGrad');
+         if (w) {
+            const actions = w.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="WhatDoAfterGrad[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+
+         $('#OthersFour').val(y.attr('OthersFour'));
+         
+         const dif = y.attr('WhatDiffUniversity');
+
+         if (dif) {
+            const actions = dif.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="WhatDiffUniversity[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         $('#OthersFive').val(y.attr('OthersFive'));
+
+         const g = y.attr('WhatGreatLearn');
+         if (g) {
+            const actions = g.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="WhatGreatLearn[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+         
+         $('#txtOthersSix').val(y.attr('OthersSix'));
+
+         const ye = y.attr('WouldYouEncourrel');
+         ye==="Yes" ? $(`#YesOne`).prop('checked', true) : ye==="No" ? $(`#NoOne`).prop('checked', true) : '';
+
+         const why = y.attr('Why');
+         if (why) {
+            const actions = why.split(',').map(action => action.trim()); // Ensure all actions are trimmed
+            // Avoid duplicates by creating a Set
+            const uniqueActions = [...new Set(actions)];
+            uniqueActions.forEach(action => {
+               // Use jQuery to select checkboxes with the same value as the action
+               const checkbox = $(`input[name="Why[]"][value="${action}"]`);
+               if (checkbox.length) {
+                  checkbox.prop('checked', true); // Check the checkbox if it exists
+               }
+            });
+         }
+
+         $('#txtOthersSeven').val(y.attr('OthersSeven'));
+         $('#txtWhatCanSugServ').val(y.attr('WhatCanSugServ'));
+
          const txtSureName = $("#txtSureName").val().trim();
          if (txtSureName.length <= 0) {
             $('#txtSureNameReq').text('*');
@@ -710,123 +859,6 @@
             $("#txtFirstEnroll").removeClass('is-invalid').addClass('is-valid');
             $('#errTxtFirstEnroll').text('');
          }
-         const l = y.attr('whyenrollcsu');
-         if (l) {
-            const actions = l.split(',').map(action => action.trim()); // Ensure all actions are trimmed
-            // Avoid duplicates by creating a Set
-            const uniqueActions = [...new Set(actions)];
-            uniqueActions.forEach(action => {
-               // Use jQuery to select checkboxes with the same value as the action
-               const checkbox = $(`input[name="WhyEnrollCsu[]"][value="${action}"]`);
-               if (checkbox.length) {
-                  checkbox.prop('checked', true); // Check the checkbox if it exists
-               }
-            });
-         }
-         const r = y.attr('IfNoWhy');
-         if (r) {
-            const actions = r.split(',').map(action => action.trim()); // Ensure all actions are trimmed
-            // Avoid duplicates by creating a Set
-            const uniqueActions = [...new Set(actions)];
-            uniqueActions.forEach(action => {
-               // Use jQuery to select checkboxes with the same value as the action
-               const checkbox = $(`input[name="IfNoWhy[]"][value="${action}"]`);
-               if (checkbox.length) {
-                  checkbox.prop('checked', true); // Check the checkbox if it exists
-               }
-            });
-         }
-         const h = y.attr('HowFeelGraduate');
-         if (h) {
-            const actions = h.split(',').map(action => action.trim()); // Ensure all actions are trimmed
-            // Avoid duplicates by creating a Set
-            const uniqueActions = [...new Set(actions)];
-            uniqueActions.forEach(action => {
-               // Use jQuery to select checkboxes with the same value as the action
-               const checkbox = $(`input[name="HowFeelGraduate[]"][value="${action}"]`);
-               if (checkbox.length) {
-                  checkbox.prop('checked', true); // Check the checkbox if it exists
-               }
-            });
-         }
-         const w = y.attr('WhatDiffUniversity');
-         if (w) {
-            const actions = r.split(',').map(action => action.trim()); // Ensure all actions are trimmed
-            // Avoid duplicates by creating a Set
-            const uniqueActions = [...new Set(actions)];
-            uniqueActions.forEach(action => {
-               // Use jQuery to select checkboxes with the same value as the action
-               const checkbox = $(`input[name="WhatDiffUniversity[]"][value="${action}"]`);
-               if (checkbox.length) {
-                  checkbox.prop('checked', true); // Check the checkbox if it exists
-               }
-            });
-         }
-         const d = y.attr('WhatDiffUniversity');
-         if (d) {
-            const actions = d.split(',').map(action => action.trim()); // Ensure all actions are trimmed
-            // Avoid duplicates by creating a Set
-            const uniqueActions = [...new Set(actions)];
-            uniqueActions.forEach(action => {
-               // Use jQuery to select checkboxes with the same value as the action
-               const checkbox = $(`input[name="WhatDiffUniversity[]"][value="${action}"]`);
-               if (checkbox.length) {
-                  checkbox.prop('checked', true); // Check the checkbox if it exists
-               }
-            });
-         }
-         const g = y.attr('WhatGreatLearn');
-         if (g) {
-            const actions = g.split(',').map(action => action.trim()); // Ensure all actions are trimmed
-            // Avoid duplicates by creating a Set
-            const uniqueActions = [...new Set(actions)];
-            uniqueActions.forEach(action => {
-               // Use jQuery to select checkboxes with the same value as the action
-               const checkbox = $(`input[name="WhatGreatLearn[]"][value="${action}"]`);
-               if (checkbox.length) {
-                  checkbox.prop('checked', true); // Check the checkbox if it exists
-               }
-            });
-         }
-         const e = y.attr('WouldYouEncourRel');
-         if (e) {
-            const actions = e.split(',').map(action => action.trim()); // Ensure all actions are trimmed
-            // Avoid duplicates by creating a Set
-            const uniqueActions = [...new Set(actions)];
-            uniqueActions.forEach(action => {
-               // Use jQuery to select checkboxes with the same value as the action
-               const checkbox = $(`input[name="WouldYouEncourRel[]"][value="${action}"]`);
-               if (checkbox.length) {
-                  checkbox.prop('checked', true); // Check the checkbox if it exists
-               }
-            });
-         }
-         const i = y.attr('Why');
-         if (i) {
-            const actions = i.split(',').map(action => action.trim()); // Ensure all actions are trimmed
-            // Avoid duplicates by creating a Set
-            const uniqueActions = [...new Set(actions)];
-            uniqueActions.forEach(action => {
-               // Use jQuery to select checkboxes with the same value as the action
-               const checkbox = $(`input[name="Why[]"][value="${action}"]`);
-               if (checkbox.length) {
-                  checkbox.prop('checked', true); // Check the checkbox if it exists
-               }
-            });
-         }
-         const f = y.attr('FinishCrsEnrolled');
-         if (f) {
-            const actions = f.split(',').map(action => action.trim()); // Ensure all actions are trimmed
-            // Avoid duplicates by creating a Set
-            const uniqueActions = [...new Set(actions)];
-            uniqueActions.forEach(action => {
-               // Use jQuery to select checkboxes with the same value as the action
-               const checkbox = $(`input[name="FinishCrsEnrolled[]"][value="${action}"]`);
-               if (checkbox.length) {
-                  checkbox.prop('checked', true); // Check the checkbox if it exists
-               }
-            });
-         }
          $("#OthersOne").addClass('is-valid');
          $("#txtOtherIfNo").addClass('is-valid');
          $("#txtOthersThree").addClass('is-valid');
@@ -836,7 +868,18 @@
          $("#txtOthersSeven").addClass('is-valid');
          $("#txtWhatCanSugServ").addClass('is-valid');
          $("#txtFirstEnroll").addClass('is-valid');
+
+         if ($('#WithinPhilippines').prop('checked')) {
+            $('#PhilippinesAbroad').val('Within Philippines').change()[0].size = 3; // Expands dropdown
+            $('#PhilippinesAbroad').removeClass('d-none');
+         } else {
+            $('#PhilippinesAbroad').val('').change()[0].size = 1; // Reset dropdown size
+            $('#PhilippinesAbroad').addClass('d-none');
+         }
+         validInputs();
       });
+      $(`input[name="FinishCrsEnrolled"][value="Yes"]`).prop('checked', true);
+      $(`input[name="WouldYouEncourRel"][value="Yes"]`).prop('checked', true);
       $("#txtFirstName").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $("#txtMiddleName").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $("#txtSureName").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
@@ -886,6 +929,29 @@
       $("#txtWhatCanSugServ").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $("#txtFirstEnroll").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $('#errTxtFirstEnroll').text('');
+      $(`input[name="WhyEnrollCsu[]"]:checked`).each((_, checkbox) => {
+         $(checkbox).prop('checked', false); // Uncheck the checkbox
+      });
+      $(`input[name="IfNoWhy[]"]:checked`).each((_, checkbox) => {
+         $(checkbox).prop('checked', false); // Uncheck the checkbox
+      });
+      $(`input[name="HowFeelGraduate[]"]:checked`).each((_, checkbox) => {
+         $(checkbox).prop('checked', false); // Uncheck the checkbox
+      });
+      $(`input[name="WhatDoAfterGrad[]"]:checked`).each((_, checkbox) => {
+         $(checkbox).prop('checked', false); // Uncheck the checkbox
+      });
+      $(`input[name="WhatDiffUniversity[]"]:checked`).each((_, checkbox) => {
+         $(checkbox).prop('checked', false); // Uncheck the checkbox
+      });
+      $(`input[name="WhatGreatLearn[]"]:checked`).each((_, checkbox) => {
+         $(checkbox).prop('checked', false); // Uncheck the checkbox
+      });
+      $(`input[name="Why[]"]:checked`).each((_, checkbox) => {
+         $(checkbox).prop('checked', false); // Uncheck the checkbox
+      });
+      $('#PhilippinesAbroad').val('').change()[0].size = 1; // Reset dropdown size
+      $('#PhilippinesAbroad').addClass('d-none');
    });
    $('#txtFacebookAccount').on('input',()=>{
       const txtFacebookAccount = $("#txtFacebookAccount").val().trim();
@@ -898,6 +964,7 @@
          $("#txtFacebookAccount").removeClass('is-invalid').addClass('is-valid');
          $('#errTxtFacebookAccount').text('');
       }
+      validInputs();
    })
    $('#txtFirstEnroll').on('input',()=>{
       const txtFirstEnroll = $("#txtFirstEnroll").val().trim();
@@ -910,5 +977,17 @@
          $("#txtFirstEnroll").removeClass('is-invalid').addClass('is-valid');
          $('#errTxtFirstEnroll').text('');
       }
+      validInputs();
    })
+
+   $('#WithinPhilippines').on('change', function() { 
+      if ($(this).prop('checked')) {
+         $('#PhilippinesAbroad').val('Within Philippines').change()[0].size = 3; // Expands dropdown
+         $('#PhilippinesAbroad').removeClass('d-none');
+      } else {
+         $('#PhilippinesAbroad').val('').change()[0].size = 1; // Reset dropdown size
+         $('#PhilippinesAbroad').addClass('d-none');
+      }
+   });
+
 </script>
