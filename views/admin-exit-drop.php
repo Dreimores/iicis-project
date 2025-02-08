@@ -21,7 +21,7 @@ $includeAdminController->navbar();
             <label class="my-1 mr-3"> Student number : </label>
             <div class="form-inline">
                <div class="input-group">
-                  <input type="search" name="student-no" id="student-no" list="ListOfStudentNo" class="form-control" placeholder="Search for...">
+                  <input type="search" name="Student-No" id="Student-No" list="ListOfStudentNo" class="form-control" placeholder="Search for...">
                   <div class="input-group-append">
                      <button type="button" class="btn btn-primary" title="Search student no." id="Btn-Search-Student-No">
                         <i class="fas fa-search fa-sm"></i>
@@ -29,7 +29,25 @@ $includeAdminController->navbar();
                   </div>
                </div>
                <datalist id="ListOfStudentNo">
-                  <option value="">
+                  <?php $studentFormsModel = new studentFormsModel();
+                     foreach ($studentFormsModel->view_account_student() as $row) {?>
+                     <option value    ="<?=$row['studentno']?>"
+                           studentNo  ="<?=$row['studentno']?>" 
+                           SurName    ="<?= $row['p_surname']?>"
+                           firstName  ="<?=$row['p_firstname']?>"
+                           middleName ="<?= substr($row['p_middlename'],0,1). "."?>"
+                           nickName   ="<?=$row['p_nickname']?>"
+                           ylevel     ="<?=$row['ylevel']?>"
+                           course     ="<?=$row['course']?>"
+                           p_age      ="<?=$row['p_age']?>"
+                           civilstats ="<?=$row['p_cilvilstatus']?>"
+                           homeAddres ="<?=$row['p_homeaddress']?>"
+                           hameTelno  ="<?=$row['p_homeadd_telno']?>"
+                           boardtelno ="<?=$row['p_boardhousetelno']?>"
+                           fathername ="<?=$row['f_fathername']?>"
+                           mothername ="<?=$row['m_mothername']?>"
+                           SemYearLastAttend ="<?=$row['SemYearLastAttend']?>">
+                  <?php }?>
                </datalist>
             </div>
          </div>
@@ -66,7 +84,7 @@ $includeAdminController->navbar();
          <div class="row">
             <div class="form-group col-sm-3">
                <label class="text-gray-900"> Year Level </label>
-               <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+               <input type="text" id="YearLevel" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
             </div>
 
             <div class="form-group col-sm-3">
@@ -79,7 +97,7 @@ $includeAdminController->navbar();
 
             <div class="form-group col-sm-3">
                <label class="text-gray-900"> Age </label>
-               <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+               <input type="text" id="txtAge" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
             </div>
             <div class="form-group col-sm-3">
                <label for="textCivilStatus" class="text-gray-900"> 
@@ -92,26 +110,29 @@ $includeAdminController->navbar();
          <div class="row">
             <div class="form-group col-sm-3">
                <label class="text-gray-900"> Complete Home Address </label>
-               <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+               <input type="text" id="txtHomeAddress" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
             </div>
 
             <div class="form-group col-sm-3">
                <label class="text-gray-900"> Contact Number </label>
-               <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+               <input type="text" id="txtTelphone" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
             </div>
             <div class="form-group col-sm-3">
                <label class="text-gray-900"> Father </label>
-               <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+               <input type="text" id="txtFather" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
             </div>
             <div class="form-group col-sm-3">
                <label class="text-gray-900"> Mother </label>
-               <input type="text" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
+               <input type="text" id="txtMother" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
             </div>
          </div>
          <div class="row">
             <div class="form-group col-sm-3">
-               <label class="col-form-label text-gray-900" for="SmstrSchool"> Semester/School Year Last Attended </label>
+               <label class="col-form-label text-gray-900" for="SmstrSchool"> 
+                  Semester/School Year Last Attended <span class="text-danger" id="txtSmstrSchoolReq"></span>
+               </label>
                <input type="text" id="SmstrSchool" name="SmstrSchool" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
+               <span class="text-danger" id="txtErrSmstrSchool"></span>
             </div>
          </div>
          <label for="Financial" class="text-gray-900"> Direction: Please check your choices below. </label>
@@ -222,15 +243,21 @@ $includeAdminController->navbar();
                      Planned Course and School to enroll next.
                   </h1>
                   <div class="form-group row">
-                     <label class="col-sm-1 col-form-label text-gray-900" for="Course"> Course </label>
+                     <label class="col-sm-1 col-form-label text-gray-900" for="txtCourseEnroll"> 
+                        Course <span class="text-danger" id="txtCourseEnrollReq"></span>
+                     </label>
                      <div class="col-sm-11">
-                        <input type="text" name="Course" id="Course" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
+                        <input type="text" name="txtCourseEnroll" id="txtCourseEnroll" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
+                        <span class="text-danger" id="txtErrCourseEnroll"></span>
                      </div>
                   </div>
                   <div class="form-group row">
-                     <label class="col-sm-1 col-form-label text-gray-900" for="school"> School </label>
+                     <label class="col-sm-1 col-form-label text-gray-900" for="txtSchool"> 
+                        School <span class="text-danger" id="txtSchoolReq"></span>
+                     </label>
                      <div class="col-sm-11">
-                        <input type="text" name="school" id="school" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
+                        <input type="text" name="txtSchool" id="txtSchool" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
+                        <span class="text-danger" id="txtErrSchool"></span>
                      </div>
                   </div>
                   <label for="QualityEduc"> Reasons for choosing the school. </label>
@@ -272,5 +299,79 @@ $includeAdminController->footer();
 $includeAdminController->script();
 ?>
 <script>
-
+   $('#Student-No').on('input', function(){
+      $('#Btn-Search-Student-No').click(()=>{
+         const y = $(`#ListOfStudentNo option[value=${$("#Student-No").val()}]`);
+         $("#txtSureName").val(y.attr("SurName"));
+         $("#txtFirstName").val(y.attr("firstName"));
+         $("#txtMiddleName").val(y.attr("middleName"));
+         $("#txtNickName").val(y.attr("nickName"));
+         $("#YearLevel").val(y.attr("ylevel"));
+         $("#txtCourse").val(y.attr("course"));
+         $("#txtAge").val(y.attr("p_age"));
+         $("#textCivilStatus").val(y.attr("civilstats"));
+         $("#txtHomeAddress").val(y.attr("homeAddres"));
+         $("#txtTelphone").val(y.attr("hameTelno"));
+         $("#txtFather").val(y.attr("fathername"));
+         $("#txtMother").val(y.attr("mothername"));
+         $('#SmstrSchool').val(y.attr("SemYearLastAttend"));
+      });
+      $("#txtSureName").val('');
+      $("#txtFirstName").val('');
+      $("#txtMiddleName").val('');
+      $("#txtNickName").val('');
+      $("#YearLevel").val('');
+      $("#txtCourse").val('');
+      $("#txtAge").val('');
+      $("#textCivilStatus").val('');
+      $("#txtHomeAddress").val('');
+      $("#txtTelphone").val('');
+      $("#txtFather").val('');
+      $("#txtMother").val('');
+   });
+   
+   $('#SmstrSchool').on('input',()=>{
+      const SmstrSchool = $('#SmstrSchool').val().trim();
+      if (SmstrSchool.length <= 2) {
+         $('#txtSmstrSchoolReq').text('*');      
+         $('#txtErrSmstrSchool').text('Semester/School Year Last Attended is required!');
+         $('#SmstrSchool').addClass('is-invalid');
+      } else {
+         $('#txtSmstrSchoolReq').text('');      
+         $('#txtErrSmstrSchool').text('');
+         $('#SmstrSchool').removeClass('is-invalid').addClass('is-valid')
+      } 
+   });
+   $('#txtCourseEnroll').on('input', ()=>{
+      const txtCourseEnroll = $('#txtCourseEnroll').val().trim();
+      if (txtCourseEnroll.length <= 0) {
+         $('#txtCourseEnrollReq').text('*');
+         $('#txtErrCourseEnroll').text('No blank spaces allowed.');
+         $('#txtCourseEnroll').addClass('is-invalid');
+      } else if (txtCourseEnroll.length < 3) {
+         $('#txtCourseEnrollReq').text('*');
+         $('#txtErrCourseEnroll').text('Course is required!');
+         $('#txtCourseEnroll').addClass('is-invalid');
+      } else {
+         $('#txtCourseEnrollReq').text('');
+         $('#txtErrCourseEnroll').text('');
+         $('#txtCourseEnroll').removeClass('is-invalid').addClass('is-valid')
+      }
+   })
+   $('#txtSchool').on('input', ()=>{
+      const txtSchool = $('#txtSchool').val().trim();
+      if (txtSchool.length <= 0) {
+         $('#txtSchoolReq').text('*');
+         $('#txtErrSchool').text('No blank spaces allowed.');
+         $('#txtSchool').addClass('is-invalid');
+      } else if (txtSchool.length < 3) {
+         $('#txtSchoolReq').text('*');
+         $('#txtErrSchool').text('School is required!');
+         $('#txtSchool').addClass('is-invalid');
+      } else {
+         $('#txtSchoolReq').text('');
+         $('#txtErrSchool').text('');
+         $('#txtSchool').removeClass('is-invalid').addClass('is-valid')
+      }
+   })
 </script>

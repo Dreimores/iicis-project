@@ -65,8 +65,7 @@
                            Why	          ="<?=$row['Why']?>"
                            OthersSeven	    ="<?=$row['OthersSeven']?>"
                            WhatCanSugServ	 ="<?=$row['WhatCanSugServ']?>"
-                           FinishCrsEnrolled="<?=$row['FinishCrsEnrolled']?>"
-                           >
+                           FinishCrsEnrolled="<?=$row['FinishCrsEnrolled']?>">
                      <?php }?>
                   </datalist>
                </div>
