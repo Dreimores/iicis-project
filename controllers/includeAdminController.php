@@ -86,7 +86,7 @@
       # end
 
       # exit drop
-      public function submit_exit_drop()
+      public function exit_drop()
       {
          include_once('views/admin-exit-drop.php');
       }
