@@ -67,7 +67,7 @@
                 <h6 class="collapse-header text-gray-900"> Custom Files: </h6>
                 <a class="collapse-item" href="?route=terminal-Interview"> Terminal Interview </a>
                 <a class="collapse-item" href="?route=exit-drop-form"> Exit Interview Dropping </a>
-                <a class="collapse-item" href=""> Exit Interview Transferring </a>
+                <a class="collapse-item" href="?route=exit-trans"> Exit Interview Transferring </a>
             </div>
         </div>
     </li>

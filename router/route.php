@@ -131,6 +131,9 @@
       case "exit-drop":
          $exitDropController->submit_exitdrop();
       break;
+      case "exit-trans":
+         $includeAdminController->exit_trans();
+      break;
       default:
          $includeAdminController->page_not_found();
       break;

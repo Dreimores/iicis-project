@@ -92,6 +92,13 @@
       }
       # end
 
+      # exit transfer
+      public function exit_trans()
+      {
+         include_once('views/admin-exit-trans.php');
+      }
+      # end
+
       # 404 page not found
       public function page_not_found() 
       {
