@@ -1,5 +1,5 @@
 <?php
-
+// class for connection
 class Connection 
 {
     
