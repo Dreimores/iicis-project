@@ -12,8 +12,8 @@
       public function sign_up($txtStudentNo, $txtPassword, $p_surname, $p_firstname, $p_middlename, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $files)
       {  
          # insert an account of students
-         $stmt_students = $this->getconnection()->prepare("INSERT INTO tbl_stud_accounts (studentno, pword, ylevel, email, courseid, colid, majorid, file_name) VALUES (?,?,?,?,?,?,?,?)");
-         $stmt_students->execute([$txtStudentNo, $txtPassword, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $files]);
+         $stmt_students = $this->getconnection()->prepare("INSERT INTO tbl_stud_accounts (studentno, pword, ylevel, email, courseid, colid, majorid, file_name, status) VALUES (?,?,?,?,?,?,?,?,?)");
+         $stmt_students->execute([$txtStudentNo, $txtPassword, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $files, "Pending..."]);
          # end
 
          # insert studentno into personal data
@@ -53,6 +53,16 @@
 
          # insert studentno into terminal data
          $stmt_terminal_data = $this->getConnection()->prepare("INSERT INTO tbl_terminal_form (studentno) VALUES (?)");
+         $stmt_terminal_data->execute([$txtStudentNo]);
+         # end
+
+         # insert studentno into exit drop data
+         $stmt_terminal_data = $this->getConnection()->prepare("INSERT INTO tbl_exit_drop (studentno) VALUES (?)");
+         $stmt_terminal_data->execute([$txtStudentNo]);
+         # end
+
+         # insert studentno into exit transfer data
+         $stmt_terminal_data = $this->getConnection()->prepare("INSERT INTO tbl_exit_transfer (studentno) VALUES (?)");
          $stmt_terminal_data->execute([$txtStudentNo]);
          # end
       }
@@ -104,6 +114,16 @@
          $stmt_terminal_data = $this->getConnection()->prepare("UPDATE tbl_terminal_form SET studentno=?  WHERE studentno=?");
          $stmt_terminal_data->execute([$txtStudentNo, $txtOldStudentNo]);
          # end
+
+         # insert studentno into exit drop data
+         $stmt_terminal_data = $this->getConnection()->prepare("UPDATE tbl_exit_drop SET studentno=?  WHERE studentno=?");
+         $stmt_terminal_data->execute([$txtStudentNo, $txtOldStudentNo]);
+         # end
+
+         # insert studentno into exit transfer data
+         $stmt_terminal_data = $this->getConnection()->prepare("UPDATE tbl_exit_transfer SET studentno=?  WHERE studentno=?");
+         $stmt_terminal_data->execute([$txtStudentNo, $txtOldStudentNo]);
+         # end
       }
 
       # delete student account
@@ -149,8 +169,13 @@
          $stmt_intake_data->execute([$txtStudentNo]);
          # end
 
-         # delete studentno into terminal data
-         $stmt_terminal_data = $this->getConnection()->prepare("DELETE FROM tbl_terminal_form WHERE studentno=?");
+         # delete studentno into exit drop data
+         $stmt_terminal_data = $this->getConnection()->prepare("DELETE FROM tbl_exit_drop WHERE studentno=?");
+         $stmt_terminal_data->execute([$txtStudentNo]);
+         # end
+
+         # delete studentno into exit transfer data
+         $stmt_terminal_data = $this->getConnection()->prepare("DELETE FROM tbl_exit_transfer WHERE studentno=?");
          $stmt_terminal_data->execute([$txtStudentNo]);
          # end
       }

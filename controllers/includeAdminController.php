@@ -99,6 +99,13 @@
       }
       # end
 
+      # exit reports
+      public function reports()
+      {
+         include_once('views/admin-reports.php');
+      }
+      # end
+
       # 404 page not found
       public function page_not_found() 
       {

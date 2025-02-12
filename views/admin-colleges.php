@@ -40,7 +40,7 @@
                                  collegeditid="<?=$row['colid']?>"
                                  collegecode="<?=$row['collegecode']?>"
                                  collegeedit="<?=$row['college']?>">
-                                    <i class="fas fa-edit"></i>
+                                 <i class="fas fa-pencil-alt"></i>
                                  </a>
                               </div>
                               &nbsp;

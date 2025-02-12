@@ -65,15 +65,15 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header text-gray-900"> Custom Files: </h6>
-                <a class="collapse-item" href="?route=terminal-Interview"> Terminal Interview </a>
-                <a class="collapse-item" href="?route=exit-drop-form"> Exit Interview Dropping </a>
-                <a class="collapse-item" href="?route=exit-trans"> Exit Interview Transferring </a>
+                <a class="collapse-item pl-1" href="?route=terminal-Interview"> Terminal Interview </a>
+                <a class="collapse-item pl-1" href="?route=exit-drop-form"> Exit Interview Dropping </a>
+                <a class="collapse-item pl-1" href="?route=exit-trans"> Exit Interview Transferring </a>
             </div>
         </div>
     </li>
 
     <li class="nav-item text-capitalize">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="?route=reports">
             <i class="fas fa-download fa-sm text-white-50"></i><span> generate report </span> 
         </a>
     </li>

@@ -36,7 +36,7 @@ $includeAdminController->navbar();
                                  <a data-toggle="modal" data-target="#modal-major" class="btn btn-sm btn-primary edit-show-modal-major"
                                  majorid ="<?=$row['majorid']?>"
                                  major   ="<?=$row['major']?>">
-                                    <i class="fas fa-edit"></i>
+                                 <i class="fas fa-pencil-alt"></i>
                                  </a>
                               </div>
                               &nbsp;

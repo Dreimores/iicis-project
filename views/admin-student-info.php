@@ -49,7 +49,7 @@
                         <td class="align-middle text-nowrap"><?= $row['course'] ?></td>
                         <td class="align-middle text-nowrap"><?= $row['college'] ?></td>
                         <td class="align-middle text-nowrap"><?= $row['major'] ?></td>
-                        <td class="align-middle text-nowrap"></td>
+                        <td class="align-middle text-nowrap"><?= $row['status'] === "Pending..."?"<i class='fas fa-circle text-danger'></i> ".$row['status'] : "<i class='fas fa-circle text-success'></i> ". $row['status'] ?></td>
                         <td class="align-middle">
                            <div class="btn-group d-flex justify-content-center">
                               <div>
@@ -68,7 +68,7 @@
                                     collegeid   ="<?=$row['colid']?>"
                                     majors_id   ="<?=$row['majorid']?>"
                                     passwords   ="<?=$row['pword']?>">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-pencil-alt"></i>
                                  </a>
                               </div>
                               &nbsp;

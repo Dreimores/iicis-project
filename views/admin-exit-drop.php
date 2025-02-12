@@ -487,7 +487,7 @@ $includeAdminController->script();
          } else {
             $('#txtCourseEnrollReq').text('');
             $('#txtErrCourseEnroll').text('');
-            $('#txtCourseEnroll').removeClass('is-invalid').addClass('is-valid')
+            $('#txtCourseEnroll').removeClass('is-invalid').addClass('is-valid');
          }
          $('#ComRegardStayCsuLasamCampus').addClass('is-valid');
          $('#txtExOthersOne').addClass('is-valid');
@@ -576,6 +576,7 @@ $includeAdminController->script();
          $('#txtExOthersSix').val(y.attr("ex_OthersSix"));
          $('#ComRegardStayCsuLasamCampus').val(y.attr("CRSCsuLasam"));
       });
+      $(`input[name="ParentsAwareness"][value="Aware"]`).prop('checked', true);
       $("#txtSureName").val('');
       $("#txtFirstName").val('');
       $("#txtMiddleName").val('');

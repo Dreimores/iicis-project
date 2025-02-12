@@ -18,6 +18,7 @@
    include_once('controllers/intakeController.php');
    include_once('controllers/terminalController.php');
    include_once('controllers/exitDropController.php');
+   include_once('controllers/exitTransController.php');
    # end
 
    # include models
@@ -28,6 +29,7 @@
    include_once('models/studentFormsModel.php');
    include_once('models/intakeModel.php');
    include_once('models/exitDropModel.php');
+   include_once('models/exitTransModel.php');
    # end 
 
    # get router
@@ -47,6 +49,7 @@
    $intakeController         = new intakeController();
    $terminalController       = new terminalController();
    $exitDropController       = new exitDropController();
+   $exitTransController      = new exitTransController();
    # end
 
    # route start
@@ -133,6 +136,12 @@
       break;
       case "exit-trans":
          $includeAdminController->exit_trans();
+      break;
+      case "exit-exit-trans":
+         $exitTransController->submit_exit_trans();
+      break;
+      case "reports":
+         $includeAdminController->reports();
       break;
       default:
          $includeAdminController->page_not_found();

@@ -51,7 +51,7 @@ $includeAdminController->navbar();
                                     getEmail="<?=$row['emailaddress']?>"
                                     username="<?=$row['username']?>"
                                     password="<?=$row['admin_password']?>">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fas fa-pencil-alt"></i>
                                  </a>
                               </div>
                               &nbsp;

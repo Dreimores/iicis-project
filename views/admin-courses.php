@@ -38,10 +38,10 @@ $includeAdminController->navbar();
                            <div class="btn-group d-flex justify-content-center">
                               <div>
                                  <a data-toggle="modal" data-target="#modal-courses" class="btn btn-sm btn-primary edit-show-modal-courses"
-                                 courseidedit="<?=$row['courseid']?>"
-                                 coursecode  ="<?=$row['coursecode']?>"
-                                 courseedit  ="<?=$row['course']?>">
-                                    <i class="fas fa-edit"></i>
+                                    courseidedit="<?=$row['courseid']?>"
+                                    coursecode  ="<?=$row['coursecode']?>"
+                                    courseedit  ="<?=$row['course']?>">
+                                    <i class="fas fa-pencil-alt"></i>
                                  </a>
                               </div>
                               &nbsp;

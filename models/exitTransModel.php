@@ -2,24 +2,38 @@
 
    class exitTransModel extends Connection
    {
+      # initialize the connection
       public function __construct()
       {
          parent::__construct();
       }
+      # end
 
+      # for submmitting the form transfer
       public function submit_exit_trans(
          $SmstrSchool,
          $ReasonTransfer,
          $OthersOne,
+         $FeelAboutTransfer,
+         $OthersTwo,
+         $ParentAwareness,
+         $PrntFeelAboutTransfer,
+         $OthersThree,
+         $txtCourseEnroll,
+         $txtSchool,
+         $RsnsChoosTheSchl,
+         $OthersFour,
+         $Regarding,
+         $studentno
       )
       {
-         $stmt = $this->getConnection()->prepare("UPDATE tbl_exit_transfer SET studentno = ? 
+         $stmt = $this->getConnection()->prepare("UPDATE tbl_exit_transfer SET
          SmstrSchool = ?, 
          ReasonTransfer = ?, 
          trans_OthersOne = ?, 
          FeelAboutTransfer = ?, 
          trans_OthersTwo = ?, 
-         ParentAwareness = ?, 
+         trans_ParentAwareness = ?, 
          PrntFeelAboutTransfer = ?,
          trans_OthersThree = ?, 
          trans_CourseOne = ?,
@@ -28,7 +42,22 @@
          trans_OthersFour = ?,
          Regarding = ? 
          WHERE studentno = ?");
-         $stmt->execute([]);
+         $stmt->execute([
+            $SmstrSchool,
+            $ReasonTransfer,
+            $OthersOne,
+            $FeelAboutTransfer,
+            $OthersTwo,
+            $ParentAwareness,
+            $PrntFeelAboutTransfer,
+            $OthersThree,
+            $txtCourseEnroll,
+            $txtSchool,
+            $RsnsChoosTheSchl,
+            $OthersFour,
+            $Regarding,
+            $studentno
+         ]);
       }
    }
 ?>
