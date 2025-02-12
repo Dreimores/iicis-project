@@ -19,6 +19,7 @@
    include_once('controllers/terminalController.php');
    include_once('controllers/exitDropController.php');
    include_once('controllers/exitTransController.php');
+   include_once('controllers/reportsController.php');
    # end
 
    # include models
@@ -50,6 +51,7 @@
    $terminalController       = new terminalController();
    $exitDropController       = new exitDropController();
    $exitTransController      = new exitTransController();
+   $reportsController        = new reportsController();
    # end
 
    # route start
@@ -142,6 +144,15 @@
       break;
       case "reports":
          $includeAdminController->reports();
+      break;
+      case "individual-reports":
+         $reportsController->individual();
+      break;
+      case "counseling-service":
+         $reportsController->counseling();
+      break;
+      case "career-guidance":
+         $reportsController->career_guidance();
       break;
       default:
          $includeAdminController->page_not_found();
