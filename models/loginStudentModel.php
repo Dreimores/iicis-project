@@ -12,8 +12,8 @@
       public function sign_up($txtStudentNo, $txtPassword, $p_surname, $p_firstname, $p_middlename, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $files)
       {  
          # insert an account of students
-         $stmt_students = $this->getconnection()->prepare("INSERT INTO tbl_stud_accounts (studentno, pword, ylevel, email, courseid, colid, majorid, file_name, status) VALUES (?,?,?,?,?,?,?,?,?)");
-         $stmt_students->execute([$txtStudentNo, $txtPassword, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $files, "Pending..."]);
+         $stmt_students = $this->getconnection()->prepare("INSERT INTO tbl_stud_accounts (studentno, studDate, pword, ylevel, email, courseid, colid, majorid, file_name, status) VALUES (?,?,?,?,?,?,?,?,?,?)");
+         $stmt_students->execute([$txtStudentNo, date('Y-m-d'),$txtPassword, $cbYearLevel, $txtEmail, $cbCourse, $cbCollege, $cbMajor, $files, "Pending..."]);
          # end
 
          # insert studentno into personal data

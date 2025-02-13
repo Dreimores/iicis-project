@@ -31,6 +31,7 @@
    include_once('models/intakeModel.php');
    include_once('models/exitDropModel.php');
    include_once('models/exitTransModel.php');
+   include_once('models/reportsModel.php');
    # end 
 
    # get router

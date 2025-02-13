@@ -19,7 +19,7 @@
       </div>
       <form action="?route=submit-intake-form" method="post">
          <div class="card-body">
-            <span id="message-notification"></span> 
+            <!-- <span id="message-notification"></span>  -->
             <div class="form-group d-sm-flex mb-4">
                <label class="my-1 mr-3"> Student number : </label>
                <div class="form-inline">
@@ -528,8 +528,8 @@
          }
          let allinputs = [txtClientName, txtCourseYear, txtDateEdit, txtTimedEdit, txtHmeAddress, txtContactNo, txtEmailAddress, txtAge, txtDateOfBirth,txtSex,txtCivilStatus,txtReligion,txtDateRferred,txtReferredBy];
          // Check if any input is empty
-         let hasEmptyInputs = allinputs.some(input => input.trim() === "");
-         hasEmptyInputs ? $('#message-notification').text("The student's does not fill out all forms!").addClass('card p-2 mb-4 bg-danger text-white') : $('#message-notification').text('').removeClass('card p-2 mb-4 bg-danger text-white') 
+         // let hasEmptyInputs = allinputs.some(input => input.trim() === "");
+         // hasEmptyInputs ? $('#message-notification').text("The student's does not fill out all forms!").addClass('card p-2 mb-4 bg-danger text-white') : $('#message-notification').text('').removeClass('card p-2 mb-4 bg-danger text-white') 
          verifyInpust();
       });
       $("#txtClientName").val('');

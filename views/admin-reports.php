@@ -28,7 +28,7 @@ $includeAdminController->navbar();
                      <div class="form-group">
                         <label for="college" class="text-capitalize"> college: </label>
                         <select name="college" id="college" class="form-control college">
-                           <option value=""> Choose... </option>
+                           <option value="" class="d-none"> Choose... </option>
                            <option value=""> All Colleges </option>
                            <?php $collegeModel = new collegeModel();
                            foreach ($collegeModel->read_colleges() as $row) {?>
@@ -37,8 +37,8 @@ $includeAdminController->navbar();
                         </select>
                      </div>
                      <div class="form-group">
-                        <label for="year_level" class="text-capitalize"> Year Level: </label>
-                        <select name="year_level" id="year_level" class="form-control">
+                        <label for="yearlevel" class="text-capitalize"> Year Level: </label>
+                        <select name="yearlevel" id="yearlevel" class="form-control">
                            <option value="" class="d-none"> Choose... </option>
                            <option value=""> All Year Level </option>
                            <option value="1"> 1 </option>
@@ -48,18 +48,20 @@ $includeAdminController->navbar();
                         </select>
                      </div>
                      <div class="form-group">
-                        <label for="dateFromStart" class="text-capitalize"> From </label>
-                        <input type="date" name="dateFromStart" id="dateFromStart" class="form-control">
+                        <label for="dateStart" class="text-capitalize"> From <span class="text-danger" id="dateStartreq"></span> </label>
+                        <input type="date" name="dateStart" id="dateStart" class="form-control" required>
+                        <span class="text-danger" id="errdateStart"></span>
                      </div>
                      <div class="form-group">
-                        <label for="dateToEnd" class="text-capitalize"> To </label>
+                        <label for="dateToEnd" class="text-capitalize"> To <span class="text-danger" id="dateToEndreq"></span> </label>
                         <input type="date" name="dateToEnd" id="dateToEnd" class="form-control">
+                        <span class="text-danger" id="errdateToEnd"></span>
                      </div>
                   </div>
                </div>
             </div>
             <div class="card-footer">
-               <button type="submit" class="btn btn-success">
+               <button type="submit" id="exportBtn" disabled class="btn btn-success">
                   <i class="fas fa-file-excel"></i>
                   Export
                </button>
@@ -83,12 +85,14 @@ $includeAdminController->navbar();
                <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                      <div class="form-group">
-                        <label for="fromCounselStart"> From: </label>
+                        <label for="fromCounselStart"> From: <span class="text-danger" id="fromCounselStartreq"></span> </label>
                         <input type="date" name="fromCounselStart" id="fromCounselStart" class="form-control"/>
+                        <span class="text-danger" id="errfromCounselStart"></span>
                      </div>
                      <div class="form-group">
-                        <label for="to_counsel_end"> To: </label>
+                        <label for="to_counsel_end"> To: <span class="text-danger" id="to_counsel_endreq"></span> </label>
                         <input type="date" name="to_counsel_end" id="to_counsel_end" class="form-control"/>
+                        <span class="text-danger" id="errfromCounselStart"></span>
                      </div>
                   </div>
                </div>
@@ -149,6 +153,75 @@ $includeAdminController->navbar();
 
 
 <?php
-$includeAdminController->footer();
-$includeAdminController->script();
+   $includeAdminController->footer();
+   $includeAdminController->script();
 ?>
+
+<script>
+  function isEmptyIndividual() {
+      const dateStart = $('#dateStart').val().trim();
+      const dateToEnd = $('#dateToEnd').val().trim();
+
+      const isValidInputs = dateStart.length > 0 && dateToEnd.length > 0;
+      $('#exportBtn').prop('disabled', !isValidInputs);
+   }
+
+   $('#dateStart, #dateToEnd').on('input change', isEmptyIndividual);
+
+   $('#college').on('input', ()=>{$('#college').addClass('is-valid')})
+
+   $('#yearlevel').on('input', ()=>{$('#yearlevel').addClass('is-valid')})
+
+   $('#dateStart').on('input', ()=>{
+      const dateStart = $('#dateStart').val().trim()
+      if (dateStart.length <= 0) {
+         $('#dateStartreq').text('*');
+         $('#dateStart').addClass('is-invalid');
+         $('#errdateStart').text('Please fill out this field.');
+      } else {
+         $('#dateStartreq').text('');
+         $('#dateStart').removeClass('is-invalid').addClass('is-valid');
+         $('#errdateStart').text('');
+      }
+   })
+
+   $('#dateToEnd').on('input', ()=>{
+      const dateStart = $('#dateToEnd').val().trim()
+      if (dateStart.length <= 0) {
+         $('#dateToEndreq').text('*');
+         $('#dateToEnd').addClass('is-invalid');
+         $('#errdateToEnd').text('Please fill out this field.');
+      } else {
+         $('#dateToEndreq').text('');
+         $('#dateToEnd').removeClass('is-invalid').addClass('is-valid');
+         $('#errdateToEnd').text('');
+      }
+   })
+
+   $('#fromCounselStart').on('input', ()=>{
+      const dateStart = $('#fromCounselStart').val().trim()
+      if (dateStart.length <= 0) {
+         $('#fromCounselStartreq').text('*');
+         $('#dateToEnd').addClass('is-invalid');
+         $('#errfromCounselStart').text('Please fill out this field.');
+      } else {
+         $('#fromCounselStartreq').text('');
+         $('#dateToEnd').removeClass('is-invalid').addClass('is-valid');
+         $('#errfromCounselStart').text('');
+      }
+   })
+
+   $('#to_counsel_end').on('input', ()=>{
+      const dateStart = $('#to_counsel_end').val().trim()
+      if (dateStart.length <= 0) {
+         $('#to_counsel_endreq').text('*');
+         $('#to_counsel_end').addClass('is-invalid');
+         $('#errto_counsel_end').text('Please fill out this field.');
+      } else {
+         $('#to_counsel_endreq').text('');
+         $('#to_counsel_end').removeClass('is-invalid').addClass('is-valid');
+         $('#errto_counsel_end').text('');
+      }
+   })
+   
+</script>
