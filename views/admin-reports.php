@@ -7,10 +7,7 @@ $includeAdminController->navbar();
 <div class="container-fluid mb-2">
    <div class="card">
       <div class="card-header">
-         <div class="h4 text-gray-800 font-weight-bold text-uppercase mb-5 d-inline">
-            <i class="fas fa-download"></i>
-            generate report
-         </div>
+         <div class="h4 text-gray-800 font-weight-bold text-uppercase mb-5 d-inline"> <i class="fas fa-download"></i> generate report </div>
       </div>
    </div>
 </div>
@@ -19,8 +16,8 @@ $includeAdminController->navbar();
       <div class="card border-left-primary h-100">
          <form action="?route=individual-reports" method="post">
             <div class="card-body">
-               <div class="h3 text-center text-uppercase font-weight-bold text-gray-700"> 
-                  individual inventory 
+               <div class="h3 text-center text-uppercase font-weight-bold text-gray-700">
+                  individual inventory
                </div>
                <hr>
                <div class="row no-gutters align-items-center">
@@ -31,9 +28,9 @@ $includeAdminController->navbar();
                            <option value="" class="d-none"> Choose... </option>
                            <option value=""> All Colleges </option>
                            <?php $collegeModel = new collegeModel();
-                           foreach ($collegeModel->read_colleges() as $row) {?>
-                           <option value="<?=$row['college']?>"><?=$row['college']?></option>
-                           <?php }?>
+                           foreach ($collegeModel->read_colleges() as $row) { ?>
+                              <option value="<?= $row['college'] ?>"><?= $row['college'] ?></option>
+                           <?php } ?>
                         </select>
                      </div>
                      <div class="form-group">
@@ -77,8 +74,8 @@ $includeAdminController->navbar();
          <form action="?route=counseling-service" method="post">
             <div class="card-body">
                <div class="text-center">
-                  <div class="h3 text-uppercase font-weight-bold text-gray-700"> 
-                     counseling service 
+                  <div class="h3 text-uppercase font-weight-bold text-gray-700">
+                     counseling service
                   </div>
                   <hr>
                </div>
@@ -86,21 +83,21 @@ $includeAdminController->navbar();
                   <div class="col mr-2">
                      <div class="form-group">
                         <label for="fromCounselStart"> From: <span class="text-danger" id="fromCounselStartreq"></span> </label>
-                        <input type="date" name="fromCounselStart" id="fromCounselStart" class="form-control"/>
+                        <input type="date" name="fromCounselStart" id="fromCounselStart" class="form-control" />
                         <span class="text-danger" id="errfromCounselStart"></span>
                      </div>
                      <div class="form-group">
                         <label for="to_counsel_end"> To: <span class="text-danger" id="to_counsel_endreq"></span> </label>
-                        <input type="date" name="to_counsel_end" id="to_counsel_end" class="form-control"/>
-                        <span class="text-danger" id="errfromCounselStart"></span>
+                        <input type="date" name="to_counsel_end" id="to_counsel_end" class="form-control" />
+                        <span class="text-danger" id="errto_counsel_end"></span>
                      </div>
                   </div>
                </div>
             </div>
             <div class="card-footer">
-               <button type="submit" class="btn btn-success"> 
-                  <i class="fas fa-file-excel"></i> 
-                  Export 
+               <button type="submit" class="btn btn-success" id="exportCounsel" disabled>
+                  <i class="fas fa-file-excel"></i>
+                  Export
                </button>
             </div>
          </form>
@@ -114,8 +111,8 @@ $includeAdminController->navbar();
          <form action="?route=career-guidance" method="post">
             <div class="card-body">
                <div class="text-center">
-                  <div class="h3 text-uppercase font-weight-bold text-gray-700"> 
-                     career guidance 
+                  <div class="h3 text-uppercase font-weight-bold text-gray-700">
+                     career guidance
                   </div>
                   <hr>
                </div>
@@ -130,35 +127,32 @@ $includeAdminController->navbar();
                         <option value="Exit Interview for Transferring"> Exit Interview for Transferring </option>
                      </select>
                      <div class="form-group mt-4">
-                        <label for="fromCareerGuidanceStart" class="text-capitalize"> From: </label>
+                        <label for="fromCareerGuidanceStart" class="text-capitalize"> From: <span class="text-danger" id="fromCareerGuidanceStartreq"></span> </label>
                         <input type="date" name="fromCareerGuidanceStart" id="fromCareerGuidanceStart" class="form-control">
+                        <span class="text-danger" id="errfromCareerGuidanceStart"></span>
                      </div>
                      <div class="form-group">
-                        <label for="toCareerGuidanceEnd" class="text-capitalize"> To: </label>
+                        <label for="toCareerGuidanceEnd" class="text-capitalize"> To: <span class="text-danger" id="toCareerGuidanceEndreq"></span> </label>
                         <input type="date" name="toCareerGuidanceEnd" id="toCareerGuidanceEnd" class="form-control">
+                        <span class="text-danger" id="errtoCareerGuidanceEnd"></span>
                      </div>
                   </div>
                </div>
             </div>
             <div class="card-footer">
-               <button type="submit" class="btn btn-success">
-                  <i class="fas fa-file-excel"></i> 
-                  Export 
-               </button>
+               <button type="submit" class="btn btn-success" id="ExportCareer" disabled><i class="fas fa-file-excel"></i> Export </button>
             </div>
          </form>
       </div>
    </div>
 </div>
-
-
 <?php
-   $includeAdminController->footer();
-   $includeAdminController->script();
+$includeAdminController->footer();
+$includeAdminController->script();
 ?>
 
 <script>
-  function isEmptyIndividual() {
+   function isEmptyIndividual() {
       const dateStart = $('#dateStart').val().trim();
       const dateToEnd = $('#dateToEnd').val().trim();
 
@@ -168,11 +162,15 @@ $includeAdminController->navbar();
 
    $('#dateStart, #dateToEnd').on('input change', isEmptyIndividual);
 
-   $('#college').on('input', ()=>{$('#college').addClass('is-valid')})
+   $('#college').on('input', () => {
+      $('#college').addClass('is-valid')
+   })
 
-   $('#yearlevel').on('input', ()=>{$('#yearlevel').addClass('is-valid')})
+   $('#yearlevel').on('input', () => {
+      $('#yearlevel').addClass('is-valid')
+   })
 
-   $('#dateStart').on('input', ()=>{
+   $('#dateStart').on('input', () => {
       const dateStart = $('#dateStart').val().trim()
       if (dateStart.length <= 0) {
          $('#dateStartreq').text('*');
@@ -185,7 +183,7 @@ $includeAdminController->navbar();
       }
    })
 
-   $('#dateToEnd').on('input', ()=>{
+   $('#dateToEnd').on('input', () => {
       const dateStart = $('#dateToEnd').val().trim()
       if (dateStart.length <= 0) {
          $('#dateToEndreq').text('*');
@@ -198,20 +196,31 @@ $includeAdminController->navbar();
       }
    })
 
-   $('#fromCounselStart').on('input', ()=>{
+   function isEmptyCounsel() {
+
+      const dateStart = $('#fromCounselStart').val().trim();
+      const dateToEnd = $('#to_counsel_end').val().trim();
+
+      const isValidInputs = dateStart.length > 0 && dateToEnd.length > 0;
+      $('#exportCounsel').prop('disabled', !isValidInputs);
+   }
+
+   $('#fromCounselStart, #to_counsel_end').on('input change', isEmptyCounsel);
+
+   $('#fromCounselStart').on('input', () => {
       const dateStart = $('#fromCounselStart').val().trim()
       if (dateStart.length <= 0) {
          $('#fromCounselStartreq').text('*');
-         $('#dateToEnd').addClass('is-invalid');
+         $('#fromCounselStart').addClass('is-invalid');
          $('#errfromCounselStart').text('Please fill out this field.');
       } else {
          $('#fromCounselStartreq').text('');
-         $('#dateToEnd').removeClass('is-invalid').addClass('is-valid');
+         $('#fromCounselStart').removeClass('is-invalid').addClass('is-valid');
          $('#errfromCounselStart').text('');
       }
    })
 
-   $('#to_counsel_end').on('input', ()=>{
+   $('#to_counsel_end').on('input', () => {
       const dateStart = $('#to_counsel_end').val().trim()
       if (dateStart.length <= 0) {
          $('#to_counsel_endreq').text('*');
@@ -223,5 +232,46 @@ $includeAdminController->navbar();
          $('#errto_counsel_end').text('');
       }
    })
-   
+
+   function isEmptyCareer() {
+
+      const dateStart = $('#fromCareerGuidanceStart').val().trim();
+      const dateToEnd = $('#toCareerGuidanceEnd').val().trim();
+      const careerGuidance = $('#careerGuidance').val().trim();
+
+      const isValidInputs = dateStart.length > 0 && dateToEnd.length > 0 && careerGuidance.length > 0;
+      $('#ExportCareer').prop('disabled', !isValidInputs);
+   }
+
+   $('#fromCareerGuidanceStart, #toCareerGuidanceEnd, #careerGuidance').on('input change', isEmptyCareer);
+
+   $('#careerGuidance').on('input',()=>{
+      $('#careerGuidance').addClass('is-valid');
+   })
+
+   $('#fromCareerGuidanceStart').on('input',()=>{
+      const fromCareerGuidanceStart = $('#fromCareerGuidanceStart').val().trim();
+      if (fromCareerGuidanceStart.length <= 0) {
+         $('#fromCareerGuidanceStartreq').text('*');
+         $('#fromCareerGuidanceStart').addClass('is-invalid');
+         $('#errfromCareerGuidanceStart').text('Please fill out this field.');
+      } else {
+         $('#fromCareerGuidanceStartreq').text('');
+         $('#fromCareerGuidanceStart').removeClass('is-invalid').addClass('is-valid');
+         $('#errfromCareerGuidanceStart').text('');
+      }
+   })
+
+   $('#toCareerGuidanceEnd').on('input',()=>{
+      const toCareerGuidanceEnd = $('#toCareerGuidanceEnd').val().trim();
+      if (toCareerGuidanceEnd.length <= 0) {
+         $('#toCareerGuidanceEndreq').text('*');
+         $('#toCareerGuidanceEnd').addClass('is-invalid');
+         $('#errtoCareerGuidanceEnd').text('Please fill out this field.');
+      } else {
+         $('#toCareerGuidanceEndreq').text('');
+         $('#toCareerGuidanceEnd').removeClass('is-invalid').addClass('is-valid');
+         $('#errtoCareerGuidanceEnd').text('');
+      }
+   })
 </script>

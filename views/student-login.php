@@ -79,7 +79,7 @@
                                     </div>
                                  </form>
                                  <hr>
-                                 <div class="text-center">
+                                 <div class="text-gray-800 text-center">
                                     Don't have an Account?
                                     <a class="h6" href="?route=sign-up"> Create One! </a>
                                  </div>
@@ -96,8 +96,11 @@
                      <!-- Nested Row within Card Body  -->
                      <div class="card col-xl-12 col-lg-12 col-md-12 o-hidden shadow">
                         <div class="mb-4">
-                           <div class="text-center border-bottom mb-3 mt-3">
-                              <div class="h2 text-shadow"> Create an Account! </div>
+                           <div class="text-center border-bottom m-3">
+                              <div class="h2 text-color text-nowrap"> 
+                                 <img src="img/csu_lasam_logo.webp" class="img-fluid d-lg-inline-block d-none" width="65"> 
+                                 Create an account! 
+                              </div>
                            </div>
                            <div class="row justify-content-center mb-3">
                               <ul class="nav nav-pills">
@@ -283,7 +286,7 @@
                               </div>
                            </div>
                            <hr>
-                           <div class="form-goup text-center">
+                           <div class="text-gray-800 text-center">
                               Already have an account? <a href="?route=sign-in"> Sign In! </a>
                            </div>
                         </div>

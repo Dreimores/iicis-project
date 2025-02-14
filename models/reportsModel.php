@@ -22,8 +22,6 @@ class reportsModel extends Connection
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
    }
 
-
-
    public function year_college_individual_reports($year, $college, $dateStart, $dateToEnd)
    {
 
@@ -77,6 +75,24 @@ class reportsModel extends Connection
          LEFT JOIN tbl_intakeform ON tbl_stud_accounts.studentno = tbl_intakeform.studentno WHERE Date BETWEEN ? AND ?"
       );
       $stmt->execute([$sDate, $eDate]); 
+
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+   }
+
+   public function career_guidance($dateStart, $dateToEnd)
+   {
+      $stmt = $this->getConnection()->prepare(
+         "SELECT * FROM tbl_stud_accounts 
+         LEFT JOIN tbl_personal_data ON tbl_stud_accounts.studentno = tbl_personal_data.studentno
+         LEFT JOIN tbl_initial_interview ON tbl_stud_accounts.studentno = tbl_initial_interview.studentno
+         LEFT JOIN tbl_terminal_form ON tbl_stud_accounts.studentno = tbl_terminal_form.studentno
+         LEFT JOIN tbl_exit_drop ON tbl_stud_accounts.studentno = tbl_exit_drop.studentno
+         LEFT JOIN tbl_exit_transfer ON tbl_stud_accounts.studentno = tbl_exit_transfer.studentno
+         WHERE studDate BETWEEN ? AND ?"
+      );
+
+      // Ensure all four parameters are passed
+      $stmt->execute([$dateStart, $dateToEnd]); 
 
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
    }

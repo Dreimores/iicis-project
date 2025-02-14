@@ -47,3 +47,7 @@
 input[type="password"].bg-password-img{
    background-image: none;
 }
+
+.text-color{
+   color: #893600;
+}
