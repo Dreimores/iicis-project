@@ -20,6 +20,7 @@
    include_once('controllers/exitDropController.php');
    include_once('controllers/exitTransController.php');
    include_once('controllers/reportsController.php');
+   include_once('controllers/dashBoardController.php');
    # end
 
    # include models
@@ -32,6 +33,7 @@
    include_once('models/exitDropModel.php');
    include_once('models/exitTransModel.php');
    include_once('models/reportsModel.php');
+   include_once('models/dashBoardModel.php');
    # end 
 
    # get router
@@ -77,6 +79,9 @@
       break;
       case "submit-form":
          $studentFormsController->submit_stud_forms();
+      break;
+      case "app":
+         $loginController->update_approved();
       break;
       case "create-an-account":
          $loginController->sign_up();

@@ -17,6 +17,7 @@
          if(isset($_POST['Btn-Terminalform-Save']))
          {  
             $txtFacebookAccount = $_POST['txtFacebookAccount'];
+            $txtTerDate         = $_POST['txtTerDate'];
             $WhyEnrollCsu       = implode(",",$_POST['WhyEnrollCsu'] ?? []);
             $OthersOne          = $_POST['OthersOne'];
             $txtFirstEnroll     = $_POST['txtFirstEnroll'];
@@ -37,7 +38,7 @@
             $txtWhatCanSugServ  = $_POST['txtWhatCanSugServ'];
             $studentno          = $_POST['student-no'];
 
-            $this->terminalModels->submit_terminal_Interview($txtFacebookAccount,$WhyEnrollCsu,$OthersOne,$txtFirstEnroll,$FinishCrsEnrolled,$IfNoWhy,$txtOtherIfNo,$HowFeelGraduate,$txtOthersThree,$WhatDoAfterGrad,$OthersFour,$WhatDiffUniversity,$OthersFive,$WhatGreatLearn,$txtOthersSix,$WouldYouEncourRel,$Why,$txtOthersSeven,$txtWhatCanSugServ,$studentno);
+            $this->terminalModels->submit_terminal_Interview($txtTerDate,$txtFacebookAccount,$WhyEnrollCsu,$OthersOne,$txtFirstEnroll,$FinishCrsEnrolled,$IfNoWhy,$txtOtherIfNo,$HowFeelGraduate,$txtOthersThree,$WhatDoAfterGrad,$OthersFour,$WhatDiffUniversity,$OthersFive,$WhatGreatLearn,$txtOthersSix,$WouldYouEncourRel,$Why,$txtOthersSeven,$txtWhatCanSugServ,$studentno);
             header('Location: ?route=terminal-Interview');
          }
       }

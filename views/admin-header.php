@@ -25,6 +25,8 @@
    
    <!-- Custom icon -->
    <link rel="icon" href="img/csu_lasam_logo.webp"/>
+
+   <link rel="stylesheet" href="vendor/aos/aos.css">
 </head>
 
 <body id="page-top">

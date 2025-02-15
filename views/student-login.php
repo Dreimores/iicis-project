@@ -810,6 +810,7 @@
                                        $('#loading-modal').modal('hide');
                                        swal({
                                           title: "Success!",
+                                          // Modify as Success Session
                                           text: "Your account has been created successfully! 🎉 You can now log in and start exploring your new features.",
                                           icon: "success",
                                           closeOnClickOutside: false,

@@ -12,6 +12,7 @@
       # Method for submitting the form
       public function submit_exitdrop(
          $SmstrSchool,
+         $txtDateExitDrop,
          $ReasonsForDrop,
          $txtExOthersOne,
          $PlanAfterDrop,
@@ -29,9 +30,10 @@
          $studentNo
       )
       {
-         $stmp = $this->getConnection()->prepare("UPDATE tbl_exit_drop SET SemYearLastAttend=?,ReasonsForDrop=?,ex_OthersOne=?,PlanAfterDrop=?,ex_OthersTwo=?,FeelAboutDrop=?,ex_OthersThree=?,ParentsAwareness=?,ParentsFeelingsDrop=?,ex_OthersFive=?,CourseOne=?,School=?,ReasonChoosSchool=?,ex_OthersSix=?,CRSCsuLasam=? WHERE studentno=?");
+         $stmp = $this->getConnection()->prepare("UPDATE tbl_exit_drop SET SemYearLastAttend=?,dropDate=?,ReasonsForDrop=?,ex_OthersOne=?,PlanAfterDrop=?,ex_OthersTwo=?,FeelAboutDrop=?,ex_OthersThree=?,ParentsAwareness=?,ParentsFeelingsDrop=?,ex_OthersFive=?,CourseOne=?,School=?,ReasonChoosSchool=?,ex_OthersSix=?,CRSCsuLasam=? WHERE studentno=?");
          $stmp->execute(
             [$SmstrSchool,
+            $txtDateExitDrop,
             $ReasonsForDrop,
             $txtExOthersOne,
             $PlanAfterDrop,

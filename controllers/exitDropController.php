@@ -14,6 +14,7 @@
          if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             $SmstrSchool      = $_POST['SmstrSchool'];
+            $txtDateExitDrop  = $_POST['txtDateExitDrop'];
             $ReasonsForDrop   = implode(",",$_POST['ReasonsForDrop'] ?? []);
             $txtExOthersOne   = $_POST['txtExOthersOne'];
             $PlanAfterDrop    = implode(",",$_POST['PlanAfterDrop'] ?? []);
@@ -29,7 +30,7 @@
             $txtExOthersSix   = $_POST['txtExOthersSix'];
             $CRStCLCampus     = $_POST['ComRegardStayCsuLasamCampus'];
             $studentNo        = $_POST['Student-No'];
-            $this->exitDropModel->submit_exitdrop($SmstrSchool,$ReasonsForDrop,$txtExOthersOne,$PlanAfterDrop,$txtExOthersTwo,$FeelAboutDrop,$txtExOthersThree,$ParentsAwareness,$ParntFeelingsDrop,$txtExOthersFive,$txtCourseEnroll,$txtSchool,$ReasonChoosSchool,$txtExOthersSix,$CRStCLCampus,$studentNo);
+            $this->exitDropModel->submit_exitdrop($SmstrSchool,$txtDateExitDrop,$ReasonsForDrop,$txtExOthersOne,$PlanAfterDrop,$txtExOthersTwo,$FeelAboutDrop,$txtExOthersThree,$ParentsAwareness,$ParntFeelingsDrop,$txtExOthersFive,$txtCourseEnroll,$txtSchool,$ReasonChoosSchool,$txtExOthersSix,$CRStCLCampus,$studentNo);
             header("Location: ?route=exit-drop-form");
          }
 

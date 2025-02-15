@@ -64,6 +64,8 @@
          }
 
       }
+
+      # sign in an account
       public function sign_in()
       {
          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -102,5 +104,16 @@
             }
          }
       }
+      # end
+
+      # for approved an account of student
+      public function update_approved()
+      {
+         if($_SERVER['REQUEST_METHOD'] === "POST") {
+            $_POST['status'] === "Approved"? $this->loginModel->update_approved("Pending...",$_POST['approved']): 
+            $this->loginModel->update_approved("Approved",$_POST['approved']);
+         }
+      }
+      # end
    }
 ?>

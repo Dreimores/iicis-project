@@ -65,7 +65,8 @@
                            Why	          ="<?=$row['Why']?>"
                            OthersSeven	    ="<?=$row['OthersSeven']?>"
                            WhatCanSugServ	 ="<?=$row['WhatCanSugServ']?>"
-                           FinishCrsEnrolled="<?=$row['FinishCrsEnrolled']?>">
+                           FinishCrsEnrolled="<?=$row['FinishCrsEnrolled']?>"
+                           terDate          ="<?=$row['terDate']?>">
                      <?php }?>
                   </datalist>
                </div>
@@ -169,6 +170,13 @@
                   </label>
                   <input type="text" id="txtFacebookAccount" name="txtFacebookAccount" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" title="Special character is not allowed." />
                   <span class="text-danger" id="errTxtFacebookAccount"></span>
+               </div>
+               <div class="form-group col-sm-3" id="txtTerminalDate">
+                  <label for="txtTerDate" class="text-gray-900"> 
+                     Date <span class="text-danger" id="txtTerDateReq"></span>
+                  </label>
+                  <input type="date" id="txtTerDate" name="txtTerDate" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" title="Special character is not allowed." />
+                  <span class="text-danger" id="errtxtTerDate"></span>
                </div>
             </div>
             <label for="QualityEducation" class="text-gray-900"> Direction: Please check your choices below. </label>
@@ -579,8 +587,9 @@
       const txtMother         = $('#txtMother').val().trim();
       const txtFacebookAccount= $('#txtFacebookAccount').val().trim();
       const txtFirstEnroll    = $('#txtFirstEnroll').val().trim();
+      const txtDate           = $('#txtTerDate').val().trim();
 
-      const isValidInputs = txtSureName.length > 2 && txtFirstName.length > 2 && txtMiddleName.length > 1 && txtNickName.length > 2 && txtCourse.length > 2 && textCivilStatus.length > 2 && txtHomeAddress.length > 2 && txtEmailAddress.length > 2 && txtTelphone.length > 2 && txtCellphone.length > 2 && txtFather.length > 2 && txtMother.length > 2 && txtFacebookAccount.length > 2 && txtFirstEnroll.length > 2;
+      const isValidInputs = txtSureName.length > 2 && txtFirstName.length > 2 && txtMiddleName.length > 1 && txtNickName.length > 2 && txtCourse.length > 2 && textCivilStatus.length > 2 && txtHomeAddress.length > 2 && txtEmailAddress.length > 2 && txtTelphone.length > 2 && txtCellphone.length > 2 && txtFather.length > 2 && txtMother.length > 2 && txtFacebookAccount.length > 2 && txtFirstEnroll.length > 2 && txtDate.length > 2;
       $('#Btn-Terminalform-Save').prop('disabled', !isValidInputs);
    }
    $('#student-no').on('input',function(){
@@ -599,6 +608,7 @@
          $("#txtFather").val(y.attr("fathername"));
          $("#txtMother").val(y.attr("mothername"));
          $('#txtFacebookAccount').val(y.attr("FacebookAccount"));
+         $("#txtTerDate").val(y.attr("terDate"));
          const wy = y.attr('Whyenrollcsu');
          if (wy) {
             const actions = wy.split(',').map(action => action.trim()); // Ensure all actions are trimmed
@@ -875,6 +885,20 @@
             $('#PhilippinesAbroad').val('').change()[0].size = 1; // Reset dropdown size
             $('#PhilippinesAbroad').addClass('d-none');
          }
+
+         const txtTerDate = $("#txtTerDate").val().trim();
+         if (txtTerDate.length <= 0) {
+            $('#txtTerDateReq').text('*');
+            $("#txtTerDate").addClass('is-invalid');
+            $('#errtxtTerDate').text('Date is required.');
+         } else if(txtTerDate.length > 2) {
+            $("#txtTerminalDate").addClass('d-none');
+         } else {
+            $('#txtTerDateReq').text('');
+            $("#txtTerDate").removeClass('is-invalid').addClass('is-valid');
+            $('#errtxtTerDate').text('');
+         }
+
          validInputs();
       });
       $(`input[name="FinishCrsEnrolled"][value="Yes"]`).prop('checked', true);
@@ -891,6 +915,11 @@
       $("#txtCellphone").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $("#txtFather").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $("#txtMother").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $("#txtTerminalDate").removeClass('d-none');
+      $("#txtTerDate").val('');
+      $('#txtTerDateReq').text('');
+      $("#txtTerDate").removeClass('is-invalid');
+      $('#errtxtTerDate').text('');
       $('#txtSureNameReq').text('');
       $('#errTxtSureName').text('');
       $('#txtFirstNameReq').text('');
@@ -951,6 +980,7 @@
       });
       $('#PhilippinesAbroad').val('').change()[0].size = 1; // Reset dropdown size
       $('#PhilippinesAbroad').addClass('d-none');
+      validInputs();
    });
    $('#txtFacebookAccount').on('input',()=>{
       const txtFacebookAccount = $("#txtFacebookAccount").val().trim();
@@ -979,6 +1009,20 @@
       validInputs();
    })
 
+   $('#txtTerDate').on('input',()=>{
+      const txtTerDate = $("#txtTerDate").val().trim();
+      if (txtTerDate.length <= 0) {
+         $('#txtTerDateReq').text('*');
+         $("#txtTerDate").addClass('is-invalid');
+         $('#errtxtTerDate').text('Please fill out this field.');
+      } else {
+         $('#txtTerDateReq').text('');
+         $("#txtTerDate").removeClass('is-invalid').addClass('is-valid');
+         $('#errtxtTerDate').text('');
+      }
+      validInputs();
+   })
+   
    $('#WithinPhilippines').on('change', function() { 
       if ($(this).prop('checked')) {
          $('#PhilippinesAbroad').val('Within Philippines').change()[0].size = 3; // Expands dropdown

@@ -52,6 +52,12 @@
                         <td class="align-middle text-nowrap"><?= $row['status'] === "Pending..."?"<i class='fas fa-circle text-danger'></i> ".$row['status'] : "<i class='fas fa-circle text-success'></i> ". $row['status'] ?></td>
                         <td class="align-middle">
                            <div class="btn-group d-flex justify-content-center">
+                              <div class="<?=$row['status']==="Approved"?"d-none":''?>">
+                                 <button type="button" class="btn btn-sm btn-success btnApprovedStudAccount mr-1" value="<?=$row['studentno']?>" status="<?=$row['status']?>"> <i class="fa"> &#x2714; </i> </button>
+                              </div>
+                              <div class="<?=$row['status']==="Pending..."?"d-none":''?>">
+                                 <button type="button" class="btn btn-sm btn-danger btnApprovedStudAccount mr-1" value="<?=$row['studentno']?>" status="<?=$row['status']?>"> <i class="fa"> &#xf00d; </i> </button>
+                              </div>
                               <div>
                                  <a data-toggle="modal" data-target="#modal-students" class="btn btn-sm btn-primary edit-show-modal-students"
                                     studentno   ="<?=$row['studentno']?>"
@@ -77,6 +83,8 @@
                                     <i class="fas fa-trash-alt"></i>
                                  </button>
                               </div>
+                              &nbsp;
+                              <button type="button" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
                            </div>
                         </td>
                      </tr>
@@ -916,4 +924,32 @@
       $('.txtConfirmPassword').attr('type', $('.txtConfirmPassword').attr('type') === 'password' ? 'text' : 'password');
    });
    // ends
+
+   // for approving an account of students
+   $('.btnApprovedStudAccount').click(function(){
+      const approved = $(this).val();
+      const status = $(this).attr('status');
+      $.ajax({
+         type: "post",
+         url: "?route=app",
+         data: {
+            "approved": approved,
+            "status": status
+         },
+         success:() => {
+            location.reload();
+         }
+      })
+   })
 </script>
+
+
+
+
+
+
+
+
+
+
+

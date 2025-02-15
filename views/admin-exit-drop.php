@@ -62,7 +62,7 @@ $includeAdminController->navbar();
                               ReasonChoosSchool="<?=$row['ReasonChoosSchool']?>"
                               ex_OthersSix     ="<?=$row['ex_OthersSix']?>"
                               CRSCsuLasam      ="<?=$row['CRSCsuLasam']?>"
-                              >
+                              dropDate         ="<?=$row['dropDate']?>">
                      <?php }?>
                   </datalist>
                </div>
@@ -154,6 +154,13 @@ $includeAdminController->navbar();
                   </label>
                   <input type="text" id="SmstrSchool" name="SmstrSchool" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
                   <span class="text-danger" id="txtErrSmstrSchool"></span>
+               </div>
+               <div class="form-group col-sm-3" id="txtDateExitDroping">
+                  <label class="col-form-label text-gray-900" for="txtDateExitDrop"> 
+                     Date <span class="text-danger" id="txtDateExitDropReq"></span>
+                  </label>
+                  <input type="date" id="txtDateExitDrop" name="txtDateExitDrop" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
+                  <span class="text-danger" id="errtxtDateExitDrop"></span>
                </div>
             </div>
             <label for="Financial" class="text-gray-900"> Direction: Please check your choices below. </label>
@@ -310,7 +317,7 @@ $includeAdminController->navbar();
          </div>
          <div class="card-footer">
             <div class="d-sm-flex justify-content-start">
-               <button type="submit" title="Save record." class="btn btn-success"> <i class="fas fa-save"></i> Save </button>
+               <button type="submit" title="Save record." id="btn-dropping-save" class="btn btn-success" disabled> <i class="fas fa-save"></i> Save </button>
             </div>
          </div>
       </form>
@@ -321,6 +328,46 @@ $includeAdminController->footer();
 $includeAdminController->script();
 ?>
 <script>
+   function validateInput() {
+
+      const txtSureName     = $("#txtSureName").val().trim();
+      const txtFirstName    = $("#txtFirstName").val().trim();
+      const txtMiddleName   = $("#txtMiddleName").val().trim();
+      const txtNickName     = $("#txtNickName").val().trim();
+      const txtYearLevel    = $("#txtYearLevel").val().trim();
+      const txtCourse       = $("#txtCourse").val().trim();
+      const txtAge          = $("#txtAge").val().trim();
+      const textCivilStatus = $("#textCivilStatus").val().trim();
+      const txtHomeAddress  = $("#txtHomeAddress").val().trim();
+      const txtTelphone     = $("#txtTelphone").val().trim();
+      const txtFather       = $("#txtFather").val().trim();
+      const txtMother       = $("#txtMother").val().trim();
+      const SmstrSchool     = $("#SmstrSchool").val().trim();
+      const txtCourseEnroll = $("#txtCourseEnroll").val().trim();
+      const txtSchool       = $("#txtSchool").val().trim();
+      const txtDateExitDrop  = $("#txtDateExitDrop").val().trim();
+
+      const isValidInputs = 
+      txtSureName.length > 2 && 
+      txtFirstName.length > 2 && 
+      txtMiddleName.length > 1 && 
+      txtYearLevel.length > 0 && 
+      txtCourse.length > 2 && 
+      txtAge.length > 1 && 
+      txtNickName.length > 2 && 
+      txtCourse.length > 2 && 
+      textCivilStatus.length > 2 &&
+      txtHomeAddress.length > 2 && 
+      txtTelphone.length > 2 && 
+      txtFather.length > 2 && 
+      txtMother.length > 2 && 
+      SmstrSchool.length > 2 && 
+      txtCourseEnroll.length > 2 && 
+      txtSchool.length > 2 && 
+      txtDateExitDrop.length > 2;
+      $('#btn-dropping-save').prop('disabled', !isValidInputs);
+   }
+
    $('#Student-No').on('input', function(){
       $('#Btn-Search-Student-No').click(()=>{
          const y = $(`#ListOfStudentNo option[value=${$("#Student-No").val()}]`);
@@ -339,6 +386,7 @@ $includeAdminController->script();
          $('#SmstrSchool').val(y.attr("SemYearLastAttend"));
          $('#txtCourseEnroll').val(y.attr('CourseOne'));
          $('#txtSchool').val(y.attr('School'));
+         $('#txtDateExitDrop').val(y.attr('dropDate'));
          const txtSureName = $("#txtSureName").val().trim();
          if (txtSureName.length <= 0) {
             $('#txtSureNameReq').text('*');
@@ -575,6 +623,19 @@ $includeAdminController->script();
          } 
          $('#txtExOthersSix').val(y.attr("ex_OthersSix"));
          $('#ComRegardStayCsuLasamCampus').val(y.attr("CRSCsuLasam"));
+         const txtDateExitDrop = $('#txtDateExitDrop').val().trim();
+         if (txtDateExitDrop.length <= 0) {
+            $('#txtDateExitDropReq').text('*');
+            $('#errtxtDateExitDrop').text('Date is required.');
+            $('#txtDateExitDrop').addClass('is-invalid');
+         } else if (txtDateExitDrop.length > 2) {
+            $('#txtDateExitDroping').addClass('d-none');
+         } else {
+            $('#txtDateExitDropReq').text('');
+            $('#errtxtDateExitDrop').text('');
+            $('#txtDateExitDrop').removeClass('is-invalid').addClass('is-valid')
+         }
+         validateInput();
       });
       $(`input[name="ParentsAwareness"][value="Aware"]`).prop('checked', true);
       $("#txtSureName").val('');
@@ -607,6 +668,10 @@ $includeAdminController->script();
       $("#SmstrSchool").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $("#txtCourseEnroll").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $("#txtSchool").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
+      $('#txtDateExitDropReq').text('');
+      $('#errtxtDateExitDrop').text('');
+      $('#txtDateExitDroping').removeClass('d-none');
+      $('#txtDateExitDrop').removeClass('is-invalid');
       $('#errTxtYearLevel').text('');
       $('#txtYearLevelReq').text('');
       $('#txtSureNameReq').text('');
@@ -666,6 +731,7 @@ $includeAdminController->script();
       $('#txtExOthersFive').val("");
       $('#txtExOthersSix').val("");
       $('#ComRegardStayCsuLasamCampus').val("");
+      validateInput();
    });
    
    $('#SmstrSchool').on('input',()=>{
@@ -679,6 +745,7 @@ $includeAdminController->script();
          $('#txtErrSmstrSchool').text('');
          $('#SmstrSchool').removeClass('is-invalid').addClass('is-valid')
       } 
+      validateInput();
    });
    $('#txtCourseEnroll').on('input', ()=>{
       const txtCourseEnroll = $('#txtCourseEnroll').val().trim();
@@ -695,6 +762,7 @@ $includeAdminController->script();
          $('#txtErrCourseEnroll').text('');
          $('#txtCourseEnroll').removeClass('is-invalid').addClass('is-valid')
       }
+      validateInput();
    })
    $('#txtSchool').on('input', ()=>{
       const txtSchool = $('#txtSchool').val().trim();
@@ -711,5 +779,19 @@ $includeAdminController->script();
          $('#txtErrSchool').text('');
          $('#txtSchool').removeClass('is-invalid').addClass('is-valid')
       }
+      validateInput();
+   })
+   $('#txtDateExitDrop').on('input', ()=>{
+      const txtDateExitDrop = $('#txtDateExitDrop').val().trim();
+      if (txtDateExitDrop.length <= 0) {
+         $('#txtDateExitDropReq').text('*');
+         $('#errtxtDateExitDrop').text('Date is required.');
+         $('#txtDateExitDrop').addClass('is-invalid');
+      } else {
+         $('#txtDateExitDropReq').text('');
+         $('#errtxtDateExitDrop').text('');
+         $('#txtDateExitDrop').removeClass('is-invalid').addClass('is-valid')
+      }
+      validateInput();
    })
 </script>

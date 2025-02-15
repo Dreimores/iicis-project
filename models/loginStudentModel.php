@@ -198,5 +198,13 @@
          return $query->fetchAll(PDO::FETCH_COLUMN);
       }
       # end
+
+      # For update approving an account of student
+      public function update_approved($status, $studentno)
+      {
+         $stmt = $this->getConnection()->prepare("UPDATE tbl_stud_accounts SET status = ? WHERE studentno = ?");
+         $stmt->execute([$status, $studentno]);
+      }
+      # End
    }
 ?>

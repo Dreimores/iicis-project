@@ -61,6 +61,7 @@ $includeAdminController->navbar();
                            RsnsChoosTheSchl ="<?=$row['RsnsChoosTheSchl']?>"
                            trans_OthersFour ="<?=$row['trans_OthersFour']?>"
                            Regarding        ="<?=$row['Regarding']?>"
+                           transDate        ="<?=$row['transDate']?>"
                            >
                      <?php }?>
                   </datalist>
@@ -153,6 +154,13 @@ $includeAdminController->navbar();
                   </label>
                   <input type="text" id="SmstrSchool" name="SmstrSchool" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
                   <span class="text-danger" id="txtErrSmstrSchool"></span>
+               </div>
+               <div class="form-group col-sm-3" id="txtforTransferring">
+                  <label class="col-form-label text-gray-900" for="txtforTransfer"> 
+                     Date <span class="text-danger" id="txtforTransferReq"></span>
+                  </label>
+                  <input type="date" id="txtforTransfer" name="txtforTransfer" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white"/>
+                  <span class="text-danger" id="errtxtforTransfer"></span>
                </div>
             </div>
             <label for="ScreenedOut" class="text-gray-900">
@@ -324,7 +332,7 @@ $includeAdminController->navbar();
             </ol>
          </div>
          <div class="card-footer">
-            <button type="submit" title="Save record." class="btn btn-success"> <i class="fas fa-save"></i> Save </button>
+            <button type="submit" title="Save record." id="btn-Transferring-save" disabled class="btn btn-success"> <i class="fas fa-save"></i> Save </button>
          </div>
       </form>
    </div>
@@ -334,6 +342,47 @@ $includeAdminController->footer();
 $includeAdminController->script();
 ?>
 <script>
+
+   function validateInputs() {
+
+      const txtSureName     = $("#txtSureName").val().trim();
+      const txtFirstName    = $("#txtFirstName").val().trim();
+      const txtMiddleName   = $("#txtMiddleName").val().trim();
+      const txtNickName     = $("#txtNickName").val().trim();
+      const txtYearLevel    = $("#txtYearLevel").val().trim();
+      const txtCourse       = $("#txtCourse").val().trim();
+      const txtAge          = $("#txtAge").val().trim();
+      const textCivilStatus = $("#textCivilStatus").val().trim();
+      const txtHomeAddress  = $("#txtHomeAddress").val().trim();
+      const txtTelphone     = $("#txtTelphone").val().trim();
+      const txtFather       = $("#txtFather").val().trim();
+      const txtMother       = $("#txtMother").val().trim();
+      const SmstrSchool     = $("#SmstrSchool").val().trim();
+      const txtCourseEnroll = $("#txtCourseEnroll").val().trim();
+      const txtSchool       = $("#txtSchool").val().trim();
+      const txtforTransfer  = $("#txtforTransfer").val().trim();
+
+      const isValidInputs = 
+      txtSureName.length > 2 && 
+      txtFirstName.length > 2 && 
+      txtMiddleName.length > 1 && 
+      txtYearLevel.length > 0 && 
+      txtCourse.length > 2 && 
+      txtAge.length > 1 && 
+      txtNickName.length > 2 && 
+      txtCourse.length > 2 && 
+      textCivilStatus.length > 2 &&
+      txtHomeAddress.length > 2 && 
+      txtTelphone.length > 2 && 
+      txtFather.length > 2 && 
+      txtMother.length > 2 && 
+      SmstrSchool.length > 2 && 
+      txtCourseEnroll.length > 2 && 
+      txtSchool.length > 2 && 
+      txtforTransfer.length > 2;
+      $('#btn-Transferring-save').prop('disabled', !isValidInputs);
+   }
+
    $('#Student-No-exit').on('input', function(){
       $('#Btn-Search-Student-No-exit').click(()=>{
          const y = $(`#ListOfStudentNoExit option[value=${$("#Student-No-exit").val()}]`);
@@ -352,6 +401,7 @@ $includeAdminController->script();
          $('#SmstrSchool').val(y.attr("SmstrSchool"));
          $('#txtCourseEnroll').val(y.attr('trans_CourseOne'));
          $('#txtSchool').val(y.attr('trans_School'));
+         $('#txtforTransfer').val(y.attr('transDate'));
          const txtSureName = $("#txtSureName").val().trim();
          if (txtSureName.length <= 0) {
             $('#txtSureNameReq').text('*');
@@ -566,6 +616,19 @@ $includeAdminController->script();
          }
          $('#OthersFour').val(y.attr('trans_OthersFour')).addClass('is-valid');
          $('#Regarding').val(y.attr('Regarding')).addClass('is-valid');
+         const txtforTransfer = $('#txtforTransfer').val().trim();
+         if (txtforTransfer.length <= 0) {
+            $('#txtforTransferReq').text('*');
+            $('#errtxtforTransfer').text('No blank spaces allowed.');
+            $('#txtforTransfer').addClass('is-invalid');
+         } else if(txtforTransfer.length > 2) {
+            $('#txtforTransferring').addClass('d-none');
+         } else {
+            $('#txtforTransferReq').text('');
+            $('#errtxtforTransfer').text('');
+            $('#txtforTransfer').removeClass('is-invalid').addClass('is-valid')
+         }
+         validateInputs();
       });
       $(`input[name="ParentAwareness"][value="Aware"]`).prop('checked', true);
       $("#txtFirstName").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
@@ -581,6 +644,44 @@ $includeAdminController->script();
       $("#txtMother").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $("#txtYearLevel").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $("#txtCourseEnroll").val('').removeClass('is-invalid is-valid border-bottom-0');
+      $('#errTxtSureName').text('');
+      $('#txtSureNameReq').text('');
+      $('#errTxtFirstName').text('');
+      $('#txtFirstNameReq').text('');
+      $('#errTxtMiddleName').text('');
+      $('#txtMiddleNameReq').text('');
+      $('#errTxtNickName').text('');
+      $('#txtNickNameReq').text('');
+      $('#errTxtYearLevel').text('');
+      $('#txtYearLevelReq').text('');
+      $('#errTxtCourse').text('');
+      $('#txtCourseReq').text('');
+      $('#errTxtAge').text('');
+      $('#txtAgeReq').text('');
+      $('#errTextCivilStatus').text('');
+      $('#textCivilStatusReq').text('');
+      $('#errTxtHomeAddress').text('');
+      $('#txtHomeAddressReq').text('');
+      $('#errTxtTelphone').text('');
+      $('#txtTelphoneReq').text('');
+      $('#errTxtFather').text('');
+      $('#txtFatherReq').text('');
+      $('#errTxtMother').text('');
+      $('#txtMotherReq').text('');
+      $('#errTxtMother').text('');
+      $('#txtMotherReq').text('');
+      $('#txtErrCourseEnroll').text('');
+      $('#txtCourseEnrollReq').text('');
+      $('#txtErrSchool').text('');
+      $('#txtSchoolReq').text('');
+
+      $('#txtforTransferReq').text('');
+      $('#errtxtforTransfer').text('');
+      $('#txtforTransferring').removeClass('d-none');
+      $('#txtforTransfer').removeClass('is-invalid');
+      $('#txtErrSmstrSchool').text('');
+      $('#txtSmstrSchoolReq').text('');
+      $('#txtErrSmstrSchoolReq').text('');
       $("#txtSchool").val('').removeClass('is-invalid is-valid');
       $('#OthersFour').val('').removeClass('is-invalid is-valid');
       $('#Regarding').val('').removeClass('is-invalid is-valid');
@@ -600,6 +701,7 @@ $includeAdminController->script();
       $(`input[name="RsnsChoosTheSchl[]"]:checked`).each((_, checkbox) => {
          $(checkbox).prop('checked', false); // Uncheck the checkbox
       });
+      validateInputs();
    });
 
    $('#SmstrSchool').on('input',()=>{
@@ -613,6 +715,7 @@ $includeAdminController->script();
          $('#txtErrSmstrSchool').text('');
          $('#SmstrSchool').removeClass('is-invalid').addClass('is-valid')
       } 
+      validateInputs();
    });
    $('#txtCourseEnroll').on('input', ()=>{
       const txtCourseEnroll = $('#txtCourseEnroll').val().trim();
@@ -629,6 +732,7 @@ $includeAdminController->script();
          $('#txtErrCourseEnroll').text('');
          $('#txtCourseEnroll').removeClass('is-invalid').addClass('is-valid')
       }
+      validateInputs();
    })
    $('#txtSchool').on('input', ()=>{
       const txtSchool = $('#txtSchool').val().trim();
@@ -645,5 +749,19 @@ $includeAdminController->script();
          $('#txtErrSchool').text('');
          $('#txtSchool').removeClass('is-invalid').addClass('is-valid')
       }
+      validateInputs();
+   })
+   $('#txtforTransfer').on('input', ()=>{
+      const txtforTransfer = $('#txtforTransfer').val().trim();
+      if (txtforTransfer.length <= 0) {
+         $('#txtforTransferReq').text('*');
+         $('#errtxtforTransfer').text('No blank spaces allowed.');
+         $('#txtforTransfer').addClass('is-invalid');
+      } else {
+         $('#txtforTransferReq').text('');
+         $('#errtxtforTransfer').text('');
+         $('#txtforTransfer').removeClass('is-invalid').addClass('is-valid')
+      }
+      validateInputs();
    })
 </script>

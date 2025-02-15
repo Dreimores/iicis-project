@@ -12,6 +12,7 @@
       # for submmitting the form transfer
       public function submit_exit_trans(
          $SmstrSchool,
+         $transDate,
          $ReasonTransfer,
          $OthersOne,
          $FeelAboutTransfer,
@@ -29,6 +30,7 @@
       {
          $stmt = $this->getConnection()->prepare("UPDATE tbl_exit_transfer SET
          SmstrSchool = ?, 
+         transDate = ?,
          ReasonTransfer = ?, 
          trans_OthersOne = ?, 
          FeelAboutTransfer = ?, 
@@ -44,6 +46,7 @@
          WHERE studentno = ?");
          $stmt->execute([
             $SmstrSchool,
+            $transDate,
             $ReasonTransfer,
             $OthersOne,
             $FeelAboutTransfer,
