@@ -109,9 +109,17 @@
       # for approved an account of student
       public function update_approved()
       {
-         if($_SERVER['REQUEST_METHOD'] === "POST") {
-            $_POST['status'] === "Approved"? $this->loginModel->update_approved("Pending...",$_POST['approved']): 
-            $this->loginModel->update_approved("Approved",$_POST['approved']);
+         if($_SERVER['REQUEST_METHOD'] === "POST") 
+         {
+            if ($_POST['status'] === "Approved") {
+
+               $this->loginModel->update_approved("Pending...",$_POST['approved']);
+            
+            } else {
+
+               $this->loginModel->update_approved("Approved",$_POST['approved']);
+
+            } 
          }
       }
       # end

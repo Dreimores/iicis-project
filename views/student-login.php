@@ -16,6 +16,8 @@
       <link href="css/css.css" rel="stylesheet" type="text/css"/>
       <!-- Custom css animation -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
+
+      <link href="img/csu_lasam_logo.webp" rel="icon">
    </head>
    <body>
       <div class="d-flex">

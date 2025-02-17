@@ -21,11 +21,6 @@
    <!-- Sweet Alert -->
    <script src="js/sweetalert.min.js"></script>
 
-   <script src="vendor/aos/aos.js"></script>
-   <script src="vendor/glightbox/js/glightbox.min.js"></script>
-   <script src="vendor/swiper/swiper-bundle.min.js"></script>
-   <script src="vendor/script-swipper.js"></script>
-
    <!-- Script for custom message -->
    <script>
       /* Success message */
