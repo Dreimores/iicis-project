@@ -53,10 +53,22 @@
                         <td class="align-middle">
                            <div class="btn-group d-flex justify-content-center">
                               <div class="<?=$row['status']==="Approved"?"d-none":''?>">
-                                 <button type="button" class="btn btn-sm btn-success btnApprovedStudAccount mr-1" value="<?=$row['studentno']?>" status="<?=$row['status']?>"> <i class="fa"> &#x2714; </i> </button>
+                                 <button type="button" class="btn btn-sm btn-success btnApprovedStudAccount mr-1" 
+                                 value    ="<?=$row['studentno']?>" 
+                                 status   ="<?=$row['status']?>" 
+                                 fullname ="<?=$row['p_firstname']." ".substr($row['p_middlename'],0,1).". ".$row['p_surname']?>"
+                                 email    =<?=$row['email']?>> 
+                                 <i class="fa"> &#x2714; </i> 
+                              </button>
                               </div>
                               <div class="<?=$row['status']==="Pending..."?"d-none":''?>">
-                                 <button type="button" class="btn btn-sm btn-danger btnApprovedStudAccount mr-1" value="<?=$row['studentno']?>" status="<?=$row['status']?>"> <i class="fa"> &#xf00d; </i> </button>
+                                 <button type="button" class="btn btn-sm btn-danger btnApprovedStudAccount mr-1" 
+                                 value    ="<?=$row['studentno']?>" 
+                                 status   ="<?=$row['status']?>" 
+                                 fullname ="<?=$row['p_firstname']." ".substr($row['p_middlename'],0,1).". ".$row['p_surname']?>"
+                                 email    =<?=$row['email']?>> 
+                                    <i class="fa"> &#xf00d; </i> 
+                                 </button>
                               </div>
                               <div>
                                  <a data-toggle="modal" data-target="#modal-students" class="btn btn-sm btn-primary edit-show-modal-students"
@@ -927,14 +939,21 @@
 
    // for approving an account of students
    $('.btnApprovedStudAccount').click(function(){
+
       const approved = $(this).val();
-      const status = $(this).attr('status');
+      const status   = $(this).attr('status');
+      const fullname = $(this).attr('fullname');
+      const email    = $(this).attr('email');
+
+      alert(fullname)
       $.ajax({
          type: "post",
          url: "?route=app",
          data: {
             "approved": approved,
-            "status": status
+            "status": status,
+            "fullname":fullname,
+            "email":email
          },
          success:() => {
             location.reload();
