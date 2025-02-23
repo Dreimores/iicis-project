@@ -37,8 +37,13 @@ class studentFormsController
          $personal_landlord    = $_POST['personal-landlord-relation'];
          $personal_hobbies     = $_POST['personal-hobbies'];
          $personal_describe    = $_POST['personal-describe-yourself'];
-         $studentno            = $_SESSION['username'];
          # end
+
+         # Check student number based on route
+         
+         $studentno = [];
+         isset($_POST['btn-views']) ? $studentno = $_POST['studentno'] : $studentno = $_SESSION['username'];
+         
          
          # update personal data query 
          $this->studentFormsModel->submit_stud_personal_data(
@@ -288,7 +293,15 @@ class studentFormsController
             $studentno       
          );
          # redirect into personal data 
-         header('Location: ?route=student-forms');
+         if (isset($_POST['btn-views'])) {
+
+            header('Location: ?route=student-info');
+         
+         } else {
+         
+            header('Location: ?route=student-forms');
+         
+         }
          # end header
       
       }

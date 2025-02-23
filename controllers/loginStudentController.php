@@ -9,18 +9,18 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
-require 'vendor/autoload.php';
+require_once('phpmailer/vendor/autoload.php');
 
 class send_email
 {
-   public function send($fullname,$email)
+   public function send_approved($fullname,$sendemail)
    {
       //Create an instance; passing `true` enables exceptions
       $mail = new PHPMailer(true);
 
       try {
          //Server settings
-         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+         $mail->SMTPDebug = 0;                                       //Enable verbose debug output
          $mail->isSMTP();                                            //Send using SMTP
          $mail->Host       = 'smtp.gmail.com';                       //Set the SMTP server to send through
          $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -30,31 +30,66 @@ class send_email
          $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
          //Recipients
-         $mail->setFrom('from@example.com', 'Mailer');
-         $mail->addAddress('joe@example.net', 'Joe User');     //Add a recipient
-         $mail->addAddress('ellen@example.com');               //Name is optional
-         $mail->addReplyTo('info@example.com', 'Information');
-         $mail->addCC('cc@example.com');
-         $mail->addBCC('bcc@example.com');
-
-         //Attachments
-         $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-         $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+         $mail->setFrom('dreiandmores04@gmail.com', $fullname);
+         $mail->addAddress($sendemail);                                  //Add a recipient
 
          //Content
-         $mail->isHTML(true);                                  //Set email format to HTML
-         $mail->Subject = 'Here is the subject';
-         $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
+         $mail->isHTML(true);                                        //Set email format to HTML
+         $mail->Subject = 'Email Verification from CSU Lasam Campus';
+         $email_template = "
+            <h4>Hi $fullname!</h4>
+            <p>
+                You are receiving this email because we received a request from your CCSO account.</br>
+                Your account is already approved by CCSO Admin.</br>
+                Already have an account? Login! Click the link below.
+            </p>
+            <br/><br/>
+            <a href='http://localhost/iicis-project/?route='> Click to login </a>
+        ";
+        $mail->Body = $email_template;
          $mail->send();
-         echo 'Message has been sent';
+      } catch (Exception $e) {
+         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+      }
+   }
+
+   public function send_disapproved($fullname,$sendemail)
+   {
+      //Create an instance; passing `true` enables exceptions
+      $mail = new PHPMailer(true);
+
+      try {
+         //Server settings
+         $mail->SMTPDebug = 0;                                       //Enable verbose debug output
+         $mail->isSMTP();                                            //Send using SMTP
+         $mail->Host       = 'smtp.gmail.com';                       //Set the SMTP server to send through
+         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+         $mail->Username   = 'dreiandmores04@gmail.com';             //SMTP username
+         $mail->Password   = 'fbnxhzqmyfeuslgn';                     //SMTP password
+         $mail->SMTPSecure = 'ssl';                                  //Enable implicit TLS encryption
+         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+         //Recipients
+         $mail->setFrom('dreiandmores04@gmail.com', $fullname);
+         $mail->addAddress($sendemail);                                  //Add a recipient
+
+         //Content
+         $mail->isHTML(true);                                        //Set email format to HTML
+         $mail->Subject = 'Email Verification from CSU Lasam Campus';
+         $email_template = "
+            <h4>Hi $fullname!</h4>
+            <p>
+                You are receiving this email because we received a request from your CCSO account.</br>
+                Your account is disapproved by the CCSO Admin.</br>
+            </p>
+        ";
+        $mail->Body = $email_template;
+         $mail->send();
       } catch (Exception $e) {
          echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
       }
    }
 }
-
 
 class loginStudentController extends send_email
 {
@@ -155,14 +190,17 @@ class loginStudentController extends send_email
    public function update_approved()
    {
       if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
          $fullname = $_POST['fullname'];
          $email    = $_POST['email'];
 
          if ($_POST['status'] === "Approved") {
 
             $this->loginModel->update_approved("Pending...", $_POST['approved']);
-         } else {
+            $this->send_approved($fullname,$email);
 
+         } else {
+            $this->send_disapproved($fullname,$email);
             $this->loginModel->update_approved("Approved", $_POST['approved']);
          }
       }

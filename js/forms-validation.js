@@ -1,115 +1,3 @@
-const nextButtonfirst = document.querySelector(".next-tab");
-nextButtonfirst.addEventListener("click", (e) => {
-  const activeTab = document.querySelector(".tab-pane.show.active");
-  const nextTab = activeTab.nextElementSibling;
-  const tabId = nextTab.getAttribute("id");
-  prevButtons.classList.remove("d-none");
-  const tab = new bootstrap.Tab(document.getElementById(`${tabId}-tab`));
-  if (tabId === "initialinterview") {
-    const icon = nextButtonfirst.querySelector("i");
-    icon.classList.remove("fa-arrow-right");
-    icon.classList.add("fa-save");
-    nextButtonfirst.classList.remove("btn-primary");
-    nextButtonfirst.classList.add("btn-success");
-    nextButtonfirst.type = "submit";
-    e.preventDefault();
-    tab.show();
-  } else {
-    tab.show();
-    nextButtonfirst.type = "button";
-  }
-});
-const prevButtons = document.querySelector(".prev-tab");
-prevButtons.addEventListener("click", () => {
-  const activeTab = document.querySelector(".tab-pane.show.active");
-  const prevTab = activeTab.previousElementSibling;
-  const tabId = prevTab.getAttribute("id");
-  const tab = new bootstrap.Tab(document.getElementById(`${tabId}-tab`));
-  if (tabId === "Personal") prevButtons.classList.add("d-none");
-  const icon = nextButtonfirst.querySelector("i");
-  icon.classList.add("fa-arrow-right");
-  icon.classList.remove("fa-save");
-  nextButtonfirst.classList.add("btn-primary");
-  nextButtonfirst.classList.remove("btn-success");
-  tab.show();
-});
-const prevTab1 = document.querySelector(".presonal-dara-link");
-prevTab1.addEventListener("click", (event) => {
-  event.preventDefault();
-  const tab = new bootstrap.Tab(document.getElementById(`Personal-tab`));
-  prevButtons.classList.add("d-none");
-  const icon = nextButtonfirst.querySelector("i");
-  icon.classList.add("fa-arrow-right");
-  icon.classList.remove("fa-save");
-  nextButtonfirst.classList.add("btn-primary");
-  nextButtonfirst.classList.remove("btn-success");
-  tab.show();
-});
-const prevTab2 = document.querySelector(".family-data-link");
-prevTab2.addEventListener("click", (event) => {
-  event.preventDefault();
-  const tab = new bootstrap.Tab(document.getElementById(`Familydata-tab`));
-  prevButtons.classList.remove("d-none");
-  const icon = nextButtonfirst.querySelector("i");
-  icon.classList.add("fa-arrow-right");
-  icon.classList.remove("fa-save");
-  nextButtonfirst.classList.add("btn-primary");
-  nextButtonfirst.classList.remove("btn-success");
-  tab.show();
-});
-const prevTab3 = document.querySelector(".educational-data-link");
-prevTab3.addEventListener("click", (event) => {
-  event.preventDefault();
-  const tab = new bootstrap.Tab(document.getElementById(`Educationaldata-tab`));
-  prevButtons.classList.remove("d-none");
-  const icon = nextButtonfirst.querySelector("i");
-  icon.classList.add("fa-arrow-right");
-  icon.classList.remove("fa-save");
-  nextButtonfirst.classList.add("btn-primary");
-  nextButtonfirst.classList.remove("btn-success");
-  tab.show();
-});
-const prevTab4 = document.querySelector(".health-data-link");
-prevTab4.addEventListener("click", (event) => {
-  event.preventDefault();
-  const tab = new bootstrap.Tab(document.getElementById(`Healthdata-tab`));
-  prevButtons.classList.remove("d-none");
-  const icon = nextButtonfirst.querySelector("i");
-  icon.classList.add("fa-arrow-right");
-  icon.classList.remove("fa-save");
-  nextButtonfirst.classList.add("btn-primary");
-  nextButtonfirst.classList.remove("btn-success");
-  tab.show();
-});
-const prevTab5 = document.querySelector(".ip-and-pwd-checklist-link");
-prevTab5.addEventListener("click", (event) => {
-  event.preventDefault();
-  const tab = new bootstrap.Tab(
-    document.getElementById(`IPandPWDchecklist-tab`)
-  );
-  prevButtons.classList.remove("d-none");
-  const icon = nextButtonfirst.querySelector("i");
-  icon.classList.add("fa-arrow-right");
-  icon.classList.remove("fa-save");
-  nextButtonfirst.classList.add("btn-primary");
-  nextButtonfirst.classList.remove("btn-success");
-  tab.show();
-});
-const prevTab6 = document.querySelector(".initial-interview-link");
-prevTab6.addEventListener("click", (event) => {
-  event.preventDefault();
-  const tab = new bootstrap.Tab(
-    document.getElementById(`initialinterview-tab`)
-  );
-  const icon = nextButtonfirst.querySelector("i");
-  icon.classList.remove("fa-arrow-right");
-  icon.classList.add("fa-save");
-  nextButtonfirst.type = "submit";
-  nextButtonfirst.classList.remove("btn-primary");
-  nextButtonfirst.classList.add("btn-success");
-  prevButtons.classList.remove("d-none");
-  tab.show();
-});
 // validation for presonal data
 $("#txtSurname").on("input", () => {
   const txtSurname = $("#txtSurname").val();
@@ -1619,3 +1507,116 @@ $("#table_educational_data").on(
     x--;
   }
 );
+
+const nextButtonfirst = document.querySelector(".next-tab");
+nextButtonfirst.addEventListener("click", (e) => {
+  const activeTab = document.querySelector(".tab-pane.show.active");
+  const nextTab = activeTab.nextElementSibling;
+  const tabId = nextTab.getAttribute("id");
+  prevButtons.classList.remove("d-none");
+  const tab = new bootstrap.Tab(document.getElementById(`${tabId}-tab`));
+  if (tabId === "initialinterview") {
+    const icon = nextButtonfirst.querySelector("i");
+    icon.classList.remove("fa-arrow-right");
+    icon.classList.add("fa-save");
+    nextButtonfirst.classList.remove("btn-primary");
+    nextButtonfirst.classList.add("btn-success");
+    nextButtonfirst.type = "submit";
+    e.preventDefault();
+    tab.show();
+  } else {
+    tab.show();
+    nextButtonfirst.type = "button";
+  }
+});
+const prevButtons = document.querySelector(".prev-tab");
+prevButtons.addEventListener("click", () => {
+  const activeTab = document.querySelector(".tab-pane.show.active");
+  const prevTab = activeTab.previousElementSibling;
+  const tabId = prevTab.getAttribute("id");
+  const tab = new bootstrap.Tab(document.getElementById(`${tabId}-tab`));
+  if (tabId === "Personal") prevButtons.classList.add("d-none");
+  const icon = nextButtonfirst.querySelector("i");
+  icon.classList.add("fa-arrow-right");
+  icon.classList.remove("fa-save");
+  nextButtonfirst.classList.add("btn-primary");
+  nextButtonfirst.classList.remove("btn-success");
+  tab.show();
+});
+const prevTab1 = document.querySelector(".presonal-dara-link");
+prevTab1.addEventListener("click", (event) => {
+  event.preventDefault();
+  const tab = new bootstrap.Tab(document.getElementById(`Personal-tab`));
+  prevButtons.classList.add("d-none");
+  const icon = nextButtonfirst.querySelector("i");
+  icon.classList.add("fa-arrow-right");
+  icon.classList.remove("fa-save");
+  nextButtonfirst.classList.add("btn-primary");
+  nextButtonfirst.classList.remove("btn-success");
+  tab.show();
+});
+const prevTab2 = document.querySelector(".family-data-link");
+prevTab2.addEventListener("click", (event) => {
+  event.preventDefault();
+  const tab = new bootstrap.Tab(document.getElementById(`Familydata-tab`));
+  prevButtons.classList.remove("d-none");
+  const icon = nextButtonfirst.querySelector("i");
+  icon.classList.add("fa-arrow-right");
+  icon.classList.remove("fa-save");
+  nextButtonfirst.classList.add("btn-primary");
+  nextButtonfirst.classList.remove("btn-success");
+  tab.show();
+});
+const prevTab3 = document.querySelector(".educational-data-link");
+prevTab3.addEventListener("click", (event) => {
+  event.preventDefault();
+  const tab = new bootstrap.Tab(document.getElementById(`Educationaldata-tab`));
+  prevButtons.classList.remove("d-none");
+  const icon = nextButtonfirst.querySelector("i");
+  icon.classList.add("fa-arrow-right");
+  icon.classList.remove("fa-save");
+  nextButtonfirst.classList.add("btn-primary");
+  nextButtonfirst.classList.remove("btn-success");
+  tab.show();
+});
+const prevTab4 = document.querySelector(".health-data-link");
+prevTab4.addEventListener("click", (event) => {
+  event.preventDefault();
+  const tab = new bootstrap.Tab(document.getElementById(`Healthdata-tab`));
+  prevButtons.classList.remove("d-none");
+  const icon = nextButtonfirst.querySelector("i");
+  icon.classList.add("fa-arrow-right");
+  icon.classList.remove("fa-save");
+  nextButtonfirst.classList.add("btn-primary");
+  nextButtonfirst.classList.remove("btn-success");
+  tab.show();
+});
+const prevTab5 = document.querySelector(".ip-and-pwd-checklist-link");
+prevTab5.addEventListener("click", (event) => {
+  event.preventDefault();
+  const tab = new bootstrap.Tab(
+    document.getElementById(`IPandPWDchecklist-tab`)
+  );
+  prevButtons.classList.remove("d-none");
+  const icon = nextButtonfirst.querySelector("i");
+  icon.classList.add("fa-arrow-right");
+  icon.classList.remove("fa-save");
+  nextButtonfirst.classList.add("btn-primary");
+  nextButtonfirst.classList.remove("btn-success");
+  tab.show();
+});
+const prevTab6 = document.querySelector(".initial-interview-link");
+prevTab6.addEventListener("click", (event) => {
+  event.preventDefault();
+  const tab = new bootstrap.Tab(
+    document.getElementById(`initialinterview-tab`)
+  );
+  const icon = nextButtonfirst.querySelector("i");
+  icon.classList.remove("fa-arrow-right");
+  icon.classList.add("fa-save");
+  nextButtonfirst.type = "submit";
+  nextButtonfirst.classList.remove("btn-primary");
+  nextButtonfirst.classList.add("btn-success");
+  prevButtons.classList.remove("d-none");
+  tab.show();
+});

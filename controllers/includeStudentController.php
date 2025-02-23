@@ -70,5 +70,12 @@
          include_once('views/student-forms.php');
       }
       # end
+
+      # student views forms
+      public function views()
+      {
+         include_once('views/admin-views.php');
+      }
+      # end
    }
 ?>

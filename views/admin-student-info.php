@@ -96,7 +96,14 @@
                                  </button>
                               </div>
                               &nbsp;
-                              <button type="button" class="btn btn-sm btn-info"><i class="fas fa-eye"></i></button>
+                              <div>
+                                 <form action="?route=views" method="post">
+                                    <button type="submit" class="btn btn-sm btn-info">
+                                       <i class="fas fa-eye"></i>
+                                    </button>
+                                    <input type="hidden" name="studentno" value="<?=$row['studentno']?>">
+                                 </form>
+                              </div>
                            </div>
                         </td>
                      </tr>
@@ -317,9 +324,9 @@
    </div>
 </div>
 <div class="modal fade" id="loading-modal" tabindex="-1" role="dialog" aria-labelledby="loading-modal-label" aria-hidden="false">
-   <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
-      <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"></div>
-   </div>
+    <div class="modal-dialog modal-dialog-centered justify-content-center" role="document">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"></div>
+    </div>
 </div>
 <?php
    $includeAdminController->footer();
@@ -939,13 +946,10 @@
 
    // for approving an account of students
    $('.btnApprovedStudAccount').click(function(){
-
       const approved = $(this).val();
       const status   = $(this).attr('status');
       const fullname = $(this).attr('fullname');
       const email    = $(this).attr('email');
-
-      alert(fullname)
       $.ajax({
          type: "post",
          url: "?route=app",
@@ -955,11 +959,17 @@
             "fullname":fullname,
             "email":email
          },
-         success:() => {
+         beforeSend: () => {
+          $('#loading-modal').modal({backdrop: 'static',
+              keyboard: false
+          }).modal('show');
+        },success:() => {
             location.reload();
          }
       })
    })
+   // end
+
 </script>
 
 

@@ -160,6 +160,9 @@
       case "career-guidance":
          $reportsController->career_guidance();
       break;
+      case "views":
+         $includeStudentController->views();
+      break;
       default:
          $includeAdminController->page_not_found();
       break;
