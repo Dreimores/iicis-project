@@ -21,9 +21,6 @@
    <!-- Sweet Alert -->
    <script src="js/sweetalert.min.js"></script>
 
-   <!-- Custom form validation scripts -->
-   <script src="js/forms-validation.js"></script>
-
    <!-- Script for custom message -->
    <script>
       /* Success message */

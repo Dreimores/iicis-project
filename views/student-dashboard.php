@@ -24,7 +24,18 @@ $includeController->navbar();
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
-                            <div class="h4 text-gray-700">Announcement</div>
+                            <div class="h4 text-gray-700"> Announcement </div>
+                            <span>
+                                <?php $announceModel = new announceModel();
+                                    foreach ($announceModel->show_announce() as $row) {?> 
+                                        <div class="text-xs mb-3"> 
+                                            <i><?=$row['time_date']?></i>
+                                        </div>
+                                        <?=$row['announce']?>
+                                        <br>
+                                        <hr class="text-gray-500">
+                                <?php }?>
+                            </span>
                         </div>
                     </div>
                 </div>

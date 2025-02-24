@@ -153,7 +153,7 @@
                      <input type="file" id="file-image" class="d-none file-image">
                      <input type="hidden" id="old__image" class="form-control" name="old__image">
                   </div>
-                  <div class="tab-pane fade show active  animate__animated animate__fadeIn" id="Personal">
+                  <div class="tab-pane fade show active animate__animated animate__fadeIn" id="Personal">
                      <div class="mb-4 col-sm-12">
                         <label for="cbYearLevel" class="form-label text-gray-900">
                            Year level <span class="text-danger" id="yLevelReq"></span>

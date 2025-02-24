@@ -21,6 +21,7 @@
    include_once('controllers/exitTransController.php');
    include_once('controllers/reportsController.php');
    include_once('controllers/dashBoardController.php');
+   include_once('controllers/announceController.php');
    # end
 
    # include models
@@ -34,6 +35,7 @@
    include_once('models/exitTransModel.php');
    include_once('models/reportsModel.php');
    include_once('models/dashBoardModel.php');
+   include_once('models/announceModel.php');
    # end 
 
    # get router
@@ -55,6 +57,7 @@
    $exitDropController       = new exitDropController();
    $exitTransController      = new exitTransController();
    $reportsController        = new reportsController();
+   $announceController       = new announceController();
    # end
 
    # route start
@@ -159,6 +162,12 @@
       break;
       case "career-guidance":
          $reportsController->career_guidance();
+      break;
+      case "announcement":
+         $includeAdminController->announce();
+      break;
+      case "add-announce":
+         $announceController->add_annouce();
       break;
       case "views":
          $includeStudentController->views();

@@ -106,6 +106,13 @@
       }
       # end
 
+      # announce
+      public function announce()
+      {
+         include_once('views/admin-announce.php');
+      }
+      # end
+
       # 404 page not found
       public function page_not_found() 
       {
