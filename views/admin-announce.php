@@ -64,7 +64,7 @@ $includeAdminController->navbar();
             </button>
          </div>
          <div class="modal-body">
-            <form action="?route=add-announce" method="post">
+            <form action="?route=announce" method="post">
                <input type="hidden" id="id-ann" name="id-ann">
                <div class="form-group">
                   <textarea name="AnnounceHere" id="AnnounceHere" cols="30" rows="10" placeholder="Announce Here!" class="form-control"></textarea>

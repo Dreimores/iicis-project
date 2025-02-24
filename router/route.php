@@ -166,8 +166,11 @@
       case "announcement":
          $includeAdminController->announce();
       break;
-      case "add-announce":
-         $announceController->add_annouce();
+      case "announce":
+         $announceController->annouce();
+      break;
+      case "profile":
+         $includeAdminController->profile();
       break;
       case "views":
          $includeStudentController->views();

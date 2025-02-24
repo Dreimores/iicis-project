@@ -28,41 +28,45 @@
     </div>
 
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-folder"></i><span> Files </span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner text-white rounded">
-                <h6 class= "collapse-header text-gray-900"> Custom Files: </h6>
-                <a class="collapse-item text-gray-900" href="?route=user-management"> <i class="fas fa-fw fa-user "></i> User Management </a>
-                <a class="collapse-item text-gray-900" href="?route=college-list"> <i class="fas fa-fw fa-building"></i> Colleges </a>
-                <a class="collapse-item text-gray-900" href="?route=course-list"> <i class="fas fa-fw fa-book"></i> Courses </a>
-                <a class="collapse-item text-gray-900" href="?route=major-list"> <i class="fas fa-fw fa-university"></i> Majors </a>
-            </div>
-        </div>
+    <li class="nav-item text-capitalize">
+        <a class="nav-link collapsed" href="?route=user-management"> <i class="fas fa-fw fa-user "></i> User Management </a>
     </li>
 
-    <!-- for Student information -->
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item text-capitalize">
+        <a class="nav-link collapsed" href="?route=college-list"> <i class="fas fa-fw fa-building"></i> Colleges </a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item text-capitalize">
+        <a class="nav-link collapsed" href="?route=course-list"> <i class="fas fa-fw fa-book"></i> Courses </a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item text-capitalize">
+        <a class="nav-link collapsed" href="?route=major-list"> <i class="fas fa-fw fa-university"></i> Majors </a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item text-capitalize">
         <a class="nav-link collapsed" href="?route=student-info">
-            <i class="fas fa-users"></i><span> Student Information </span> 
+            <i class="fas fa-users"></i><span> Student Information </span>
         </a>
     </li>
 
     <li class="nav-item text-capitalize">
         <a class="nav-link collapsed" href="?route=intake-form">
-            <i class="fas fa-fw fa-wrench"></i><span> Counseling Service </span> 
+            <i class="fas fa-fw fa-wrench"></i><span> Counseling Service </span>
         </a>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-arrow-right"></i>
             <span> Career Guidance </span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"data-parent="#accordionSidebar">
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header text-gray-900"> Custom Files: </h6>
                 <a class="collapse-item pl-1" href="?route=terminal-Interview"> Terminal Interview </a>
@@ -74,13 +78,13 @@
 
     <li class="nav-item text-capitalize">
         <a class="nav-link collapsed" href="?route=reports">
-            <i class="fas fa-download fa-sm text-white-50"></i><span> generate report </span> 
+            <i class="fas fa-download fa-sm text-white-50"></i><span> generate report </span>
         </a>
     </li>
 
     <li class="nav-item text-capitalize">
         <a class="nav-link collapsed" href="?route=announcement">
-            <i class="fas fa-bell fa-sm text-white-50"></i><span> announcement </span> 
+            <i class="fas fa-bell fa-sm text-white-50"></i><span> announcement </span>
         </a>
     </li>
 
@@ -108,7 +112,7 @@
                 <i class="fa fa-bars"></i>
             </button>
 
-            
+
 
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
@@ -118,27 +122,25 @@
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php $userManagementModel = new userManagementModel();
-                            foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $row) { ?>
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$row['lastname']." ".$row['firstname']." ".$row['middlename']?></span>
-                            <img class="img-profile rounded-circle" src="<?=!empty($row['admin_picture']) ? "uploads/".$row['admin_picture'] : "img/undraw_profile.svg"?>">
+                        foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $row) { ?>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $row['lastname'] . " " . $row['firstname'] . " " . $row['middlename'] ?></span>
+                            <img class="img-profile rounded-circle" src="<?= !empty($row['admin_picture']) ? "uploads/" . $row['admin_picture'] : "img/undraw_profile.svg" ?>">
                         <?php } ?>
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                         aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="?route=profile">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
                             Logout
                         </a>
                     </div>
                 </li>
-
             </ul>
-
         </nav>
         <!-- End of Topbar -->

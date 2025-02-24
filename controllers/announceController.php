@@ -9,7 +9,7 @@ class announceController
       $this->announceModel = new announceModel();
    }
 
-   public function add_annouce()
+   public function annouce()
    {  
       $id_Ann       = $_POST['id-ann'];
       $AnnounceHere = $_POST['AnnounceHere'];

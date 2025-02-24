@@ -113,6 +113,13 @@
       }
       # end
 
+      # profile
+      public function profile()
+      {
+         include_once('views/admin-profile.php');
+      }
+      # end
+
       # 404 page not found
       public function page_not_found() 
       {
