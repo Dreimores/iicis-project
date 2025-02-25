@@ -59,6 +59,15 @@
          return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
       # end
+
+      # update profile
+      public function update_profile($userLName, $userFName, $userMName, $userEmAdd, $userPhone, $username)
+      {
+         $stmt = $this->getConnection()->prepare("UPDATE tbl_admin_users SET lastname=?,firstname=?,middlename=?,emailaddress=?,phoneNumber=? WHERE username =?");
+         $stmt->execute([$userLName, $userFName, $userMName, $userEmAdd, $userPhone, $username]);
+      }
+      # end
+
    }
 
 ?>

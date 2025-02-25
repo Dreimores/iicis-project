@@ -87,7 +87,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                   <span aria-hidden="true">×</span>
                </button>
             </div>
-            <form action="" method="post">
+            <form action="?route=update-profile" method="post">
                <div class="modal-body">
                   <div class="d-flex justify-content-center mb-3">
                      <img src="img/undraw_profile.svg" class="img-profile rounded-circle sign-up-profile" id="imgProfPicture" width="75" height="75" />
@@ -95,50 +95,43 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                      <input type="file" name="fileImage" id="fileImage" class="form-control p-1 d-none" />
                      <input type="hidden" name="old-image" id="old-image" class="form-control p-1" />
                   </div>
-                  <div class="form-group d-none">
-                     <label for="getuserId" class="col-form-label col-12">User Id</label>
+                  <div class="d-none">
+                     <input type="text" value="<?=$_SESSION['admin-username']?>" name="getuserId"/>
+                  </div>
+                  <div class="form-group">
+                     <label for="userLName" class="col-form-label col-12">
+                        Last Name <span class="text-danger" id="userLNameReq"></span>
+                     </label>
                      <div class="col-12">
-                        <input type="text" id="getuserId" name="getuserId" class="form-control" />
+                        <input type="text" id="userLName" name="userLName" value="<?= $row['lastname'] ?>" class="form-control" />
+                        <span class="text-danger" id="errUserLName"></span>
                      </div>
                   </div>
-                  <div class="d-flex">
-                     <div class="form-group">
-                        <label for="userLName" class="col-form-label col-12">
-                           Last Name <span class="text-danger" id="userLNameReq"></span>
-                        </label>
-                        <div class="col-12">
-                           <input type="text" id="userLName" name="userLName" value="<?= $row['lastname'] ?>" class="form-control" />
-                           <span class="text-danger" id="errUserLName"></span>
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <label for="userFName" class="col-form-label col-12">
-                           First Name <span class="text-danger" id="userFNameReq"></span>
-                        </label>
-                        <div class="col-12">
-                           <input type="text" id="userFName" name="userFName" value="<?= $row['firstname'] ?>" class="form-control" />
-                           <span class="text-danger" id="errUserFName"></span>
-                        </div>
+                  <div class="form-group">
+                     <label for="userFName" class="col-form-label col-12">
+                        First Name <span class="text-danger" id="userFNameReq"></span>
+                     </label>
+                     <div class="col-12">
+                        <input type="text" id="userFName" name="userFName" value="<?= $row['firstname'] ?>" class="form-control" />
+                        <span class="text-danger" id="errUserFName"></span>
                      </div>
                   </div>
-                  <div class="d-flex">
-                     <div class="form-group">
-                        <label for="userMName" class="col-form-label col-12">
-                           Middle Name <span class="text-danger" id="userMNameReq"></span>
-                        </label>
-                        <div class="col-12">
-                           <input type="text" id="userMName" name="userMName" value="<?= $row['middlename'] ?>" class="form-control" />
-                           <span class="text-danger" id="errUserMName"></span>
-                        </div>
+                  <div class="form-group">
+                     <label for="userMName" class="col-form-label col-12">
+                        Middle Name <span class="text-danger" id="userMNameReq"></span>
+                     </label>
+                     <div class="col-12">
+                        <input type="text" id="userMName" name="userMName" value="<?= $row['middlename'] ?>" class="form-control" />
+                        <span class="text-danger" id="errUserMName"></span>
                      </div>
-                     <div class="form-group">
-                        <label for="userEmAdd" class="col-form-label col-12">
-                           Email Address <span class="text-danger" id="userEmAddReq"></span>
-                        </label>
-                        <div class="col-12">
-                           <input type="text" id="userEmAdd" name="userEmAdd" value="<?= $row['emailaddress'] ?>" class="form-control" />
-                           <span class="text-danger" id="errUserEmAdd"></span>
-                        </div>
+                  </div>
+                  <div class="form-group">
+                     <label for="userEmAdd" class="col-form-label col-12">
+                        Email Address <span class="text-danger" id="userEmAddReq"></span>
+                     </label>
+                     <div class="col-12">
+                        <input type="text" id="userEmAdd" name="userEmAdd" value="<?= $row['emailaddress'] ?>" class="form-control" />
+                        <span class="text-danger" id="errUserEmAdd"></span>
                      </div>
                   </div>
                   <div class="form-group">
@@ -158,7 +151,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                         <i class="fas fa-ban"></i>
                         Cancel
                      </button>
-                     <button type="submit" class="btn btn-success" id="edit-user-form">
+                     <button type="submit" class="btn btn-success">
                         <i class="fas fa-save"></i>
                         Save
                      </button>

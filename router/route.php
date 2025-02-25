@@ -172,6 +172,9 @@
       case "profile":
          $includeAdminController->profile();
       break;
+      case "update-profile":
+         $userManagementController->update_profile();
+      break;
       case "views":
          $includeStudentController->views();
       break;

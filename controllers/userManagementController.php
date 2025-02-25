@@ -1,12 +1,12 @@
 <?php
-include_once('models/usermanagementModel.php');
+
 class usermanagementController
 {
    private $usermanagementModel;
    
    public function __construct()
    {
-      $this->usermanagementModel = new usermanagementModel();
+      $this->usermanagementModel = new userManagementModel();
    }
 
    # Add, edit, and delete for admin user list
@@ -84,5 +84,28 @@ class usermanagementController
          }
       }
       # end
+
    }
+
+   # update profile
+   public function update_profile()
+   {
+      if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
+         $userLName = $_POST['userLName']; 
+         $userFName = $_POST['userFName']; 
+         $userMName = $_POST['userMName']; 
+         $userEmAdd = $_POST['userEmAdd']; 
+         $userPhone = $_POST['userPhone']; 
+         $username  = $_POST['getuserId'];
+
+         $this->usermanagementModel->update_profile($userLName,$userFName,$userMName,$userEmAdd,$userPhone,$username);
+         header('Location: ?route=profile');
+         # Set success message and redirect
+         $_SESSION['success'] = "User admin has been successfully updated!";
+         # end
+      }
+   }
+   # end
+
 }
