@@ -4,7 +4,9 @@ $includeStudentController = new includeStudentController();
 # end
 
 # initialize the login controller to fetch all the data
-$loginController = new studentFormsModel();
+$loginController     = new studentFormsModel();
+$courseModel         = new courseModel();
+$majorModel          = new majorModel();
 # end
 
 $includeStudentController->header();
@@ -53,29 +55,39 @@ $includeStudentController->navbar();
                      <div class="row">
                         <div class="form-group col-md-6 col-lg-3">
                            <label for="personal-course" class="text-capitalize m-0">Course</label>
-                           <select name="personal-course" id="personal-course" class="form-control mb-4 border-top-0 border-left-0 border-right-0 rounded-0 shadow-none">
+                           <select id="personal-course" onchange="selectedCourse()" class="form-control mb-4 border-top-0 border-left-0 border-right-0 rounded-0 shadow-none">
                               <option value="">Choose...</option>
+                              <option value="<?=$row['course']?>" class="d-none" selected><?=$row['course']?></option>
+                              <?php foreach ($courseModel->read_courses() as $crrow) {?>
+                                 <option value="<?=$crrow['course']?>"><?=$crrow['course']?></option>
+                              <?php }?>
                            </select>
+                           <input type="hidden" name="personal-courseid" id="personal-courseid" value="<?=$row['courseid']?>" class="form-control">
                         </div>
                         <div class="form-group col-md-6 col-lg-3">
                            <label for="personal-yearlevel" class="text-capitalize m-0">Year Level</label>
                            <select name="personal-yearlevel" id="personal-yearlevel" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none">
                               <option value="">Choose...</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
+                              <option value="1" <?=$row['ylevel']==='1'?'selected':''?>>1</option>
+                              <option value="2" <?=$row['ylevel']==='2'?'selected':''?>>2</option>
+                              <option value="3" <?=$row['ylevel']==='3'?'selected':''?>>3</option>
+                              <option value="4" <?=$row['ylevel']==='4'?'selected':''?>>4</option>
                            </select>
                         </div>
                         <div class="form-group col-md-6 col-lg-3">
                            <label for="personal-major" class="text-capitalize m-0">Major</label>
-                           <select name="personal-major" id="personal-major" class="form-control mb-4 border-top-0 border-left-0 border-right-0 rounded-0 shadow-none">
+                           <select id="personal-major" onchange="selectedMajor()" class="form-control mb-4 border-top-0 border-left-0 border-right-0 rounded-0 shadow-none">
                               <option value="">Choose...</option>
+                              <option value="<?=$row['major']?>" class="d-none" selected><?=$row['major']?></option>
+                              <?php foreach ($majorModel->read_majors() as $mrow) {?>
+                                 <option value="<?=$mrow['major']?>"><?=$mrow['major']?></option>
+                              <?php }?>
                            </select>
+                           <input type="hidden" name="personal-majorid" id="personal-majorid" value="<?=$row['majorid']?>" class="form-control">
                         </div>
                         <div class="form-group col-md-6 col-lg-3">
                            <label for="personal-studentnumber" class="text-capitalize m-0">Student Number</label>
-                           <input type="text" id="personal-studentnumber" name="personal-studentnumber" value="<?=$row['studentno']?>" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none">
+                           <input type="text" id="personal-studentnumber" name="personal-studentnumber" value="<?=$row['studentno']?>" class="form-control border-top-0 border-left-0 border-right-0 shadow-none bg-white" role="button" readonly>
                         </div>
                      </div>
                      <!-- end -->
@@ -1812,4 +1824,39 @@ $includeStudentController->navbar();
 $includeStudentController->footer();
 $includeStudentController->script();
 ?>
+
+<script>
+   function selectedCourse(){
+      const crs = document.getElementById('personal-course');
+      const selectedcrs = crs.options[crs.selectedIndex].text;
+      $.ajax({
+         type:'post',
+         url: '?route=submit-courses',
+         data: {
+            "course-btn": 1,
+            "seleted-course":selectedcrs
+         },
+         success: (x)=>{
+            document.getElementById('personal-courseid').value = x;
+         }
+      })
+   }
+
+   function selectedMajor()
+   {
+      const m = document.getElementById('personal-major');
+      const selMajor = m.options[m.selectedIndex].text;
+      $.ajax({
+         type: 'post',
+         url: '?route=submit-majors',
+         data: {
+            'major-btn': 1,
+            'selected-major': selMajor
+         },
+         success: (x) => {
+            document.getElementById('personal-majorid').value = x;
+         }
+      })
+   }
+</script>
 

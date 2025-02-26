@@ -18,6 +18,10 @@ class studentFormsController
       if($_SERVER['REQUEST_METHOD'] === 'POST')
       {
          # update personal data method post
+
+         $personalcourseid     = $_POST['personal-courseid'];
+         $personalyearlevel    = $_POST['personal-yearlevel'];
+         $personalmajorid      = $_POST['personal-majorid'];
          $personal_surname     = $_POST['personal-surname'];
          $personal_firstname   = $_POST['personal-firstname'];
          $personal_middlename  = $_POST['personal-middlename'];
@@ -43,7 +47,8 @@ class studentFormsController
          
          $studentno = [];
          isset($_POST['btn-views']) ? $studentno = $_POST['studentno'] : $studentno = $_SESSION['username'];
-         
+
+         $this->studentFormsModel->stud_info($personalcourseid,$personalyearlevel,$personalmajorid,$studentno);
          
          # update personal data query 
          $this->studentFormsModel->submit_stud_personal_data(

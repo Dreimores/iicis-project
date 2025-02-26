@@ -71,6 +71,13 @@
       }
       # end
 
+      # admin profile
+      public function stud_profile()
+      {
+         include_once('views/student-profile.php');
+      }
+      # end
+
       # student views forms
       public function views()
       {

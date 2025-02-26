@@ -24,3 +24,51 @@
 
    <!-- Custom form validation scripts -->
    <script src="js/forms-validation.js"></script>
+
+   <!-- Sweet Alert -->
+   <script src="js/sweetalert.min.js"></script>
+
+   <!-- change password script -->
+   <script src="js/change-pass.js"></script>
+
+   <!-- Script for custom message -->
+   <script>
+      /* Success message */
+      <?php if (isset($_SESSION['success']) && $_SESSION['success'] != "") { ?>
+            swal({
+               title: "Success",
+               icon: "success",
+               text: "<?php echo $_SESSION['success'] ?>",
+               button: "Ok",
+               closeOnClickOutside: false
+            })
+            $('.swal-text').addClass('text-center ml-3 mr-3');
+      <?php } unset($_SESSION['success']); ?>
+      /* end */
+
+      /* Error message */
+      <?php if (isset($_SESSION['error']) && $_SESSION['error'] != "") { ?>
+         swal({
+            icon: "error",
+            text: "<?php echo $_SESSION['error'] ?>",
+            button: "Ok",
+            closeOnClickOutside: false
+         })
+         $('.swal-text').addClass('text-center ml-3 mr-3');
+      <?php } unset($_SESSION['error']); ?>
+      /* end */ 
+      
+      /* Warning message */
+      <?php if (isset($_SESSION['warning']) && $_SESSION['warning'] != "") { ?>
+         swal({
+            icon: "warning",
+            text: "<?php echo $_SESSION['warning']?>",
+            button: "Ok",
+            closeOnClickOutside: false
+         })
+         $('.swal-text').addClass('text-center ml-3 mr-3');
+      <?php } unset($_SESSION['warning']); ?>
+      /* end */
+
+   </script>
+   <!-- End -->

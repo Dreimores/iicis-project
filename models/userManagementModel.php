@@ -60,11 +60,25 @@
       }
       # end
 
-      # update profile
-      public function update_profile($userLName, $userFName, $userMName, $userEmAdd, $userPhone, $username)
+      # admin update profile
+      public function update_profile($adminPicture,$userLName, $userFName, $userMName, $userEmAdd, $userPhone, $username)
       {
-         $stmt = $this->getConnection()->prepare("UPDATE tbl_admin_users SET lastname=?,firstname=?,middlename=?,emailaddress=?,phoneNumber=? WHERE username =?");
-         $stmt->execute([$userLName, $userFName, $userMName, $userEmAdd, $userPhone, $username]);
+         $stmt = $this->getConnection()->prepare("UPDATE tbl_admin_users SET admin_picture=?,lastname=?,firstname=?,middlename=?,emailaddress=?,phoneNumber=? WHERE username =?");
+         $stmt->execute([$adminPicture, $userLName, $userFName, $userMName, $userEmAdd, $userPhone, $username]);
+      }
+      # end
+
+      # studnet update profile
+      public function stud_update_profile($adminPicture,$userLName, $userFName, $userMName, $userEmAdd, $userPhone, $username)
+      {
+         $stmt = $this->getConnection()->prepare(
+            "UPDATE tbl_stud_accounts  AS sa 
+            JOIN tbl_personal_data     AS pd 
+            ON sa.studentno = pd.studentno 
+            SET sa.file_name = ?, pd.p_surname = ?, pd.p_firstname = ?, pd.p_middlename = ?, sa.email = ?, pd.p_homeadd_telno = ? 
+            WHERE sa.studentno = ?"
+            );
+         $stmt->execute([$adminPicture, $userLName, $userFName, $userMName, $userEmAdd, $userPhone, $username]);
       }
       # end
 

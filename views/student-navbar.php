@@ -135,27 +135,77 @@
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                         aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="?route=stud-profile">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
                         </a>
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Settings
-                        </a>
-                        <a class="dropdown-item" href="#">
-                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Activity Log
+                        <a class="dropdown-item" href="#" data-target="#change-password" data-toggle="modal">
+                            <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Change password
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#logoutModal">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Logout
                         </a>
                     </div>
                 </li>
-
             </ul>
-
         </nav>
         <!-- End of Topbar -->
+
+        <div class="modal fade" id="change-password" tabindex="-1" role="dialog" aria-hidden="true" data-keybord="false" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header pt-2 pb-2 pl-3 pr-3">
+                        <div class="h6 mt-1 text-primary"> Change password <i class="fas fa-question-circle fa-sm" role="button" title="Change your password."></i> </div>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <form action="#" method="post">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="oldPasword" class="col-form-label col-12">
+                                    Old password <span class="text-danger" id="oldPaswordReq"></span>
+                                </label>
+                                <div class="col-12">
+                                    <input type="text" id="oldPasword" name="oldPasword" value="" class="form-control" />
+                                    <span class="text-danger" id="erroldPasword"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="changePass" class="col-form-label col-12">
+                                    Change password <span class="text-danger" id="changePassReq"></span>
+                                </label>
+                                <div class="col-12">
+                                    <input type="text" id="changePass" name="changePass" value="" class="form-control" />
+                                    <span class="text-danger" id="errchangePass"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="ConfirmPassword" class="col-form-label col-12">
+                                    Confirm password <span class="text-danger" id="ConfirmPasswordReq"></span>
+                                </label>
+                                <div class="col-12">
+                                    <input type="text" id="ConfirmPassword" name="ConfirmPassword" value="" class="form-control" />
+                                    <span class="text-danger" id="errConfirmPassword"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="form-group mr-3">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    <i class="fas fa-ban"></i>
+                                    Cancel
+                                </button>
+                                <button type="submit" class="btn btn-success add-user-profile">
+                                    <i class="fas fa-save"></i>
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>

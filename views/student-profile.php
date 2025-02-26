@@ -1,10 +1,15 @@
 <?php
-$includeAdminController = new includeAdminController();
-$includeAdminController->header();
-$includeAdminController->navbar();
-$userManagementModel = new userManagementModel();
-foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $row) { ?>
-   <div class="container-fluid">
+# initialize include controler to get the header, navbar, footer, script
+$includeStudentController = new includeStudentController();
+$studentFormsModel        = new studentFormsModel();
+# end
+
+$includeStudentController->header();
+$includeStudentController->navbar();
+
+foreach ($studentFormsModel->session_studentno($_SESSION['username']) as $row) {
+?>
+<div class="container-fluid">
       <div class="card">
          <div class="card-header">
             <div class="h4"> Profile </div>
@@ -15,13 +20,13 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
             </div>
             <div class="form-group ml-2">
                <div class="d-none d-lg-inline">
-                  <img class="img-profile rounded-circle sign-up-profile" width="100" src="<?= !empty($row['admin_picture']) ? "uploads/" . $row['admin_picture'] : "img/undraw_profile.svg" ?>" width="75" height="75">
-                  <span class="text-gray-600"><?= $row['lastname'] . " " . $row['firstname'] . " " . $row['middlename'] ?></span>
+                  <img class="img-profile rounded-circle sign-up-profile" width="100" src="<?= !empty($row['file_name']) ? "uploads/" . $row['file_name'] : "img/undraw_profile.svg" ?>" width="75" height="75">
+                  <span class="text-gray-600"><?= $row['p_surname'] . " " . $row['p_firstname'] . " " . $row['p_middlename'] ?></span>
                   <a class="btn btn-sm btn-primary position-absolute" href="#" data-toggle="modal" data-target="#edited-profle" style="left: 6.8rem; top:10.5rem;"> <i class="fas fa-pencil-alt"></i> Edit profile </a>
                </div>
                <div class="d-flex flex-column justify-content-center align-items-center text-center d-lg-none d-inline">
-                  <img class="img-profile rounded-circle sign-up-profile" width="100" src="<?= !empty($row['admin_picture']) ? "uploads/" . $row['admin_picture'] : "img/undraw_profile.svg" ?>" width="75" height="75">
-                  <span class="text-gray-600"><?= $row['lastname'] . " " . $row['firstname'] . " " . $row['middlename'] ?></span>
+                  <img class="img-profile rounded-circle sign-up-profile" width="100" src="<?= !empty($row['file_name']) ? "uploads/" . $row['file_name'] : "img/undraw_profile.svg" ?>" width="75" height="75">
+                  <span class="text-gray-600"><?= $row['p_surname'] . " " . $row['p_firstname'] . " " . $row['p_middlename'] ?></span>
                   <a class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target="#edited-profle"> <i class="fas fa-pencil-alt"></i> Edit profile </a>
                </div>
             </div>
@@ -33,7 +38,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                   Last Name
                </label>
                <div class="col-12">
-                  <input type="text" value="<?= $row['lastname'] ?>" class="form-control border-0 mb-4 shadow-none" role="button" disabled />
+                  <input type="text" value="<?= $row['p_surname'] ?>" class="form-control border-0 mb-4 shadow-none" role="button" disabled />
                </div>
             </div>
             <div class="form-group">
@@ -41,7 +46,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                   First Name
                </label>
                <div class="col-12">
-                  <input type="text" value="<?= $row['firstname'] ?>" class="form-control border-0 mb-4 shadow-none" role="button" disabled />
+                  <input type="text" value="<?= $row['p_firstname'] ?>" class="form-control border-0 mb-4 shadow-none" role="button" disabled />
                </div>
             </div>
             <div class="form-group">
@@ -49,7 +54,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                   Middle Name
                </label>
                <div class="col-12">
-                  <input type="text" value="<?= $row['middlename'] ?>" class="form-control border-0 mb-4 shadow-none" role="button" disabled />
+                  <input type="text" value="<?= $row['p_middlename'] ?>" class="form-control border-0 mb-4 shadow-none" role="button" disabled />
                </div>
             </div>
             <div class="form-group">
@@ -57,7 +62,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                   Email Address
                </label>
                <div class="col-12">
-                  <input type="text" value="<?= $row['emailaddress'] ?>" class="form-control mb-4 shadow-none" role="button" disabled />
+                  <input type="text" value="<?= $row['email'] ?>" class="form-control mb-4 shadow-none" role="button" disabled />
                </div>
             </div>
             <div class="form-group">
@@ -65,7 +70,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                   Phone Number
                </label>
                <div class="col-12">
-                  <input type="text" value="<?= $row['phoneNumber'] ?>" class="form-control mb-4 shadow-none" role="button" disabled />
+                  <input type="text" value="<?= $row['p_homeadd_telno'] ?>" class="form-control mb-4 shadow-none" role="button" disabled />
                </div>
             </div>
          </div>
@@ -77,7 +82,6 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
          </div>
       </div>
    </div>
-
    <div class="modal fade" id="edited-profle" tabindex="-1" role="dialog" aria-hidden="true" data-keybord="false" data-backdrop="static">
       <div class="modal-dialog modal-dialog-centered" role="document">
          <div class="modal-content">
@@ -90,20 +94,20 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
             <form action="?route=update-profile" method="post" enctype="multipart/form-data">
                <div class="modal-body">
                   <div class="d-flex justify-content-center mb-3">
-                     <img src="<?=$row['admin_picture']!==''?'uploads/'.$row['admin_picture']:'img/undraw_profile.svg'?>" class="img-profile rounded-circle sign-up-profile" id="imgProfPicture" width="75" height="75"/>
+                     <img src="<?=$row['file_name']!==''?'uploads/'.$row['file_name']:'img/undraw_profile.svg'?>" class="img-profile rounded-circle sign-up-profile" id="imgProfPicture" width="75" height="75"/>
                      <i class="fas fa-camera position-absolute bg-secondary text-white border-sign-up-profile" id="profile-sing-up"></i>
                      <input type="file" name="fileImage" id="fileImage" class="form-control p-1 d-none" />
-                     <input type="hidden" name="old-image" id="old-image" value="<?=$row['admin_picture']?>" class="form-control p-1"/>
+                     <input type="hidden" name="old-image" id="old-image" value="<?=$row['file_name']?>" class="form-control p-1"/>
                   </div>
                   <div class="d-none">
-                     <input type="text" value="<?=$_SESSION['admin-username']?>" name="getuserId"/>
+                     <input type="hidden" value="<?=$_SESSION['username']?>" name="getuserId"/>
                   </div>
                   <div class="form-group">
                      <label for="userLName" class="col-form-label col-12">
                         Last Name <span class="text-danger" id="userLNameReq"></span>
                      </label>
                      <div class="col-12">
-                        <input type="text" id="userLName" name="userLName" value="<?= $row['lastname'] ?>" class="form-control" />
+                        <input type="text" id="userLName" name="userLName" value="<?= $row['p_surname'] ?>" class="form-control" />
                         <span class="text-danger" id="errUserLName"></span>
                      </div>
                   </div>
@@ -112,7 +116,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                         First Name <span class="text-danger" id="userFNameReq"></span>
                      </label>
                      <div class="col-12">
-                        <input type="text" id="userFName" name="userFName" value="<?= $row['firstname'] ?>" class="form-control" />
+                        <input type="text" id="userFName" name="userFName" value="<?= $row['p_firstname'] ?>" class="form-control" />
                         <span class="text-danger" id="errUserFName"></span>
                      </div>
                   </div>
@@ -121,7 +125,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                         Middle Name <span class="text-danger" id="userMNameReq"></span>
                      </label>
                      <div class="col-12">
-                        <input type="text" id="userMName" name="userMName" value="<?= $row['middlename'] ?>" class="form-control" />
+                        <input type="text" id="userMName" name="userMName" value="<?= $row['p_middlename'] ?>" class="form-control" />
                         <span class="text-danger" id="errUserMName"></span>
                      </div>
                   </div>
@@ -130,7 +134,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                         Email Address <span class="text-danger" id="userEmAddReq"></span>
                      </label>
                      <div class="col-12">
-                        <input type="text" id="userEmAdd" name="userEmAdd" value="<?= $row['emailaddress'] ?>" class="form-control" />
+                        <input type="text" id="userEmAdd" name="userEmAdd" value="<?= $row['email'] ?>" class="form-control" />
                         <span class="text-danger" id="errUserEmAdd"></span>
                      </div>
                   </div>
@@ -139,7 +143,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                         Phone Number <span class="text-danger" id="userPhoneReq"></span>
                      </label>
                      <div class="col-12">
-                        <input type="text" id="userPhone" name="userPhone" value="<?= $row['phoneNumber'] ?>" class="form-control" />
+                        <input type="text" id="userPhone" name="userPhone" value="<?= $row['p_homeadd_telno'] ?>" class="form-control" />
                         <input type="hidden" id="origUName" class="form-control">
                         <span class="text-danger" id="errUserPhone"></span>
                      </div>
@@ -151,7 +155,7 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
                         <i class="fas fa-ban"></i>
                         Cancel
                      </button>
-                     <button type="submit" name="btn-admin-profile" class="btn btn-success add-user-profile">
+                     <button type="submit" name="btn-student-profile" class="btn btn-success add-user-profile">
                         <i class="fas fa-save"></i>
                         Save
                      </button>
@@ -163,10 +167,9 @@ foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $r
    </div>
 <?php } ?>
 <?php
-$includeAdminController->footer();
-$includeAdminController->script();
+   $includeStudentController->footer();
+   $includeStudentController->script();
 ?>
-
 <script>
    $('#profile-sing-up').click(function(){
       const fileImage = $('#fileImage');

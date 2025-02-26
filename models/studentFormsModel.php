@@ -441,13 +441,23 @@ class studentFormsModel extends Connection
       ]);
    }
 
+   # update student account
+   public function stud_info($courseid,$yearLevel,$majorid,$studentno)
+   {
+      $stmt = $this->getConnection()->prepare("UPDATE tbl_stud_accounts SET courseid = ?, ylevel = ?, majorid = ? WHERE studentno = ?");
+      $stmt->execute([$courseid,$yearLevel,$majorid,$studentno]);
+   }
+   # end
+
    # check the student no if already exist 
    public function session_studentno($studentno)
    {
       # SQL query to fetch data from seven tables using LEFT JOIN
       $query = $this->getconnection()->prepare(
-         "SELECT sa.*, pd.*, fd.*, ed.*, hd.*, ipd.*, ini.*
+         "SELECT sa.*, pd.*, fd.*, ed.*, hd.*, ipd.*, ini.*, cr.*, mj.*
          FROM tbl_stud_accounts          AS sa 
+         LEFT JOIN tblcourses            AS cr  ON sa.courseid  = cr.courseid
+         LEFT JOIN tblmajors             AS mj  ON sa.majorid   = mj.majorid
          LEFT JOIN tbl_personal_data     AS pd  ON sa.studentno = pd.studentno 
          LEFT JOIN tbl_family_data       AS fd  ON sa.studentno = fd.studentno
          LEFT JOIN tbl_educational_data  AS ed  ON sa.studentno = ed.studentno    

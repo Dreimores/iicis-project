@@ -90,19 +90,38 @@ class usermanagementController
    # update profile
    public function update_profile()
    {
-      if ($_SERVER['REQUEST_METHOD'] === "POST") {
+      $userLName = $_POST['userLName']; 
+      $userFName = $_POST['userFName']; 
+      $userMName = $_POST['userMName']; 
+      $userEmAdd = $_POST['userEmAdd']; 
+      $userPhone = $_POST['userPhone']; 
+      $username  = $_POST['getuserId']; 
+      $fileName  = $_FILES['fileImage']['name'];
+      $tmp_name  = $_FILES['fileImage']['tmp_name'];
+      $old_image = $_POST['old-image'];
 
-         $userLName = $_POST['userLName']; 
-         $userFName = $_POST['userFName']; 
-         $userMName = $_POST['userMName']; 
-         $userEmAdd = $_POST['userEmAdd']; 
-         $userPhone = $_POST['userPhone']; 
-         $username  = $_POST['getuserId'];
+      if (!empty($fileName)) {
+         # Remove the old uploaded file
+         unlink('uploads/' . $old_image);
+         # Move the new uploaded file and set it as the old_image
+         move_uploaded_file($tmp_name, 'uploads/' . $fileName);
+         $old_image = $fileName;
+      }
 
-         $this->usermanagementModel->update_profile($userLName,$userFName,$userMName,$userEmAdd,$userPhone,$username);
+      if (isset($_POST['btn-admin-profile'])) {
+
+         $this->usermanagementModel->update_profile($old_image,$userLName,$userFName,$userMName,$userEmAdd,$userPhone,$username);
          header('Location: ?route=profile');
          # Set success message and redirect
          $_SESSION['success'] = "User admin has been successfully updated!";
+         # end
+      } 
+
+      if (isset($_POST['btn-student-profile'])) {
+         $this->usermanagementModel->stud_update_profile($old_image,$userLName,$userFName,$userMName,$userEmAdd,$userPhone,$username);
+         header('Location: ?route=stud-profile');
+         # Set success message and redirect
+         $_SESSION['success'] = "Profile successfully updated!";
          # end
       }
    }

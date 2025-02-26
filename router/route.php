@@ -22,6 +22,7 @@
    include_once('controllers/reportsController.php');
    include_once('controllers/dashBoardController.php');
    include_once('controllers/announceController.php');
+   include_once('controllers/forgotpassController.php');
    # end
 
    # include models
@@ -36,6 +37,7 @@
    include_once('models/reportsModel.php');
    include_once('models/dashBoardModel.php');
    include_once('models/announceModel.php');
+   include_once('models/forgotpassModel.php');
    # end 
 
    # get router
@@ -58,6 +60,7 @@
    $exitTransController      = new exitTransController();
    $reportsController        = new reportsController();
    $announceController       = new announceController();
+   $forgotpassController     = new forgotpassController();
    # end
 
    # route start
@@ -69,6 +72,9 @@
          $includeStudentController->login();
       break;
       case "sign-up":
+         $includeStudentController->login();
+      break;
+      case "forgot-password":
          $includeStudentController->login();
       break;
       case "dashboard":
@@ -174,6 +180,12 @@
       break;
       case "update-profile":
          $userManagementController->update_profile();
+      break;
+      case "stud-profile":
+         $includeStudentController->stud_profile();
+      break;
+      case "forgot-pass":
+         $forgotpassController->forgot_password();
       break;
       case "views":
          $includeStudentController->views();
