@@ -127,4 +127,16 @@ class usermanagementController
    }
    # end
 
+   # change password
+   public function change_pass()
+   {
+      $newPassword = $_POST['changePass'];
+      $username   = $_SESSION['username'];
+      if ($_SERVER['REQUEST_METHOD'] === "POST") {
+         $this->usermanagementModel->change_pass($newPassword, $username);
+         header('Location: ?route=dashboard');
+         $_SESSION['changePass'] = "Success";
+      }
+   }
+
 }

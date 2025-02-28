@@ -125,7 +125,8 @@
                         # initialize the login controller to fetch all the data
                         $loginStudentModel = new studentFormsModel();
                         # end
-                        foreach ($loginStudentModel->session_studentno($_SESSION['username']) as $row) { ?>
+                        $sample_password = null;
+                        foreach ($loginStudentModel->session_studentno($_SESSION['username']) as $row) { $_SESSION['pWord'] = $row['pword'] ?>
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 <?=$row['p_firstname']." ".substr($row['p_middlename'],0,1).". ".$row['p_surname']?>
                             </span>
@@ -144,7 +145,7 @@
                             Change password
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <a class="dropdown-item text-danger Logout-Portal-Btn-student">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Logout
                         </a>
@@ -163,14 +164,15 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <form action="#" method="post">
+                    <form action="?route=change-pass" method="post">
                         <div class="modal-body">
+                            <input type="text" id="oldPWord" value="<?=$_SESSION['pWord']?>" class="d-none"/>
                             <div class="form-group">
                                 <label for="oldPasword" class="col-form-label col-12">
                                     Old password <span class="text-danger" id="oldPaswordReq"></span>
                                 </label>
                                 <div class="col-12">
-                                    <input type="text" id="oldPasword" name="oldPasword" value="" class="form-control" />
+                                    <input type="text" id="oldPasword" name="oldPasword" class="form-control" />
                                     <span class="text-danger" id="erroldPasword"></span>
                                 </div>
                             </div>
@@ -179,7 +181,7 @@
                                     Change password <span class="text-danger" id="changePassReq"></span>
                                 </label>
                                 <div class="col-12">
-                                    <input type="text" id="changePass" name="changePass" value="" class="form-control" />
+                                    <input type="text" id="changePass" name="changePass" class="form-control" />
                                     <span class="text-danger" id="errchangePass"></span>
                                 </div>
                             </div>
@@ -188,7 +190,7 @@
                                     Confirm password <span class="text-danger" id="ConfirmPasswordReq"></span>
                                 </label>
                                 <div class="col-12">
-                                    <input type="text" id="ConfirmPassword" name="ConfirmPassword" value="" class="form-control" />
+                                    <input type="text" id="ConfirmPassword" name="ConfirmPassword" class="form-control" />
                                     <span class="text-danger" id="errConfirmPassword"></span>
                                 </div>
                             </div>
@@ -199,7 +201,7 @@
                                     <i class="fas fa-ban"></i>
                                     Cancel
                                 </button>
-                                <button type="submit" class="btn btn-success add-user-profile">
+                                <button type="submit" class="btn btn-success btn-change-password" disabled>
                                     <i class="fas fa-save"></i>
                                     Save
                                 </button>

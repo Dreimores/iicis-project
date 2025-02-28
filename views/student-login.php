@@ -20,7 +20,6 @@
 
    <link href="img/csu_lasam_logo.webp" rel="icon">
 </head>
-
 <body>
    <div class="d-flex">
       <div class="col-xl-6 col-lg-12 bg-gradient-light">

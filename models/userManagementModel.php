@@ -82,6 +82,14 @@
       }
       # end
 
+      # change password
+      public function change_pass($newPassword,$studentno)
+      {
+         $stmt = $this->getConnection()->prepare("UPDATE tbl_stud_accounts SET pword = ? WHERE studentno = ?");
+         $stmt->execute([$newPassword, $studentno]);
+      }
+      # end
+
    }
 
 ?>

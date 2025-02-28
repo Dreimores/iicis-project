@@ -5,6 +5,10 @@
    require_once('config/dbconfig.php');
    # end
 
+   # security
+   include_once('controllers/securityController.php');
+   # end
+
    # includes controllers
    include_once('controllers/includeStudentController.php');
    include_once('controllers/loginStudentController.php');
@@ -61,6 +65,7 @@
    $reportsController        = new reportsController();
    $announceController       = new announceController();
    $forgotpassController     = new forgotpassController();
+   $securityController       = new securityController();
    # end
 
    # route start
@@ -78,12 +83,14 @@
          $includeStudentController->login();
       break;
       case "dashboard":
+         $securityController->security();
          $includeStudentController->dashboard();
       break;
       case "check-file-exist":
          $includeStudentController->check_file_exist();
       break;
       case "student-forms":
+         $securityController->security();
          $includeStudentController->student_forms();
       break;
       case "submit-form":
@@ -105,59 +112,67 @@
          $loginAdminController->createAdminAccount();
       break;
       case "admin-dashboard":
+         $securityController->securityAdmin();
          $includeAdminController->admin_dashboard();
       break;
       case "user-management":
+         $securityController->securityAdmin();
          $includeAdminController->user_management();
       break;
-      case "admin-user-management":
-         $userManagementController->admin_user_management();
-      break;
       case "college-list":
+         $securityController->securityAdmin();
          $includeAdminController->college();
       break;
       case "submit-colleges":
          $collegeController->submit_colleges();
       break;
       case "course-list":
+         $securityController->securityAdmin();
          $includeAdminController->course();
       break;
       case "submit-courses":
          $courseController->submit_course();
       break;
       case "major-list":
+         $securityController->securityAdmin();
          $includeAdminController->majors();
       case "submit-majors":
          $majorController->submit_majors();
       break;
       case "student-info":
+         $securityController->securityAdmin();
          $includeAdminController->student_info();
       break;
       case "intake-form":
+         $securityController->securityAdmin();
          $includeAdminController->intake_form();
       break;
       case "submit-intake-form":
          $intakeController->submit_intake_form();
       break;
       case "terminal-Interview":
+         $securityController->securityAdmin();
          $includeAdminController->terminalInterviewForm();
       break;
       case "submit-terminal-Interview":
          $terminalController->submit_terminal_Interview();
       break;
       case "exit-drop-form":
+         $securityController->securityAdmin();
          $includeAdminController->exit_drop();
       break;
       case "exit-drop":
          $exitDropController->submit_exitdrop();
       break;
       case "exit-trans":
+         $securityController->securityAdmin();
          $includeAdminController->exit_trans();
       break;
       case "exit-exit-trans":
          $exitTransController->submit_exit_trans();
       break;
       case "reports":
+         $securityController->securityAdmin();
          $includeAdminController->reports();
       break;
       case "individual-reports":
@@ -170,6 +185,7 @@
          $reportsController->career_guidance();
       break;
       case "announcement":
+         $securityController->securityAdmin();
          $includeAdminController->announce();
       break;
       case "announce":
@@ -187,8 +203,18 @@
       case "forgot-pass":
          $forgotpassController->forgot_password();
       break;
+      case "change-pass":
+         $userManagementController->change_pass();
+      break;
       case "views":
+         $securityController->securityAdmin();
          $includeStudentController->views();
+      break;
+      case "logoutStud":
+         $securityController->logoutPortalStudent();
+      break;
+      case "logoutAdmin":
+         $securityController->logoutPortalAdmin();
       break;
       default:
          $includeAdminController->page_not_found();

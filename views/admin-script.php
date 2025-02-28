@@ -21,6 +21,9 @@
    <!-- Sweet Alert -->
    <script src="js/sweetalert.min.js"></script>
 
+   <!-- script logout portal -->
+   <script src="js/logout-portal.js"></script>
+
    <!-- Script for custom message -->
    <script>
       /* Success message */

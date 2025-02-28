@@ -135,7 +135,7 @@
                             Profile
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <a class="dropdown-item text-danger Logout-Portal-Btn-Admin">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2"></i>
                             Logout
                         </a>

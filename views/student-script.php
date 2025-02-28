@@ -31,6 +31,9 @@
    <!-- change password script -->
    <script src="js/change-pass.js"></script>
 
+   <!-- script logout portal -->
+   <script src="js/logout-portal.js"></script>
+
    <!-- Script for custom message -->
    <script>
       /* Success message */
@@ -44,6 +47,27 @@
             })
             $('.swal-text').addClass('text-center ml-3 mr-3');
       <?php } unset($_SESSION['success']); ?>
+      /* end */
+
+      /* change password message */
+      <?php if (isset($_SESSION['changePass']) && $_SESSION['changePass'] != "") { ?>
+         swal({
+               title: "Success",
+               icon: "success",
+               text: "<?=$_SESSION['changePass']?>",
+               closeOnClickOutside: false,
+               dangerMode: true,
+               buttons: {
+                  confirm: "Logout",
+                  cancel: "Stay Logged In",
+               }
+         }).then((willLogout) => {
+               if (willLogout) {
+                  window.location.href = "?route="; // Redirect to logout page
+               }
+         });
+         $(".swal-text").addClass("text-center ml-3 mr-3");
+      <?php } unset($_SESSION['changePass']); // Clear session after showing message ?>
       /* end */
 
       /* Error message */
