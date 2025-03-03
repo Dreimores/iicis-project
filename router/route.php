@@ -119,6 +119,9 @@
          $securityController->securityAdmin();
          $includeAdminController->user_management();
       break;
+      case "admin-user-management":
+         $userManagementController->admin_user_management();
+      break;
       case "college-list":
          $securityController->securityAdmin();
          $includeAdminController->college();

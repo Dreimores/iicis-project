@@ -9,7 +9,7 @@
 
       public function read_announce()
       {
-         $stmt = $this-> getConnection()->prepare("SELECT * FROM tbl_announcement ORDER BY id ASC");
+         $stmt = $this->getConnection()->prepare("SELECT * FROM tbl_announcement ORDER BY id ASC");
          $stmt->execute();
          return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }

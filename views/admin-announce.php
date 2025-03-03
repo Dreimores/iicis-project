@@ -28,7 +28,7 @@ $includeAdminController->navbar();
                   $announceModel = new announceModel();
                   foreach ($announceModel->read_announce() as $row) {?>
                   <tr>
-                     <td class="align-middle"><?=$row['announce']?></td>
+                     <td class="align-middle"><?=$row['announce']?> </td>
                      <td class="align-middle col-sm-2">
                         <div class="d-flex justify-content-center">
                            <a href="#" title="Edit record." data-target="#announcement" idAnn="<?=$row['id']?>" Ann="<?=$row['announce']?>" data-toggle="modal" class="btn btn-primary btn-sm announcement-edit">
