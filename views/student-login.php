@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,6 +25,7 @@
          <div class="container col-xl-6 col-lg-12">
             <!-- Outer Row -->
             <?php
+            unset($_SESSION['success']);
             $loginModel = new loginStudentModel();
             $studentNumbers = $loginModel->invalid_studentno();
             if ($_GET['route'] == 'sign-in') { ?>
@@ -918,6 +918,7 @@
                         } else { // Then Insert into table students account
                            const formData = new FormData();
                            formData.append("btnSubmitSaveAdd", 1);
+                           formData.append("btnSubmitSignup", 1);
                            formData.append("txtStudentNo", studentNo);
                            formData.append("txtPassword", pWord);
                            formData.append("txtFirstName", txtFirstName);

@@ -53,7 +53,8 @@
                         <td class="align-middle">
                            <div class="btn-group d-flex justify-content-center">
                               <div class="<?=$row['status']==="Approved"?"d-none":''?>">
-                                 <button type="button" class="btn btn-sm btn-success btnApprovedStudAccount mr-1" 
+                                 <button type="button" class="btn btn-sm btn-success btnApprovedStudAccount mr-1"
+                                 id="btnApprovedStudAccount" 
                                  value    ="<?=$row['studentno']?>" 
                                  status   ="<?=$row['status']?>" 
                                  fullname ="<?=$row['p_firstname']." ".substr($row['p_middlename'],0,1).". ".$row['p_surname']?>"
@@ -945,26 +946,42 @@
    // ends
 
    // for approving an account of students
-   $('.btnApprovedStudAccount').click(function(){
+   $('.btnApprovedStudAccount').click(function(e){
+      e.preventDefault();
       const approved = $(this).val();
       const status   = $(this).attr('status');
       const fullname = $(this).attr('fullname');
       const email    = $(this).attr('email');
-      $.ajax({
-         type: "post",
-         url: "?route=app",
-         data: {
-            "approved": approved,
-            "status": status,
-            "fullname":fullname,
-            "email":email
+      const message = status === "Approved" ? "You want to disapprove this account." : "You want to approve this account.";
+      swal({
+         title: "Are you sure?",
+         text: message,
+         icon: "warning",
+         buttons: true,
+         dangerMode: true,
+         closeOnClickOutside: false,
+         buttons: {
+            confirm: "Ok",
+            cancel: "Cancel",
          },
-         beforeSend: () => {
-          $('#loading-modal').modal({backdrop: 'static',
-              keyboard: false
-          }).modal('show');
-        },success:() => {
-            location.reload();
+      }).then((c) => {
+         if(c){
+            $.ajax({
+            type: "post",
+            url: "?route=app",
+            data: {
+               "approved": approved,
+               "status": status,
+               "fullname":fullname,
+               "email":email
+            },beforeSend: () => {
+               $('#loading-modal').modal({backdrop: 'static',
+                  keyboard: false
+               }).modal('show');
+            },success:() => {
+                  location.reload();
+               }
+            })
          }
       })
    })

@@ -170,13 +170,18 @@
          # end
 
          # delete studentno into exit drop data
-         $stmt_terminal_data = $this->getConnection()->prepare("DELETE FROM tbl_exit_drop WHERE studentno=?");
+         $tbl_exit_drop = $this->getConnection()->prepare("DELETE FROM tbl_exit_drop WHERE studentno=?");
+         $tbl_exit_drop->execute([$txtStudentNo]);
+         # end
+
+         # delete studentno into terminal data
+         $stmt_terminal_data = $this->getConnection()->prepare("DELETE FROM tbl_terminal_form WHERE studentno=?");
          $stmt_terminal_data->execute([$txtStudentNo]);
          # end
 
          # delete studentno into exit transfer data
-         $stmt_terminal_data = $this->getConnection()->prepare("DELETE FROM tbl_exit_transfer WHERE studentno=?");
-         $stmt_terminal_data->execute([$txtStudentNo]);
+         $tbl_exit_transfer = $this->getConnection()->prepare("DELETE FROM tbl_exit_transfer WHERE studentno=?");
+         $tbl_exit_transfer->execute([$txtStudentNo]);
          # end
       }
       # end
