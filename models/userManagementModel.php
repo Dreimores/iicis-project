@@ -52,10 +52,10 @@
       # end
 
       # get full name
-      public function admin_username($studentno)
+      public function admin_username($useranme)
       {
          $stmt = $this->getConnection()->prepare("SELECT * FROM tbl_admin_users WHERE username = ?");
-         $stmt->execute([$studentno]);
+         $stmt->execute([$useranme]);
          return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
       # end
@@ -87,6 +87,16 @@
       {
          $stmt = $this->getConnection()->prepare("UPDATE tbl_stud_accounts SET pword = ? WHERE studentno = ?");
          $stmt->execute([$newPassword, $studentno]);
+      }
+      # end
+
+      # Get admin count
+      public function count_admin_users()
+      {
+         $stmt = $this->getConnection()->prepare("SELECT COUNT(*) as count FROM tbl_admin_users");
+         $stmt->execute();
+         $result = $stmt->fetch(PDO::FETCH_ASSOC);
+         return $result['count'] ?? 0;
       }
       # end
 

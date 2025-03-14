@@ -6,11 +6,11 @@ $includeController->navbar();
 <link rel="stylesheet" href="vendor/aos/aos.css">
 <div class="container-fluid">
     <div class="card shadow">
-        <div class="card-body">
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="mb-3">
-                    <img src="img/csu_lasam_logo.webp" width="100" data-aos="fade-right">
-                    <img src="img/csuguidance.jpeg" width="100" data-aos="fade-left">
+        <div class="card-header">
+            <div class="d-sm-flex justify-content-center">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="img/csu_lasam_logo.webp" width="75" data-aos="fade-right">
+                    <img src="img/csuguidance.jpeg" width="75" data-aos="fade-left">
                 </div>
             </div>
             <div class="form-group d-none d-lg-inline">
@@ -20,21 +20,35 @@ $includeController->navbar();
                     <div class="ml-1">this is the battle cry of the CCSO at CSU Lasam.</div>
                 </div>
             </div>
+        </div>
+        <div class="card-body text-gray-800">
             <div class="form-group">
                 <div class="card">
+                    <div class="card-header bg-white">
+                        <div class="h4 font-weight-bold text-primary m-0"> 
+                            <i class="fas fa-bell text-warning animate__animated animate__shakeX"></i> 
+                            Announcement 
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <div class="h4 text-gray-700"> Announcement </div>
                             <span>
-                                <?php $announceModel = new announceModel();
-                                    foreach ($announceModel->show_announce() as $row) {?> 
-                                        <div class="text-xs mb-3"> 
-                                            <i><?=$row['time_date']?></i>
-                                        </div>
+                            <?php 
+                                $announceModel = new announceModel();
+                                $announcements = $announceModel->show_announce(); 
+                                $total = count($announcements); // Get the total of announcements records
+                                $index = 1; 
+                                foreach ($announcements as $row) { ?> 
+                                    <div class="text-xs mb-3"> 
+                                        <i><?=$row['time_date']?></i>
+                                    </div>
+                                    <div>
                                         <?=$row['announce']?>
-                                        <br>
-                                        <hr class="text-gray-500">
-                                <?php }?>
+                                    </div>
+                                    <br>
+                                    <?php if ($index < $total) { ?>
+                                      <hr class="text-gray-500">
+                                    <?php } $index++; } ?>
                             </span>
                         </div>
                     </div>

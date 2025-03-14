@@ -3,7 +3,7 @@ $includeAdminController = new includeAdminController();
 $includeAdminController->header();
 $includeAdminController->navbar();
 ?>
-<div class="container-fluid">
+<div class="container-fluid animate__animated animate__fadeIn">
    <div class="card shadow-sm">
       <div class="card-header d-sm-flex justify-content-center">
          <div class="d-sm-inline-block d-none mx-1"></div>
@@ -19,6 +19,9 @@ $includeAdminController->navbar();
       </div>
       <form action="?route=exit-exit-trans" method="post">
          <div class="card-body">
+            <div class="d-flex mb-2 text-danger">
+               <span id="message-notifications"></span>
+            </div>
             <div class="form-group d-sm-flex mb-4">
                <label class="my-1 mr-3"> Student number : </label>
                <div class="form-inline">
@@ -628,6 +631,12 @@ $includeAdminController->script();
             $('#errtxtforTransfer').text('');
             $('#txtforTransfer').removeClass('is-invalid').addClass('is-valid')
          }
+         const allinputs = [txtSureName, txtFirstName, txtMiddleName, txtNickName, txtCourse, textCivilStatus, txtHomeAddress,txtMother, txtFather,txtTelphone, txtAge,txtYearLevel];
+         // Check if any input is empty
+         const hasEmptyInputs = allinputs.some(input => input.trim() === '');
+         const iconExla = '<i class="fa fa-exclamation-circle"></i>';
+         const messages = 'The student must fill out all required fields in their account forms.';
+         hasEmptyInputs ? $('#message-notifications').html(`${iconExla} ${messages}`) : null;
          validateInputs();
       });
       $(`input[name="ParentAwareness"][value="Aware"]`).prop('checked', true);
@@ -674,7 +683,6 @@ $includeAdminController->script();
       $('#txtCourseEnrollReq').text('');
       $('#txtErrSchool').text('');
       $('#txtSchoolReq').text('');
-
       $('#txtforTransferReq').text('');
       $('#errtxtforTransfer').text('');
       $('#txtforTransferring').removeClass('d-none');
@@ -689,6 +697,7 @@ $includeAdminController->script();
       $('#OthersTwo').val('').removeClass('is-invalid is-valid');
       $('#OthersThree').val('').removeClass('is-invalid is-valid');
       $('#SmstrSchool').val('').removeClass('is-invalid is-valid');
+      $('#message-notifications').text('');
       $(`input[name="ReasonTransfer[]"]:checked`).each((_, checkbox) => {
          $(checkbox).prop('checked', false); // Uncheck the checkbox
       });

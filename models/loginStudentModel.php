@@ -187,10 +187,10 @@
       # end
 
       # sign in method
-      public function sign_in($txtStudentNo, $txtPassword)
+      public function sign_in($txtStudentNo, $txtPassword, $status)
       {
-         $stmt = $this->getConnection()->prepare("SELECT * FROM tbl_stud_accounts WHERE studentno = ? AND pword = ?");
-         $stmt->execute([$txtStudentNo, $txtPassword]);
+         $stmt = $this->getConnection()->prepare("SELECT * FROM tbl_stud_accounts WHERE studentno = ? AND pword = ? AND status = ?");
+         $stmt->execute([$txtStudentNo, $txtPassword, $status]);
          return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
       # end

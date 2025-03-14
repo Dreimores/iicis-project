@@ -3,7 +3,7 @@ $includeAdminController = new includeAdminController();
 $includeAdminController->header();
 $includeAdminController->navbar();
 ?>
-<div class="container-fluid">
+<div class="container-fluid animate__animated animate__fadeIn">
    <div class="card">
       <div class="card-header d-sm-flex justify-content-center">
          <img class="d-lg-inline-block d-none" src="img/csu_lasam_logo.webp" width="130" height="130" />
@@ -18,6 +18,9 @@ $includeAdminController->navbar();
       </div>
       <form action="?route=exit-drop" method="post">
          <div class="card-body">
+            <div class="d-flex mb-2 text-danger">
+               <span id="message-notifications"></span>
+            </div>
             <div class="form-group d-sm-flex mb-4">
                <label class="my-1 mr-3"> Student number : </label>
                <div class="form-inline">
@@ -327,6 +330,8 @@ $includeAdminController->navbar();
 $includeAdminController->footer();
 $includeAdminController->script();
 ?>
+<!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+<script src="js/textarea.js"></script>
 <script>
    function validateInput() {
 
@@ -427,6 +432,7 @@ $includeAdminController->script();
             $("#txtNickName").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
             $('#errTxtNickName').text('');
          }
+
          const txtCourse = $("#txtCourse").val().trim();
          if (txtCourse.length <= 0) {
             $('#txtCourseReq').text('*');
@@ -457,6 +463,7 @@ $includeAdminController->script();
             $("#txtHomeAddress").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
             $('#errTxtHomeAddress').text('');
          }
+
          const txtMother = $("#txtMother").val().trim();
          if (txtMother.length <= 0) {
             $('#txtMotherReq').text('*');
@@ -477,6 +484,7 @@ $includeAdminController->script();
             $("#txtFather").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
             $('#errTxtFather').text('');
          }
+
          const txtTelphone = $("#txtTelphone").val().trim();
          if (txtTelphone.length <= 0) {
             $('#txtTelphoneReq').text('*');
@@ -507,6 +515,7 @@ $includeAdminController->script();
             $("#txtYearLevel").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
             $('#errTxtYearLevel').text('');
          }
+
          const SmstrSchool = $('#SmstrSchool').val().trim();
          if (SmstrSchool.length <= 0) {
             $('#txtSmstrSchoolReq').text('*');      
@@ -635,6 +644,12 @@ $includeAdminController->script();
             $('#errtxtDateExitDrop').text('');
             $('#txtDateExitDrop').removeClass('is-invalid').addClass('is-valid')
          }
+         const allinputs = [txtSureName, txtFirstName, txtMiddleName, txtNickName, txtCourse, textCivilStatus, txtHomeAddress,txtMother, txtFather,txtTelphone, txtAge,txtYearLevel];
+         // Check if any input is empty
+         const hasEmptyInputs = allinputs.some(input => input.trim() === '');
+         const iconExla = '<i class="fa fa-exclamation-circle"></i>';
+         const messages = 'The student must fill out all required fields in their account forms.';
+         hasEmptyInputs ? $('#message-notifications').html(`${iconExla} ${messages}`) : null;
          validateInput();
       });
       $(`input[name="ParentsAwareness"][value="Aware"]`).prop('checked', true);
@@ -710,6 +725,7 @@ $includeAdminController->script();
       $('#txtExOthersThree').removeClass('is-valid');
       $('#txtExOthersFive').removeClass('is-valid');
       $('#txtExOthersSix').removeClass('is-valid');
+      $('#message-notifications').text('');
       $(`input[name="ReasonsForDrop[]"]:checked`).each((_, checkbox) => {
          $(checkbox).prop('checked', false); // Uncheck the checkbox
       });

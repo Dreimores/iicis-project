@@ -73,14 +73,20 @@ class usermanagementController
       # end
 
       # Delete
-      if (isset($_POST['btnDeleteUser'])) 
-      {
+      if (isset($_POST['btnDeleteUser'])) {
+
          $userIdToDelete = $_POST['userid'] ?? null;
-         if ($userIdToDelete) 
-         {
+         
+         if ($this->usermanagementModel->count_admin_users() === 1) {
+            
+            $_SESSION['warning'] = "Deletion is not allowed if only one admin exists.";
+
+         } else {
+            
             $this->usermanagementModel->admin_user_management_delete($userIdToDelete);
             $_SESSION['success'] = "User admin has been successfully deleted!";
             unlink('uploads/' . $_POST['images']);
+         
          }
       }
       # end

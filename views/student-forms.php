@@ -1824,7 +1824,6 @@ $includeStudentController->navbar();
 $includeStudentController->footer();
 $includeStudentController->script();
 ?>
-
 <script>
    function selectedCourse(){
       const crs = document.getElementById('personal-course');

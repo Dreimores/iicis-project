@@ -94,5 +94,18 @@
       <?php } unset($_SESSION['warning']); ?>
       /* end */
 
+      /* Fillout all form message */
+      <?php if (isset($_SESSION['ty']) && $_SESSION['ty'] != "") { ?>
+         swal({
+            title: "Thank you!",  
+            icon: "success",
+            text: "<?php echo $_SESSION['ty']?>",
+            button: "Ok",
+            closeOnClickOutside: false
+         })
+         $('.swal-text').addClass('text-center ml-3 mr-3');
+      <?php } unset($_SESSION['ty']); ?>
+      /* end */
+
    </script>
    <!-- End -->

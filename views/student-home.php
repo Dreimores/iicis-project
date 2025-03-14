@@ -12,14 +12,16 @@
    <link rel="stylesheet" href="css/footer.css">
    <!-- animation -->
    <link href="vendor/aos/aos.css" rel="stylesheet">
+   <!-- Custom css animation -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
 </head>
-<body id="page-top">
+<body id="page-top" class="text-gray-800">
    <!-- Topbar -->
    <nav class="navbar navbar-expand navbar-light sticky-top topbar" style="background:#893600">
       <ul class="navbar-nav ml-auto">
          <!-- Topbar Navbar Items -->
          <li class="nav-item d-none d-lg-inline"><a class="nav-link scrollto" href="#page-top">About</a></li>
-         <li class="nav-item d-none d-lg-inline"><a class="nav-link scrollto" href="#ServicesCSU_Lasam">Services</a></li>
+         <li class="nav-item d-none d-lg-inline"><a class="nav-link scrollto-service" href="#ServicesCSU_Lasam">Services</a></li>
          <li class="nav-item d-none d-lg-inline"><a class="nav-link scrollto" href="#ContactUsCSU_Lasam">Contact Us</a></li>
          <li class="nav-item d-none d-lg-inline"><a class="nav-link" href="?route=sign-in">Login</a></li>
          <!-- End -->
@@ -28,7 +30,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="d-lg-none text-white fas fa-bars"></span></a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                <a class="dropdown-item scrollto" href="#page-top"><i class="fas fa-bell fa-sm fa-fw mr-3"></i>About</a>
-               <a class="dropdown-item scrollto" href="#ServicesCSU_Lasam"><i class="fas fa-bell fa-sm fa-fw mr-3"></i>Services</a>
+               <a class="dropdown-item scrollto-service" href="#ServicesCSU_Lasam"><i class="fas fa-bell fa-sm fa-fw mr-3"></i>Services</a>
                <a class="dropdown-item scrollto" href="#ContactUsCSU_Lasam"><i class="fas fa-cogs fa-sm fa-fw mr-3"></i>Contact Us</a>
                <a class="dropdown-item" href="?route=sign-in"><i class="fas fa-sign-in-alt fa-sm fa-fw mr-3"></i>Login</a>
             </div>
@@ -45,7 +47,7 @@
                <div class="row justify-content-center">
                   <img class="img-fluid" src="img/cagayan_state_university_lasam_campus_logo.png" />
                </div>
-               <hr class="m-0 p-1 mb-4 position-relative" style="background:#893600">
+               <hr class="m-0 p-1 mb-4 position-relative animate__animated animate__zoomIn" style="background:#893600">
                <div class="row justify-content-center">
                   <div class="h3 mb-4 text-gray-800 text-uppercase font-weight-bold rounded border rounded-0 border-dark border-bottom-info border-top-0 border-right-0 border-left-0 d-inline-block">
                      about

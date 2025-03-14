@@ -3,7 +3,7 @@
    $includeAdminController->header();
    $includeAdminController->navbar();
 ?>
-<div class="container-fluid">
+<div class="container-fluid animate__animated animate__fadeIn">
    <div class="card">
       <div class="card-header d-sm-flex justify-content-center">
          <img class="d-lg-inline-block d-none" src="img/csu_lasam_logo.webp" width="130" height="130"/>
@@ -18,7 +18,9 @@
       </div>
       <form action="?route=submit-terminal-Interview" method="post">
          <div class="card-body">
-            <!-- <span class="card bg-danger text-white p-2 mb-3">sample</span> -->
+            <div class="d-flex mb-2 text-danger">
+               <span id="message-notifications"></span>
+            </div>
             <div class="form-group d-sm-flex mb-4">
                <label class="my-1 mr-3"> Student number : </label>
                <div class="form-inline">
@@ -730,7 +732,7 @@
          if (txtSureName.length <= 0) {
             $('#txtSureNameReq').text('*');
             $("#txtSureName").addClass('is-invalid');
-            $('#errTxtSureName').text('First Name is Required.');
+            $('#errTxtSureName').text('Surname is Required.');
          } else {
             $('#txtSureNameReq').text('');
             $("#txtSureName").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
@@ -750,7 +752,7 @@
          if (txtMiddleName.length <= 0) {
             $('#txtMiddleNameReq').text('*');
             $("#txtMiddleName").addClass('is-invalid');
-            $('#errTxtMiddleName').text('First Name is Required.');
+            $('#errTxtMiddleName').text('Middle Name is Required.');
          } else {
             $('#txtMiddleNameReq').text('');
             $("#txtMiddleName").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
@@ -760,7 +762,7 @@
          if (txtNickName.length <= 0) {
             $('#txtNickNameReq').text('*');
             $("#txtNickName").addClass('is-invalid');
-            $('#errTxtNickName').text('First Name is Required.');
+            $('#errTxtNickName').text('Nick Name is Required.');
          } else {
             $('#txtNickNameReq').text('');
             $("#txtNickName").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
@@ -770,7 +772,7 @@
          if (txtCourse.length <= 0) {
             $('#txtCourseReq').text('*');
             $("#txtCourse").addClass('is-invalid');
-            $('#errTxtCourse').text('First Name is Required.');
+            $('#errTxtCourse').text('Course is Required.');
          } else {
             $('#txtCourseReq').text('');
             $("#txtCourse").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
@@ -780,17 +782,18 @@
          if (textCivilStatus.length <= 0) {
             $('#textCivilStatusReq').text('*');
             $("#textCivilStatus").addClass('is-invalid');
-            $('#errTextCivilStatus').text('First Name is Required.');
+            $('#errTextCivilStatus').text('Civil Status is Required.');
          } else {
             $('#textCivilStatusReq').text('');
             $("#textCivilStatus").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
             $('#errTextCivilStatus').text('');
          }
+
          const txtHomeAddress = $("#txtHomeAddress").val().trim();
          if (txtHomeAddress.length <= 0) {
             $('#txtHomeAddressReq').text('*');
             $("#txtHomeAddress").addClass('is-invalid');
-            $('#errTxtHomeAddress').text('First Name is Required.');
+            $('#errTxtHomeAddress').text('Home address is Required.');
          } else {
             $('#txtHomeAddressReq').text('');
             $("#txtHomeAddress").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
@@ -800,7 +803,7 @@
          if (txtEmailAddress.length <= 0) {
             $('#txtEmailAddressReq').text('*');
             $("#txtEmailAddress").addClass('is-invalid');
-            $('#errTxtEmailAddress').text('First Name is Required.');
+            $('#errTxtEmailAddress').text('Email Address is Required.');
          } else {
             $('#txtEmailAddressReq').text('');
             $("#txtEmailAddress").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
@@ -810,7 +813,7 @@
          if (txtTelphone.length <= 0) {
             $('#txtTelphoneReq').text('*');
             $("#txtTelphone").addClass('is-invalid');
-            $('#errTxtTelphone').text('First Name is Required.');
+            $('#errTxtTelphone').text('Contact no is Required.');
          } else {
             $('#txtTelphoneReq').text('');
             $("#txtTelphone").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
@@ -820,7 +823,7 @@
          if (txtCellphone.length <= 0) {
             $('#txtCellphoneReq').text('*');
             $("#txtCellphone").addClass('is-invalid');
-            $('#errTxtCellphone').text('First Name is Required.');
+            $('#errTxtCellphone').text('Contact no is Required.');
          } else {
             $('#txtCellphoneReq').text('');
             $("#txtCellphone").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
@@ -830,7 +833,7 @@
          if (txtFather.length <= 0) {
             $('#txtFatherReq').text('*');
             $("#txtFather").addClass('is-invalid');
-            $('#errTxtFather').text('First Name is Required.');
+            $('#errTxtFather').text('Father Name is Required.');
          } else {
             $('#txtFatherReq').text('');
             $("#txtFather").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
@@ -840,7 +843,7 @@
          if (txtMother.length <= 0) {
             $('#txtMotherReq').text('*');
             $("#txtMother").addClass('is-invalid');
-            $('#errTxtMother').text('First Name is Required.');
+            $('#errTxtMother').text('Mother Name is Required.');
          } else {
             $('#txtMotherReq').text('');
             $("#txtMother").removeClass('is-invalid bg-white').addClass('is-valid border-bottom-0');
@@ -898,7 +901,12 @@
             $("#txtTerDate").removeClass('is-invalid').addClass('is-valid');
             $('#errtxtTerDate').text('');
          }
-
+         const allinputs = [txtSureName, txtFirstName, txtMiddleName, txtNickName, txtCourse, textCivilStatus, txtHomeAddress, txtEmailAddress, txtTelphone,txtCellphone,txtFather,txtMother,txtFacebookAccount,txtFirstEnroll,txtTerDate];
+         // Check if any input is empty
+         const hasEmptyInputs = allinputs.some(input => input.trim() === '');
+         const iconExla = '<i class="fa fa-exclamation-circle"></i>';
+         const messages = 'The student must fill out all required fields in their account forms.';
+         hasEmptyInputs ? $('#message-notifications').html(`${iconExla} ${messages}`) : null;
          validInputs();
       });
       $(`input[name="FinishCrsEnrolled"][value="Yes"]`).prop('checked', true);
@@ -957,6 +965,7 @@
       $("#txtWhatCanSugServ").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $("#txtFirstEnroll").val('').removeClass('is-invalid is-valid border-bottom-0').addClass('bg-white');
       $('#errTxtFirstEnroll').text('');
+      $('#message-notifications').text('');
       $(`input[name="WhyEnrollCsu[]"]:checked`).each((_, checkbox) => {
          $(checkbox).prop('checked', false); // Uncheck the checkbox
       });

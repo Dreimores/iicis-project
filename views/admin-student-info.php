@@ -3,7 +3,7 @@
    $includeAdminController->header();
    $includeAdminController->navbar();
 ?>
-<div class="container-fluid">
+<div class="container-fluid animate__animated animate__fadeIn">
    <div class="card">
       <div class="card-header">
          <div class="h4">List of Students</div>
@@ -796,6 +796,11 @@
                            contentType: false,
                            processData: false,
                            data: formData,
+                           beforeSend: () => {
+                              $('#loading-modal').modal({backdrop: 'static',
+                                 keyboard: false
+                              }).modal('show');
+                           },
                            success:() => {
                               location.reload();
                            }

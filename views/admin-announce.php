@@ -3,7 +3,7 @@ $includeAdminController = new includeAdminController();
 $includeAdminController->header();
 $includeAdminController->navbar();
 ?>
-<div class="container-fluid">
+<div class="container-fluid animate__animated animate__fadeIn">
    <div class="card">
       <div class="card-header">
          <div class="h4"> Announcements </div>
@@ -24,19 +24,19 @@ $includeAdminController->navbar();
                   </tr>
                </thead>
                <tbody>
-                  <?php 
+                  <?php
                   $announceModel = new announceModel();
-                  foreach ($announceModel->read_announce() as $row) {?>
-                  <tr>
-                     <td class="align-middle"><?=$row['announce']?> </td>
-                     <td class="align-middle col-sm-2">
-                        <div class="d-flex justify-content-center">
-                           <a href="#" title="Edit record." data-target="#announcement" idAnn="<?=$row['id']?>" Ann="<?=$row['announce']?>" data-toggle="modal" class="btn btn-primary btn-sm announcement-edit">
-                              <i class="fas fa-edit"></i>
-                           </a>
-                        </div>
-                     </td>
-                  </tr>
+                  foreach ($announceModel->read_announce() as $row) { ?>
+                     <tr>
+                        <td class="align-middle"><?= $row['announce'] ?> </td>
+                        <td class="align-middle col-sm-2">
+                           <div class="d-flex justify-content-center">
+                              <a href="#" title="Edit record." data-target="#announcement" idAnn="<?= $row['id'] ?>" Ann="<?= $row['announce'] ?>" data-toggle="modal" class="btn btn-primary btn-sm announcement-edit">
+                                 <i class="fas fa-edit"></i>
+                              </a>
+                           </div>
+                        </td>
+                     </tr>
                   <?php } ?>
                </tbody>
             </table>
@@ -49,7 +49,7 @@ $includeAdminController->navbar();
 </div>
 
 <div class="modal fade" id="announcement" data-keybord="false" data-backdrop="static">
-   <div class="modal-dialog modal-lg">
+   <div class="modal-dialog modal-xl">
       <div class="modal-content">
          <div class="modal-header">
             <div class="h4 text-primary text-gray-900 text-uppercase font-weight-bold">
@@ -59,7 +59,7 @@ $includeAdminController->navbar();
                   role="button" style="top:20px;" title="Announcement.">
                </span>
             </div>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <button onclick="location.reload()" class="close" type="button">
                <span aria-hidden="true">×</span>
             </button>
          </div>
@@ -85,35 +85,65 @@ $includeAdminController->navbar();
 $includeAdminController->footer();
 $includeAdminController->script();
 ?>
-
 <script>
+   tinymce.init({
+      selector: '#AnnounceHere',
+      plugins: [
+         // Core editing features
+         'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+         // Your account includes a free trial of TinyMCE premium features
+         // Try the most popular premium features until Mar 27, 2025:
+         'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
+      ],
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [{
+            value: 'First.Name',
+            title: 'First Name'
+         },
+         {
+            value: 'Email',
+            title: 'Email'
+         },
+      ],
+      ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+      setup: function(editor) {
+         editor.on('input', function() {
+            emptyInputs(); // Call validation on input
+         });
+         editor.on('change', function() {
+            emptyInputs(); // Call validation on change
+         });
+      }
+   });
 
    function emptyInputs() {
-      const AnnounceHere = $('#AnnounceHere').val().trim();
+      const AnnounceHere = tinymce.get('AnnounceHere').getContent().trim();
+      const isValid = AnnounceHere.length > 10;
 
-      const isvalid = AnnounceHere.length > 10;
-      $('#add-ann').prop('disabled', !isvalid);
-      $('#edit-ann').prop('disabled', !isvalid);
-
+      $('#add-ann').prop('disabled', !isValid);
+      $('#edit-ann').prop('disabled', !isValid);
    }
 
-   $('#AnnounceHere').on('input',function(){
-      const AnnounceHere = $(this).val().trim();
-      AnnounceHere.length <= 0 ? $(this).addClass('is-invalid') : $(this).removeClass('is-invalid').addClass('is-valid');
-      emptyInputs();
-   });
-
-   $('.announcement-add').click(function(){
+   $('.announcement-add').click(function() {
       $('#edit-ann').addClass('d-none');
-      $('#add-ann').removeClass('d-none');
+      $('#add-ann').removeClass('d-none').prop('disabled', true);
       $('#id-ann').val('');
-      $('#AnnounceHere').val('');
+
+      if (tinymce.get('AnnounceHere')) {
+         tinymce.get('AnnounceHere').setContent('');
+      }
    });
 
-   $('.announcement-edit').on('click',function(){
+   $('.announcement-edit').on('click', function() {
       $('#add-ann').addClass('d-none');
       $('#edit-ann').removeClass('d-none');
       $('#id-ann').val($(this).attr('idAnn'));
-      $('#AnnounceHere').val($(this).attr('Ann'));
+
+      if (tinymce.get('AnnounceHere')) {
+         tinymce.get('AnnounceHere').setContent($(this).attr('Ann'));
+      }
+      emptyInputs(); // Run validation
    });
 </script>

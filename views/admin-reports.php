@@ -11,7 +11,7 @@ $includeAdminController->navbar();
       </div>
    </div>
 </div>
-<div class="container-fluid mb-3">
+<div class="container-fluid mb-3 animate__animated animate__fadeIn">
    <div class="card">
       <div class="card border-left-primary h-100">
          <form action="?route=individual-reports" method="post">
@@ -68,7 +68,7 @@ $includeAdminController->navbar();
    </div>
 </div>
 
-<div class="container-fluid mb-3">
+<div class="container-fluid mb-3 animate__animated animate__fadeIn">
    <div class="card">
       <div class="card border-left-info h-100">
          <form action="?route=counseling-service" method="post">
@@ -105,7 +105,7 @@ $includeAdminController->navbar();
    </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid animate__animated animate__fadeIn">
    <div class="card">
       <div class="card border-left-success shadow h-100">
          <form action="?route=career-guidance" method="post">

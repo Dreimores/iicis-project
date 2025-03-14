@@ -8,10 +8,10 @@
    $includeAdminController->header();
    $includeAdminController->navbar();
 ?>
-<div class="container-fluid p-3">
-   <div class="card">
-      <?php
-      foreach ($loginController->session_studentno($_POST['studentno']) as $row) {
+<div class="container-fluid p-3 animate__animated animate__fadeIn">
+   <div class="card text-gray-800">
+      <?php 
+         foreach ($loginController->session_studentno($_POST['studentno']) as $row) {
          $f_arragement              = explode(',', $row['f_arragement']);
          $h_health_problems         = explode(",", $row['h_health_problems']);
          $ip_If_yes                 = explode(",", $row['ip_If_yes']);
@@ -34,7 +34,7 @@
          <form action="?route=submit-form" method="post">
             <div class="tab-content">
                <!-- Personal Data -->
-               <div class="tab-pane fade show active" id="Personal">
+               <div class="tab-pane fade show active animate__animated animate__fadeIn" id="Personal">
                   <div class="card-header">
                      <div class="sidebar-brand d-flex align-items-center flex-column flex-md-row text-center text-md-left">
                         <div class="mb-3 mb-md-0">
@@ -265,7 +265,7 @@
                </div>
                <!-- End row -->
                <!-- Family Data -->
-               <div class="tab-pane fade show" id="Familydata">
+               <div class="tab-pane fade show animate__animated animate__fadeIn" id="Familydata">
                   <div class="card-header">
                      <div class="sidebar-brand d-flex align-items-center flex-column flex-md-row text-center text-md-left">
                         <div class="mb-3 mb-md-0">
@@ -691,7 +691,7 @@
                <!-- End row -->
 
                <!-- Educational Data -->
-               <div class="tab-pane fade show" id="Educationaldata">
+               <div class="tab-pane fade show animate__animated animate__fadeIn" id="Educationaldata">
                   <div class="card-header">
                      <div class="sidebar-brand d-flex align-items-center flex-column flex-md-row text-center text-md-left">
                         <div class="mb-3 mb-md-0">
@@ -910,7 +910,7 @@
                <!-- End row -->
 
                <!-- Healt Data -->
-               <div class="tab-pane fade show" id="Healthdata">
+               <div class="tab-pane fade show animate__animated animate__fadeIn" id="Healthdata">
                   <div class="card-header">
                      <div class="sidebar-brand d-flex align-items-center flex-column flex-md-row text-center text-md-left">
                         <div class="mb-3 mb-md-0">
@@ -1069,7 +1069,7 @@
                <!-- End row -->
 
                <!-- IP and PWD checklist Data -->
-               <div class="tab-pane fade show" id="IPandPWDchecklist">
+               <div class="tab-pane fade show animate__animated animate__fadeIn" id="IPandPWDchecklist">
                   <div class="card-header">
                      <div class="sidebar-brand d-flex align-items-center flex-column flex-md-row text-center text-md-left">
                         <div class="mb-3 mb-md-0">
@@ -1449,7 +1449,7 @@
                <!-- End row -->
 
                <!-- Initial Interview -->
-               <div class="tab-pane fade show" id="initialinterview">
+               <div class="tab-pane fade show animate__animated animate__fadeIn" id="initialinterview">
                   <div class="card-header">
                      <div class="sidebar-brand d-flex align-items-center flex-column flex-md-row text-center text-md-left">
                         <div class="mb-3 mb-md-0">
@@ -2005,32 +2005,32 @@
                      <div class="row justify-content-center d-none d-lg-inline-block">
                         <ul class="nav nav-pills">
                            <li class="nav-item small">
-                              <a class="nav-link active" id="Personal-tab" href="#Personal" data-bs-toggle="pill">
+                              <a class="nav-link active " id="Personal-tab" href="#Personal" data-bs-toggle="pill">
                                  Personal Data
                               </a>
                            </li>
                            <li class="nav-item small">
-                              <a class="nav-link" id="Familydata-tab" href="#Familydata" data-bs-toggle="pill">
+                              <a class="nav-link " id="Familydata-tab" href="#Familydata" data-bs-toggle="pill">
                                  Family Data
                               </a>
                            </li>
                            <li class="nav-item small">
-                              <a class="nav-link" id="Educationaldata-tab" href="#Educationaldata" data-bs-toggle="pill">
+                              <a class="nav-link " id="Educationaldata-tab" href="#Educationaldata" data-bs-toggle="pill">
                                  Educational Data
                               </a>
                            </li>
                            <li class="nav-item small">
-                              <a class="nav-link" id="Healthdata-tab" href="#Healthdata" data-bs-toggle="pill">
+                              <a class="nav-link " id="Healthdata-tab" href="#Healthdata" data-bs-toggle="pill">
                                  Health Data
                               </a>
                            </li>
                            <li class="nav-item small">
-                              <a class="nav-link" id="IPandPWDchecklist-tab" href="#IPandPWDchecklist" data-bs-toggle="pill">
+                              <a class="nav-link " id="IPandPWDchecklist-tab" href="#IPandPWDchecklist" data-bs-toggle="pill">
                                  IP and PWD checklist
                               </a>
                            </li>
                            <li class="nav-item small">
-                              <a class="nav-link" id="initialinterview-tab" href="#initialinterview" data-bs-toggle="pill">
+                              <a class="nav-link " id="initialinterview-tab" href="#initialinterview" data-bs-toggle="pill">
                                  Initialm Interview
                               </a>
                            </li>

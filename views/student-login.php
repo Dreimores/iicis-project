@@ -15,7 +15,7 @@
    <!-- Custom styles -->
    <link href="css/css.css" rel="stylesheet" type="text/css" />
    <!-- Custom css animation -->
-   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
 
    <link href="img/csu_lasam_logo.webp" rel="icon">
 </head>
@@ -38,7 +38,7 @@
                            <div class="p-4 mb-2">
                               <div class="h4 mb-4 text-center text-gray-800 sign-in-text"> Sign in </div>
                               <?php if (isset($_SESSION['errIncor'])) { ?>
-                                 <div class="text-danger text-center position-relative" style="top: -10px;">
+                                 <div class="text-danger text-center position-relative animate__animated animate__shakeY" style="top: -10px;">
                                     <?= $_SESSION['errIncor'] ?>
                                  </div>
                               <?php };
@@ -948,7 +948,7 @@
                                     swal({
                                        title: "Success!",
                                        // Modify as Success Session
-                                       text: "Your account has been created successfully! 🎉 You can now log in and start exploring your new features.",
+                                       text: "Your account is currently pending approval. You will receive an email notification once it has been reviewed and approved by the admin.",
                                        icon: "success",
                                        closeOnClickOutside: false,
                                        button: {

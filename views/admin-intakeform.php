@@ -3,7 +3,7 @@
    $includeAdminController->header();
    $includeAdminController->navbar();
 ?>
-<div class="container-fluid">
+<div class="container-fluid animate__animated animate__fadeIn">
    <div class="card">
       <div class="card-header d-sm-flex justify-content-center">
          <div class="d-sm-inline-block d-none mx-1"></div>
@@ -19,7 +19,7 @@
       </div>
       <form action="?route=submit-intake-form" method="post">
          <div class="card-body">
-            <!-- <span id="message-notification"></span>  -->
+            <div class="d-flex text-danger"> <span id="message-notification" class="mb-2"></span>  </div>
             <div class="form-group d-sm-flex mb-4">
                <label class="my-1 mr-3"> Student number : </label>
                <div class="form-inline">
@@ -301,6 +301,9 @@
    $includeAdminController->script();
 ?>
 <script>
+   
+</script>
+<script>
    function verifyInpust() {
       const txtClient     = $("#txtClientName").val().trim();
       const txtCourseYear = $("#txtCourseYear").val().trim();
@@ -526,10 +529,12 @@
             $('#txtReferredByReq').text("");
             $('#txtReferredBy').removeClass('is-invalid').addClass('is-valid');
          }
-         let allinputs = [txtClientName, txtCourseYear, txtDateEdit, txtTimedEdit, txtHmeAddress, txtContactNo, txtEmailAddress, txtAge, txtDateOfBirth,txtSex,txtCivilStatus,txtReligion,txtDateRferred,txtReferredBy];
+         const allinputs = [txtClientName, txtCourseYear, txtDateEdit, txtTimedEdit, txtHmeAddress, txtContactNo, txtEmailAddress, txtAge, txtDateOfBirth,txtSex,txtCivilStatus,txtReligion,txtDateRferred,txtReferredBy];
          // Check if any input is empty
-         // let hasEmptyInputs = allinputs.some(input => input.trim() === "");
-         // hasEmptyInputs ? $('#message-notification').text("The student's does not fill out all forms!").addClass('card p-2 mb-4 bg-danger text-white') : $('#message-notification').text('').removeClass('card p-2 mb-4 bg-danger text-white') 
+         const hasEmptyInputs = allinputs.some(input => input.trim() === '');
+         const iconExla = '<i class="fa fa-exclamation-circle"></i>';
+         const messages = 'The student must fill out all required fields in their account forms.';
+         hasEmptyInputs ? $('#message-notification').html(`${iconExla} ${messages}`) : null;
          verifyInpust();
       });
       $("#txtClientName").val('');

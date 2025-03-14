@@ -4,7 +4,7 @@ $includeAdminController->header();
 $includeAdminController->navbar();
 $userManagementModel = new userManagementModel();
 foreach ($userManagementModel->admin_username($_SESSION['admin-username']) as $row) { ?>
-   <div class="container-fluid">
+   <div class="container-fluid animate__animated animate__fadeIn">
       <div class="card">
          <div class="card-header">
             <div class="h4"> Profile </div>

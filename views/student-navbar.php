@@ -197,10 +197,6 @@
                         </div>
                         <div class="modal-footer">
                             <div class="form-group mr-3">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">
-                                    <i class="fas fa-ban"></i>
-                                    Cancel
-                                </button>
                                 <button type="submit" class="btn btn-success btn-change-password" disabled>
                                     <i class="fas fa-save"></i>
                                     Save

@@ -45,6 +45,31 @@
    }, true)
    /* End */ 
 
+   /* Scroll to an element with navbar offset */
+   const scrollto_service = (el) => {
+      let element = select(el);
+      if (element) {
+         let navbar = select('.topbar'); // Select the navbar
+         let navbarHeight = navbar ? navbar.offsetHeight : 50; // Get navbar height
+         let extraSpacing = 10; // Additional space for better visibility
+
+         window.scrollTo({
+            top: element.offsetTop - navbarHeight - extraSpacing,
+            behavior: 'smooth'
+         });
+      }
+   };
+
+   /* Scrool with ofset on links with a class name .scrollto */
+   on('click', '.scrollto-service', function(e) {
+      if (select(this.hash)) {
+         e.preventDefault()
+         select('body')
+         scrollto_service(this.hash)
+      }
+   }, true)
+   /* End */ 
+
    /* Animation on scroll */
    window.addEventListener('load', () => {
       AOS.init({

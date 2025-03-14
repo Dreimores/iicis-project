@@ -3,7 +3,7 @@
    $includeAdminController->header();
    $includeAdminController->navbar();
 ?>
-<div class="container-fluid">
+<div class="container-fluid animate__animated animate__fadeIn">
    <div class="card">
       <div class="card-header">
          <div class="h4">List of Colleges</div>
@@ -65,7 +65,7 @@
          <div class="modal-header pt-2 pb-2 pl-3 pr-3">
             <div class="h6" id="Add_College"> Add </div>
             <div class="h6" id="Edit_College"> Edit </div>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <button onclick="location.reload()" class="close" type="button">
                <span aria-hidden="true">×</span>
             </button>
          </div>

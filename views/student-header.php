@@ -25,6 +25,9 @@
    
    <!-- Custom css -->
    <link rel="icon" href="img/csu_lasam_logo.webp">
+
+   <!-- Custom css animation -->
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
    
 </head>
 

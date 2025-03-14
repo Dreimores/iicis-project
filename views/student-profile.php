@@ -9,14 +9,14 @@ $includeStudentController->navbar();
 
 foreach ($studentFormsModel->session_studentno($_SESSION['username']) as $row) {
 ?>
-<div class="container-fluid">
+<div class="container-fluid animate__animated animate__fadeIn">
       <div class="card">
          <div class="card-header">
             <div class="h4"> Profile </div>
          </div>
          <div class="card-body">
             <div class="form-group">
-               <a href="?route=admin-dashboard"><i class="fas fa-arrow-left fa-1x text-black-50"></i></a>
+               <a href="?route=dashboard"><i class="fas fa-arrow-left fa-1x text-black-50"></i></a>
             </div>
             <div class="form-group ml-2">
                <div class="d-none d-lg-inline">
@@ -151,10 +151,6 @@ foreach ($studentFormsModel->session_studentno($_SESSION['username']) as $row) {
                </div>
                <div class="modal-footer">
                   <div class="form-group mr-3">
-                     <button type="button" class="btn btn-danger" data-dismiss="modal">
-                        <i class="fas fa-ban"></i>
-                        Cancel
-                     </button>
                      <button type="submit" name="btn-student-profile" class="btn btn-success add-user-profile">
                         <i class="fas fa-save"></i>
                         Save

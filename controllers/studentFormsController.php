@@ -301,11 +301,12 @@ class studentFormsController
          if (isset($_POST['btn-views'])) {
 
             header('Location: ?route=student-info');
-         
+            $_SESSION['ty'] = "Student profile has been recorded and submitted.";
+            
          } else {
          
             header('Location: ?route=student-forms');
-         
+            $_SESSION['ty'] = "Your profile has been recorded and submitted.";
          }
          # end header
       

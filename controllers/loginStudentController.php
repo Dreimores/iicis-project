@@ -206,7 +206,7 @@ class loginStudentController extends send_email
          $txtUName = $_POST['txtUName'];
          $txtPWord = $_POST['txtPWord'];
 
-         $result       = $this->loginModel->sign_in($txtUName, $txtPWord);
+         $result       = $this->loginModel->sign_in($txtUName, $txtPWord, 'Approved');
          $admin_result = $this->loginAdminModel->sign_in_admin($txtUName, $txtPWord);
 
          if (empty($txtUName)) {
@@ -220,10 +220,10 @@ class loginStudentController extends send_email
             header("Location: ?route=sign-in");
          
          } else if ($result) {
-
+            
             $_SESSION['username'] = $txtUName;
             header("Location: ?route=dashboard");
-         
+
          } elseif ($admin_result) {
 
             $_SESSION['admin-username'] = $txtUName;
@@ -231,8 +231,15 @@ class loginStudentController extends send_email
          
          } else {
 
-            $_SESSION['errIncor'] = "Incorrect Username or Password.";
-            header("Location: ?route=sign-in");
+            if ($this->loginModel->sign_in($txtUName, $txtPWord, 'Pending...')) {
+               
+               $_SESSION['errIncor'] = "Something went wrong. Please try again.";
+               header("Location: ?route=sign-in");
+
+            } else {
+               $_SESSION['errIncor'] = "Incorrect Username or Password.";
+               header("Location: ?route=sign-in");
+            }
          
          }
       
