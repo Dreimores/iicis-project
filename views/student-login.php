@@ -106,7 +106,7 @@
                         <div class="text-center border-bottom m-3">
                            <div class="h2 text-color text-nowrap">
                               <img src="img/csu_lasam_logo.webp" class="img-fluid d-lg-inline-block d-none" width="65">
-                              Create an account!
+                              Create an account
                            </div>
                         </div>
                         <div class="row justify-content-center mb-3">
@@ -659,10 +659,9 @@
          const fName = $("#txtFirstName").val().trim();
          const lName = $("#txtLastName").val().trim();
          const email = $("#txtEmail").val().trim();
-         const mName = $("#txtMiddleName").val().trim();
          const yLevel = $("#cbYearLevel").val().trim();
          const emailIsValid = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email);
-         const isFormValid = fName.length > 2 && lName.length > 2 && mName.length > 2 && yLevel.length > 0 && emailIsValid;
+         const isFormValid = fName.length > 2 && lName.length > 2 && yLevel.length > 0 && emailIsValid;
          $("#nextStepBtn").prop("disabled", !isFormValid);
       }
       $("#cbYearLevel").on("input", () => {
@@ -713,20 +712,9 @@
          checkFormValidity();
       });
       $("#txtMiddleName").on("input", () => {
-         const mName = $("#txtMiddleName").val();
-         if (mName.trim().length <= 0) {
-            $("#errMiddleName").text("No blank spaces allowed.");
-            $("#txtMiddleName").addClass("is-invalid");
-            $("#mNameReq").text("*");
-         } else if (mName.trim().length <= 2) {
-            $("#errMiddleName").text("At least 3 characters required.");
-            $("#mNameReq").text("*");
-            $("#txtMiddleName").addClass("is-invalid");
-         } else {
-            $("#errMiddleName").text("");
-            $("#mNameReq").text("");
-            $("#txtMiddleName").removeClass("is-invalid").addClass("is-valid");
-         }
+         $("#errMiddleName").text("");
+         $("#mNameReq").text("");
+         $("#txtMiddleName").removeClass("is-invalid").addClass("is-valid");
          checkFormValidity();
       });
       $("#txtEmail").on("input", () => {

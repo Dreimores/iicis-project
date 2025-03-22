@@ -29,7 +29,9 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item text-capitalize">
-        <a class="nav-link collapsed" href="?route=user-management"> <i class="fas fa-fw fa-user "></i> User Management </a>
+        <a class="nav-link collapsed" href="?route=user-management"> 
+            <i class="fas fa-fw fa-user "></i> <span> User Management </span> 
+        </a>
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->

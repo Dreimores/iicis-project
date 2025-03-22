@@ -3,20 +3,18 @@ $includeController = new includeStudentController();
 $includeController->header();
 $includeController->navbar();
 ?>
-<link rel="stylesheet" href="vendor/aos/aos.css">
-<div class="container-fluid">
-    <div class="card shadow">
+<div class="container-fluid mb-2">
+    <div class="card text-gray-900 text-lg">
         <div class="card-header">
             <div class="d-sm-flex justify-content-center">
                 <div class="d-flex justify-content-center align-items-center">
-                    <img src="img/csu_lasam_logo.webp" width="75" data-aos="fade-right">
-                    <img src="img/csuguidance.jpeg" width="75" data-aos="fade-left">
+                    <img src="img/csuguidance.jpeg" width="75">
                 </div>
             </div>
-            <div class="form-group d-none d-lg-inline">
-                <div class="h4 text-capitalize text-center" data-aos="fade-left">welcome to your safe place!</div>
-                <div class="h4 d-sm-flex justify-content-center" data-aos="fade-right">
-                    <div class="h4 text-uppercase">"we exist because we care",</div>
+            <div class="form-group text-center">
+                <div class="text-capitalize text-center">welcome to your safe place!</div>
+                <div class="d-sm-flex justify-content-center">
+                    <div class="text-uppercase">"we exist because we care",</div>
                     <div class="ml-1">this is the battle cry of the CCSO at CSU Lasam.</div>
                 </div>
             </div>
@@ -58,8 +56,8 @@ $includeController->navbar();
                 <div class="text-gray-900">Counseling and Career Services Office(formerly the Guidance and Counseling Center)</div>
                 <div class="text-uppercase text-gray-900 font-weight-bold mb-4">citizen's charter</div>
             </div>
-            <div class="d-sm-inline-block d-md-inline-block d-lg-inline-block d-none" data-aos="fade-left">
-                <div class="form-group row" data-aos="fade-left">
+            <div class="d-sm-inline-block d-md-inline-block d-lg-inline-block d-none">
+                <div class="form-group row">
                     <label class="col-sm-3 text-gray-900 font-weight-bold"> LOCATION </label>
                     <div class="col-sm-9">: &nbsp; Counseling and Career Services Office (CCSO), Left Wing-DARP Hall, Cagayan State University-Lasam Campus</div>
                     <label class="col-sm-3 text-gray-900 font-weight-bold m-0"> AVAILABILITY OF SERVICE </label>
@@ -70,8 +68,8 @@ $includeController->navbar();
             </div>
 
             <!-- for mobile -->
-            <div class="d-sm-flex flex-column mb-3 d-sm-none d-md-none d-lg-none" data-aos="fade-left">
-                <div data-aos="fade-right">
+            <div class="d-sm-flex flex-column mb-3 d-sm-none d-md-none d-lg-none">
+                <div>
                     <div class="text-gray-900 mb-1">
                         <b>LOCATION :</b> Counseling and Career Services Office (CCSO), Left Wing-DARP Hall, Cagayan State University-Lasam Campus
                     </div>
@@ -85,12 +83,12 @@ $includeController->navbar();
             </div>
             <!-- end -->
             <div class="d-sm-flex flex-column">
-                <div data-aos="fade-left">
+                <div>
                     <div class="text-gray-900 font-weight-bold">Counseling and Career Services Office</div>
                     <div class="text-gray-900 font-weight-bold">Information and Growth Session Service</div>
                 </div>
             </div>
-            <div class="d-sm-inline-block d-md-inline-block d-lg-inline-block d-none" data-aos="fade-left">
+            <div class="d-sm-inline-block d-md-inline-block d-lg-inline-block d-none">
                 <div class="row">
                     <label class="col-sm-3 text-gray-900 m-0"> Schedule of Availability of Service</label>
                     <div class="col-sm-8">: &nbsp; August-October, January- May</div>
@@ -103,8 +101,8 @@ $includeController->navbar();
                 </div>
             </div>
             <!-- for mobile -->
-            <div class="d-sm-flex flex-column mb-3 d-sm-none d-md-none d-lg-none" data-aos="fade-left">
-                <div data-aos="fade-right">
+            <div class="d-sm-flex flex-column mb-3 d-sm-none d-md-none d-lg-none">
+                <div>
                     <div class="text-gray-900 mb-1">Schedule of Availability of Service <b>:</b> August-October, January- May</div>
                     <div class="text-gray-900 mb-1">Client/Customers <b>:</b> College Students</div>
                     <div class="text-gray-900 mb-1">Requirements <b>:</b> Letters, Activity Sheets, Certificate of Participation and Growth Session or Information Service Logbook</div>
@@ -112,8 +110,8 @@ $includeController->navbar();
                 </div>
             </div>
             <!-- end  -->
-            <div class="table-responsive mb-4" data-aos="fade-left">
-                <table class="table table-bordered table-hover table-sm text-dark p-0">
+            <div class="table-responsive mb-4">
+                <table class="table table-bordered table-sm text-dark p-0">
                     <tr>
                         <td class="align-middle text-uppercase font-weight-bold text-center">steps</td>
                         <td class="align-middle text-uppercase font-weight-bold text-center">client/applicant</td>
@@ -166,8 +164,8 @@ $includeController->navbar();
                     </tr>
                 </table>
             </div>
-            <div class="d-sm-flex flex-column" data-aos="fade-left">
-                <div data-aos="fade-right">
+            <div class="d-sm-flex flex-column">
+                <div>
                     <div class="text-gray-900 font-weight-bold">
                         Counseling and Career Services Office
                     </div>
@@ -176,7 +174,7 @@ $includeController->navbar();
                     </div>
                 </div>
             </div>
-            <div class="d-sm-inline-block d-md-inline-block d-lg-inline-block d-none" data-aos="fade-left">
+            <div class="d-sm-inline-block d-md-inline-block d-lg-inline-block d-none">
                 <div class="row">
                     <label class="col-sm-3 text-gray-900 m-0"> Schedule of Availability of Service </label>
                     <div class="col-sm-8">: &nbsp; September, November, February and April</div>
@@ -189,8 +187,8 @@ $includeController->navbar();
                 </div>
             </div>
             <!-- for mobile -->
-            <div class="d-sm-flex flex-column mb-3 d-sm-none d-md-none d-lg-none" data-aos="fade-left">
-                <div data-aos="fade-right">
+            <div class="d-sm-flex flex-column mb-3 d-sm-none d-md-none d-lg-none">
+                <div>
                     <div class="text-gray-900 text-justify mb-1">Schedule of Availability of Service <b>:</b> September, November, February and April</div>
                     <div class="text-gray-900 text-justify mb-1">Client/Customers <b>:</b> CSU College Students and other requesting parties (as needs arise for faculty and staff)</div>
                     <div class="text-gray-900 text-justify mb-1">Requirements <b>:</b> I.D, Ball pen/ Pencil, Psychological Test Manual, Psychological Test Booklets and Answer Sheets, Psychological Testing Logbook</div>
@@ -198,8 +196,8 @@ $includeController->navbar();
                 </div>
             </div>
             <!-- end -->
-            <div class="table-responsive mb-3" data-aos="fade-left">
-                <table class="table table-bordered table-hover table-sm text-dark">
+            <div class="table-responsive mb-3">
+                <table class="table table-bordered table-sm text-dark">
                     <tr>
                         <td class="align-middle text-uppercase font-weight-bold text-center">steps</td>
                         <td class="align-middle text-uppercase font-weight-bold text-center">client/applicant</td>
@@ -252,13 +250,13 @@ $includeController->navbar();
                     </tr>
                 </table>
             </div>
-            <div class="d-sm-flex flex-column" data-aos="fade-left">
-                <div data-aos="fade-right">
+            <div class="d-sm-flex flex-column">
+                <div>
                     <div class="text-gray-900 font-weight-bold">Counseling and Career Services Office</div>
                     <div class="text-gray-900 font-weight-bold">Employment Counseling and PRC Online Orientation</div>
                 </div>
             </div>
-            <div class="d-sm-inline-block d-none d-md-inline-block d-none d-lg-inline-block d-none" data-aos="fade-left">
+            <div class="d-sm-inline-block d-none d-md-inline-block d-none d-lg-inline-block d-none">
                 <div class="row">
                     <label class="col-sm-3 text-gray-900 m-0"> Schedule of Availability of Service</label>
                     <div class="col-sm-8">
@@ -279,8 +277,8 @@ $includeController->navbar();
                 </div>
             </div>
             <!-- for mobile -->
-            <div class="d-sm-flex flex-column mb-3 d-sm-none d-md-none d-lg-none" data-aos="fade-left">
-                <div data-aos="fade-right">
+            <div class="d-sm-flex flex-column mb-3 d-sm-none d-md-none d-lg-none">
+                <div>
                     <div class="text-gray-900 text-justify mb-1">Schedule of Availability of Service <b>:</b> May or June</div>
                     <div class="text-gray-900 text-justify mb-1">Client/Customers <b>:</b> CSU College Graduating Students (for employment counseling) and Graduating Students with Board Courses (for PRC Online Orientation)</div>
                     <div class="text-gray-900 text-justify mb-1">Requirements <b>:</b> Request Letter, Certificates of Appreciation for Speakers and Participation for attendees, Career Guidance Logbook</div>
@@ -288,8 +286,8 @@ $includeController->navbar();
                 </div>
             </div>
             <!-- end -->
-            <div class="table-responsive mb-3" data-aos="fade-left">
-                <table class="table table-bordered table-hover table-sm text-dark">
+            <div class="table-responsive mb-3">
+                <table class="table table-bordered table-sm text-dark">
                     <tr>
                         <td class="align-middle text-uppercase font-weight-bold text-center">steps</td>
                         <td class="align-middle text-uppercase font-weight-bold text-center">client/applicant</td>
@@ -334,13 +332,13 @@ $includeController->navbar();
                     </tr>
                 </table>
             </div>
-            <div class="d-sm-flex flex-column" data-aos="fade-left">
-                <div data-aos="fade-right">
+            <div class="d-sm-flex flex-column">
+                <div>
                     <div class="text-gray-900 font-weight-bold pr-5">Counseling and Career Services</div>
                     <div class="text-gray-900 font-weight-bold pr-5">Requests for Certification of Good Moral Character</div>
                 </div>
             </div>
-            <div class="d-sm-inline-block d-none d-md-inline-block d-none d-lg-inline-block d-none" data-aos="fade-left">
+            <div class="d-sm-inline-block d-none d-md-inline-block d-none d-lg-inline-block d-none">
                 <div class="row">
                     <label class="col-sm-3 text-gray-900 m-0"> Schedule of Availability of Service</label>
                     <div class="col-sm-8">: &nbsp; All Year Round </div>
@@ -353,8 +351,8 @@ $includeController->navbar();
                 </div>
             </div>
             <!-- for mobile -->
-            <div class="d-sm-flex flex-column d-sm-none d-md-none d-lg-none" data-aos="fade-left">
-                <div data-aos="fade-right">
+            <div class="d-sm-flex flex-column d-sm-none d-md-none d-lg-none">
+                <div>
                     <div class="text-gray-900 mb-1">Schedule of Availability of Service <b>:</b> All Year Round</div>
                     <div class="text-gray-900 mb-1">Client/Customers <b>:</b> Undergraduate and Graduate CSU students</div>
                     <div class="text-gray-900 mb-1">Requirements <b>:</b> Official Receipt of Payment</div>
@@ -363,7 +361,7 @@ $includeController->navbar();
             </div>
             <!-- end -->
             <div class="table-responsive mb-3">
-                <table class="table table-bordered table-hover table-sm text-dark">
+                <table class="table table-bordered table-sm text-dark">
                     <tr>
                         <td class="align-middle text-uppercase font-weight-bold text-center">steps</td>
                         <td class="align-middle text-uppercase font-weight-bold text-center">client/applicant</td>

@@ -106,21 +106,21 @@ $includeStudentController->navbar();
                            <label for="txtSurname" class="text-capitalize m-0">
                               Surname <span class="text-danger" id="surNameReq"></span>
                            </label>
-                           <input type="text" id="txtSurname" name="personal-surname" value="<?=$row['p_surname']?>" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none" />
+                           <input type="text" id="txtSurname" name="personal-surname" value="<?=$row['p_surname']?>" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
                            <span id="errSurname" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6 col-xl-3">
                            <label for="txtFirstname" class="text-capitalize m-0">
                               First Name <span class="text-danger" id="firstNameReq"></span>
                            </label>
-                           <input type="text" id="txtFirstname" name="personal-firstname" value="<?=$row['p_firstname']?>" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none" />
+                           <input type="text" id="txtFirstname" name="personal-firstname" value="<?=$row['p_firstname']?>" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
                            <span id="errFirstname" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6 col-xl-3">
                            <label for="txtMiddlename" class="text-capitalize m-0">
                               Middle Name (full) <span class="text-danger" id="middleNameReq"></span>
                            </label>
-                           <input type="text" id="txtMiddlename" name="personal-middlename" value="<?=$row['p_middlename']?>" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none" />
+                           <input type="text" id="txtMiddlename" name="personal-middlename" value="<?=$row['p_middlename']?>" class="form-control border-top-0 border-left-0 border-right-0 rounded-0 shadow-none bg-white" role="button" readonly/>
                            <span id="errMiddlename" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6 col-xl-3">
@@ -1857,5 +1857,6 @@ $includeStudentController->script();
          }
       })
    }
+
 </script>
 
